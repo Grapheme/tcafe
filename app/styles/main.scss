@@ -1,0 +1,12 @@
+// bower:scss
+@import "normalize-scss/_normalize.scss";
+@import "bower-bourbon/_bourbon.scss";
+// endbower
+
+$fonts_path: './fonts/';
+
+$main-border-width: 10px;
+
+@import 'fonts';
+@import 'general';
+@import 'background';

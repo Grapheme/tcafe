@@ -1,0 +1,35 @@
+@font-face {
+  font-family: 'nautilus_pompiliusregular';
+  src: url($fonts_path + 'nautilus-webfont.eot');
+  src: url($fonts_path + 'nautilus-webfont.eot?#iefix') format('embedded-opentype'),
+       url($fonts_path + 'nautilus-webfont.woff2') format('woff2'),
+       url($fonts_path + 'nautilus-webfont.woff') format('woff'),
+       url($fonts_path + 'nautilus-webfont.ttf') format('truetype'),
+       url($fonts_path + 'nautilus-webfont.svg#nautilus_pompiliusregular') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+    font-family: 'bravoscregular';
+    src: url($fonts_path + 'bravosc-webfont.eot');
+    src: url($fonts_path + 'bravosc-webfont.eot?#iefix') format('embedded-opentype'),
+         url($fonts_path + 'bravosc-webfont.woff2') format('woff2'),
+         url($fonts_path + 'bravosc-webfont.woff') format('woff'),
+         url($fonts_path + 'bravosc-webfont.ttf') format('truetype'),
+         url($fonts_path + 'bravosc-webfont.svg#bravoscregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'bravorgregular';
+    src: url($fonts_path + 'bravorg-webfont.eot');
+    src: url($fonts_path + 'bravorg-webfont.eot?#iefix') format('embedded-opentype'),
+         url($fonts_path + 'bravorg-webfont.woff2') format('woff2'),
+         url($fonts_path + 'bravorg-webfont.woff') format('woff'),
+         url($fonts_path + 'bravorg-webfont.ttf') format('truetype'),
+         url($fonts_path + 'bravorg-webfont.svg#bravorgregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
