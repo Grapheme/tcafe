@@ -7,6 +7,7 @@ body {
   box-sizing: border-box;
   min-height: 100%;
   min-width: 920px;
+  position: relative;
 }
 
 .clrfx {
@@ -15,6 +16,7 @@ body {
 
 .content {
   margin: 0 auto;
+  margin-bottom: 120px;
   &.w850px {
     width: 850px;
     overflow: hidden;
@@ -185,6 +187,31 @@ body.about {
 
 body.afisha {
   .content {
+    .top-btns {
+      text-align: center;
+      margin-bottom: 27px;
+      margin-top: 40px;
+      &>*{
+        display: inline-block;
+        vertical-align: middle;
+      }
+      .bar {
+        width: 16px;
+        height: 1px;
+        background: white;
+        margin-left: -5px;
+      }
+      a {
+        font-size: 24px;
+        font-family: "bravoscregular";
+        color: rgb(255, 255, 255);
+        text-transform: uppercase;
+        line-height: 1;
+        text-align: center;
+        text-decoration: none;
+        padding: 0 10px;
+      }
+    }
     .holder {
       .unit {
         text-decoration: none;
@@ -192,6 +219,15 @@ body.afisha {
         background: white;
         display: block;
         width: 286px;
+        float: left;
+        margin-right: 1px;
+        margin-bottom: 1px;
+        &:hover {
+          background: #c39c4d;
+        }
+        &:nth-child(3n){
+          margin-right: 0;
+        }
         .visual {
           width: 286px;
           height: 196px;
@@ -218,6 +254,27 @@ body.afisha {
             color: white;
             padding: 0 9px;
           }
+        }
+        .title {
+          font-size: 30px;
+          font-family: "bravoscregular";
+          color: rgb(26, 26, 26);
+          line-height: 1.133;
+          text-transform: uppercase;
+          min-height: 66px;
+          padding: 0 32px;
+          margin-top: 14px;
+        }
+        .where {
+          font-size: 18px;
+          font-family: "PT Serif";
+          color: rgb(26, 26, 26);
+          line-height: 1;
+          margin-left: 34px;
+          background: url('../images/ico-point.png') no-repeat left 2px;
+          padding-left: 18px;
+          margin-top: 12px;
+          padding-bottom: 26px;
         }
       }
     }
