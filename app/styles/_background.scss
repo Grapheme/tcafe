@@ -1,6 +1,14 @@
+body, html {
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+
 body.index, html.index {
   background-image: url("../images/bg-index.jpg");
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
+}
+
+body.about, html.about {
+  background-image: url("../images/bg-about.jpg");
+  background-position: center left;
 }

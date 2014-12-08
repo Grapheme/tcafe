@@ -19,6 +19,9 @@ body {
     width: 850px;
     overflow: hidden;
   }
+  &.w974 {
+    width: 974px;
+  }
   .rest-nav {
     margin: 0 -46px;
     .unit {
@@ -94,6 +97,83 @@ body {
           width: 220px;
           height: 132px;
           display: block;
+        }
+      }
+    }
+  }
+}
+
+body.about {
+  .content {
+    margin-top: 30px;
+    &>.holder {
+      background: #e4e4e4;
+      .unit {
+        width: 486px;
+        height: 428px;
+        background: white;
+        display: block;
+        float: left;
+        margin-right: 1px;
+        margin-bottom: 1px;
+        text-align: center;
+        &.large {
+          width: 100%;
+        }
+        &:nth-child(even) {
+          margin-right: 0;
+          width: 487px;
+        }
+        .icon {
+          margin-top: 60px;
+          img {
+            display: inline-block;
+            width: 35px;
+            height: 35px;
+          }
+        }
+        .title {
+          font-size: 20px;
+          color: rgb(195, 156, 77);
+          font-weight: bold;
+          line-height: 1.2;
+          font-family: "bravorgregular";
+          text-transform: uppercase;
+          letter-spacing: 0.025em;
+          .holder {
+            display: inline-block;
+            position: relative;
+            &:before, &:after {
+              width: 15px;
+              height: 1px;
+              background: rgb(195, 156, 77);
+              position: absolute;
+              display: block;
+              content: '';
+              top: 12px;
+            }
+            &:before {
+              left: -22px;
+            }
+            &:after {
+              right: -22px;
+            }
+          }
+        }
+        .text {
+          width: 364px;
+          display: inline-block;
+          font-size: 16px;
+          font-family: "PT Serif";
+          color: rgb(152, 152, 152);
+          line-height: 27px;
+          margin-top: 54px;
+          p {
+            margin: 5px 0;
+          }
+          a {
+            color: #c39c4d;
+          }
         }
       }
     }
