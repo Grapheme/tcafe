@@ -1,5 +1,6 @@
 .header {
   width: 100%;
+  margin-top: 15px;
   .logo {
     margin-left: 50px;
     float: left;
@@ -151,17 +152,21 @@
 }
 
 body.index {
-  .top-btns {
-    .logo {
-      margin-top: 70px;
-    }
+  .header {
     .menu-wrapper {
-      margin-top: 78px;
       .menu-btn {
         .label {
           color: white;
         }
       }
+    }
+  }
+}
+
+body.afisha {
+  .header {
+    .title {
+      margin-left: 56px;
     }
   }
 }

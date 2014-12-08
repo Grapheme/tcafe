@@ -22,6 +22,9 @@ body {
   &.w974 {
     width: 974px;
   }
+  &.w860 {
+    width: 860px;
+  }
   .rest-nav {
     margin: 0 -46px;
     .unit {
@@ -173,6 +176,44 @@ body.about {
           }
           a {
             color: #c39c4d;
+          }
+        }
+      }
+    }
+  }
+}
+
+body.afisha {
+  .content {
+    .holder {
+      .unit {
+        text-decoration: none;
+        color: inherit;
+        background: white;
+        display: block;
+        width: 286px;
+        .visual {
+          width: 286px;
+          height: 196px;
+          display: block;
+        }
+        .info {
+          font-size: 21px;
+          font-family: "PT Serif";
+          color: rgb(26, 26, 26);
+          line-height: 0.476;
+          text-align: left;
+          padding-left: 32px;
+          .photo {
+            display: inline-block;
+            background: url('../images/ico-photo.png') no-repeat;
+            background-size: cover;
+            width: 27px;
+            height: 22px;
+          }
+          .age {
+            float: right;
+            background: #d0572c;
           }
         }
       }

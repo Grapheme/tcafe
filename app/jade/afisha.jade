@@ -1,0 +1,24 @@
+extends ./layouts/layout.jade
+
+block vars
+ - var bodyClass = "afisha";
+
+block title
+  .title-holder
+    .title
+      .left Афиша
+      .icon
+        img(src="images/ico-mic-big.png")
+      .right событий
+
+block content
+  .content.w860
+    .holder
+      a.unit(href="")
+        img.visual(src="http://dummyimage.com/572x392")
+        .info 13 ноября | 20:00
+          .photo
+          .age 12+
+        .title Джазовик, джазмен или джазист
+        .where Газетный, 35
+      .clrfx
