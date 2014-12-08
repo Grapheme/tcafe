@@ -201,19 +201,22 @@ body.afisha {
           font-size: 21px;
           font-family: "PT Serif";
           color: rgb(26, 26, 26);
-          line-height: 0.476;
           text-align: left;
           padding-left: 32px;
+          margin-top: 25px;
           .photo {
             display: inline-block;
             background: url('../images/ico-photo.png') no-repeat;
             background-size: cover;
             width: 27px;
             height: 22px;
+            margin-bottom: -2px;
           }
           .age {
             float: right;
             background: #d0572c;
+            color: white;
+            padding: 0 9px;
           }
         }
       }
