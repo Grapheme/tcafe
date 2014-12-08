@@ -17,13 +17,13 @@ body {
   margin: 0 auto;
   &.w850px {
     width: 850px;
+    overflow: hidden;
   }
   .rest-nav {
-    margin: 0 -50px;
-    margin-bottom: 50px;
+    margin: 0 -46px;
     .unit {
       width: 220px;
-      margin: 0 46px;
+      margin: 0 45px;
       display: inline-block;
       vertical-align: top;
       .icon {

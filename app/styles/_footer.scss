@@ -1,0 +1,41 @@
+#footer {
+  text-align: center;
+  font-size: 14px;
+  font-family: "PT Serif";
+  color: rgba(255, 255, 255, 0.71);
+  padding: 0 40px;
+  min-width: 850-40*2px;
+  margin-bottom: 20px;
+  margin-top: 80px;
+  position: relative;
+  .left {
+    position: absolute;
+    left: 20px;
+    text-align: left;
+  }
+  .right {
+    position: absolute;
+    right: 20px;
+    text-align: right;
+    top: 0;
+  }
+  .center {
+    display: inline-block;
+    a {
+      display: inline-block;
+      vertical-align: top;
+      width: 20px;
+      height: 20px;
+      overflow: hidden;
+      margin: 0 10px;
+      img {
+        width: 20px;
+        height: 40px;
+        position: relative;
+        &:hover {
+          top: -20px;
+        }
+      }
+    }
+  }
+}

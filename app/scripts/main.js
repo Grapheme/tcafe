@@ -1,11 +1,15 @@
+window._TCAFE_ = {};
+
+function _log(msg) {
+  console.log(msg);
+};
+
+_TCAFE_.setYear = function(){
+  var now = new Date();
+  var year = now.getFullYear();
+  $('#footer .year').text(year);
+}
+
 $(function() {
-  
-  function _log(msg) {
-    console.log(msg);
-  };
-  
-  $('.menu-wrapper .menu-btn').on('click', function(){
-    $(this).closest('.menu-wrapper').toggleClass('open');
-  });
-  
+  _TCAFE_.setYear();
 });

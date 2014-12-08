@@ -5,7 +5,7 @@
 block vars
 
 doctype html
-html.no-js
+html(class="#{bodyClass} no-js")
     head
         meta(charset="utf-8")
         title #{title}
@@ -26,7 +26,7 @@ html.no-js
     body(class="#{bodyClass}")
       include ../includes/header.jade
       block content
-      
+      include ../includes/footer.jade
       // build:js(.) scripts/vendor.js
       // bower:js
       script(src='bower_components/jquery/dist/jquery.js')
@@ -37,6 +37,7 @@ html.no-js
 
       // build:js({app,.tmp}) scripts/main.js
       script(src="scripts/main.js")
+      script(src="scripts/menu.js")
       // endbuild
 
       
