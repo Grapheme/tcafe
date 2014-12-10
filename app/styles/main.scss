@@ -4,6 +4,11 @@
 @import "sass-easing/_sass-easing.scss";
 // endbower
 
+* {
+ -webkit-font-smoothing: antialiased;
+ -moz-osx-font-smoothing: grayscale;
+}
+
 $fonts_path: './fonts/';
 
 $main-border-width: 10px;

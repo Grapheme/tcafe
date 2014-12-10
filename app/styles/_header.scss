@@ -360,11 +360,28 @@ body.afisha {
   .header {
     .title {
       margin-left: 56px;
+      .icon {
+        img {
+          height: 86px;
+        }
+      }
     }
     .menu-wrapper {
       .menu-btn {
         .label {
           color: white;
+        }
+      }
+    }
+  }
+}
+
+body.about {
+  .header {
+    .title {
+      .icon {
+        img {
+          height: 90px;
         }
       }
     }
@@ -379,6 +396,9 @@ body.specials {
           margin-left: 56px;
           .icon {
             margin-top: 34px;
+            img {
+              width: 108px;              
+            }
           }
           .left, .right {
             top: -12px;

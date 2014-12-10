@@ -133,8 +133,7 @@ body.about {
           margin-top: 60px;
           img {
             display: inline-block;
-            width: 35px;
-            height: 35px;
+            height: 30px;
           }
         }
         .title {
@@ -212,10 +211,10 @@ body.about {
       margin-top: 25px;
       .photo {
         display: inline-block;
-        background: url('../images/ico-photo.png') no-repeat;
-        background-size: cover;
+        background: url('../images/ico-photo.svg') no-repeat;
+        background-size: contain;
         width: 27px;
-        height: 22px;
+        height: 20px;
         margin-bottom: -2px;
       }
       .age {
