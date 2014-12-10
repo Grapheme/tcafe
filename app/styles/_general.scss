@@ -185,6 +185,82 @@ body.about {
   }
 }
 
+@mixin content-unit(){
+  .unit {
+    text-decoration: none;
+    color: inherit;
+    background: white;
+    display: block;
+    width: 286px;
+    float: left;
+    margin-right: 1px;
+    margin-bottom: 1px;
+    &:nth-child(3n){
+      margin-right: 0;
+    }
+    .visual {
+      width: 286px;
+      height: 196px;
+      display: block;
+    }
+    .info {
+      font-size: 21px;
+      font-family: "PT Serif";
+      color: rgb(26, 26, 26);
+      text-align: left;
+      padding-left: 32px;
+      margin-top: 25px;
+      .photo {
+        display: inline-block;
+        background: url('../images/ico-photo.png') no-repeat;
+        background-size: cover;
+        width: 27px;
+        height: 22px;
+        margin-bottom: -2px;
+      }
+      .age {
+        float: right;
+        background: #d0572c;
+        color: white;
+        padding: 0 9px;
+      }
+    }
+    .title {
+      font-size: 30px;
+      font-family: "bravoscregular";
+      color: rgb(26, 26, 26);
+      line-height: 1.133;
+      text-transform: uppercase;
+      min-height: 66px;
+      padding: 0 32px;
+      margin-top: 14px;
+    }
+    .description {
+      padding: 0 32px;
+      font-family: "PT Serif";
+      font-size: 16px;
+      color: #1a1a1a;
+      line-height: 24px;
+      margin-top: 16px;
+      margin-bottom: 50px;
+    }
+    .where {
+      font-size: 18px;
+      font-family: "PT Serif";
+      color: rgb(26, 26, 26);
+      line-height: 1;
+      margin-left: 34px;
+      background: url('../images/ico-point.png') no-repeat left 2px;
+      padding-left: 18px;
+      margin-top: 12px;
+      padding-bottom: 26px;
+    }
+  }
+  a.unit:hover {
+    background: #c39c4d;
+  }
+}
+
 body.afisha {
   .content {
     .top-btns {
@@ -213,69 +289,24 @@ body.afisha {
       }
     }
     .holder {
-      .unit {
-        text-decoration: none;
-        color: inherit;
-        background: white;
+      @include content-unit();
+    }
+  }
+}
+
+body.specials {
+  &>.content {
+    &>.holder {
+      margin-top: 72px;
+      .col {
         display: block;
         width: 286px;
         float: left;
         margin-right: 1px;
-        margin-bottom: 1px;
-        &:hover {
-          background: #c39c4d;
-        }
         &:nth-child(3n){
           margin-right: 0;
         }
-        .visual {
-          width: 286px;
-          height: 196px;
-          display: block;
-        }
-        .info {
-          font-size: 21px;
-          font-family: "PT Serif";
-          color: rgb(26, 26, 26);
-          text-align: left;
-          padding-left: 32px;
-          margin-top: 25px;
-          .photo {
-            display: inline-block;
-            background: url('../images/ico-photo.png') no-repeat;
-            background-size: cover;
-            width: 27px;
-            height: 22px;
-            margin-bottom: -2px;
-          }
-          .age {
-            float: right;
-            background: #d0572c;
-            color: white;
-            padding: 0 9px;
-          }
-        }
-        .title {
-          font-size: 30px;
-          font-family: "bravoscregular";
-          color: rgb(26, 26, 26);
-          line-height: 1.133;
-          text-transform: uppercase;
-          min-height: 66px;
-          padding: 0 32px;
-          margin-top: 14px;
-        }
-        .where {
-          font-size: 18px;
-          font-family: "PT Serif";
-          color: rgb(26, 26, 26);
-          line-height: 1;
-          margin-left: 34px;
-          background: url('../images/ico-point.png') no-repeat left 2px;
-          padding-left: 18px;
-          margin-top: 12px;
-          padding-bottom: 26px;
-        }
+        @include content-unit();
       }
     }
   }

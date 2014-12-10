@@ -151,33 +151,6 @@
   }
 }
 
-body.index {
-  .header {
-    .menu-wrapper {
-      .menu-btn {
-        .label {
-          color: white;
-        }
-      }
-    }
-  }
-}
-
-body.afisha {
-  .header {
-    .title {
-      margin-left: 56px;
-    }
-    .menu-wrapper {
-      .menu-btn {
-        .label {
-          color: white;
-        }
-      }
-    }
-  }
-}
-
 .tilt-header {
   color: white;
   text-align: center;
@@ -366,6 +339,51 @@ body.afisha {
       }
       .third {
         text-align: right;
+      }
+    }
+  }
+}
+
+body.index {
+  .header {
+    .menu-wrapper {
+      .menu-btn {
+        .label {
+          color: white;
+        }
+      }
+    }
+  }
+}
+
+body.afisha {
+  .header {
+    .title {
+      margin-left: 56px;
+    }
+    .menu-wrapper {
+      .menu-btn {
+        .label {
+          color: white;
+        }
+      }
+    }
+  }
+}
+
+body.specials {
+  .header {
+    .title-wrapper {
+      .title-holder {
+        .title {
+          margin-left: 56px;
+          .icon {
+            margin-top: 34px;
+          }
+          .left, .right {
+            top: -12px;
+          }
+        }
       }
     }
   }
