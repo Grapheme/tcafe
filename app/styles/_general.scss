@@ -27,6 +27,43 @@ body {
   &.w860 {
     width: 860px;
   }
+  &.w1076 {
+    width: 1076px;
+  }
+  h2 {
+    font-size: 23px;
+    font-family: "PT Serif";
+    color: rgb(45, 45, 45);
+    line-height: 1.522;
+    font-weight: normal;
+    border-bottom: 1px solid #e6e6e6;
+  }
+  .top-btns {
+    text-align: center;
+    margin-bottom: 27px;
+    margin-top: 40px;
+    &>*{
+      display: inline-block;
+      vertical-align: middle;
+    }
+    .bar {
+      width: 16px;
+      height: 1px;
+      background: white;
+      margin-left: -5px;
+    }
+    a {
+      font-size: 24px;
+      font-family: "bravoscregular";
+      color: rgb(255, 255, 255);
+      text-transform: uppercase;
+      line-height: 1;
+      text-align: center;
+      text-decoration: none;
+      padding: 0 10px;
+      letter-spacing: .025em;
+    }
+  }
   .rest-nav {
     margin: 0 -46px;
     .unit {
@@ -102,82 +139,6 @@ body {
           width: 220px;
           height: 132px;
           display: block;
-        }
-      }
-    }
-  }
-}
-
-body.about {
-  .content {
-    margin-top: 30px;
-    &>.holder {
-      background: #e4e4e4;
-      .unit {
-        width: 486px;
-        height: 428px;
-        background: white;
-        display: block;
-        float: left;
-        margin-right: 1px;
-        margin-bottom: 1px;
-        text-align: center;
-        &.large {
-          width: 100%;
-        }
-        &:nth-child(even) {
-          margin-right: 0;
-          width: 487px;
-        }
-        .icon {
-          margin-top: 60px;
-          img {
-            display: inline-block;
-            height: 30px;
-          }
-        }
-        .title {
-          font-size: 20px;
-          color: rgb(195, 156, 77);
-          font-weight: bold;
-          line-height: 1.2;
-          font-family: "bravorgregular";
-          text-transform: uppercase;
-          letter-spacing: 0.025em;
-          .holder {
-            display: inline-block;
-            position: relative;
-            &:before, &:after {
-              width: 15px;
-              height: 1px;
-              background: rgb(195, 156, 77);
-              position: absolute;
-              display: block;
-              content: '';
-              top: 12px;
-            }
-            &:before {
-              left: -22px;
-            }
-            &:after {
-              right: -22px;
-            }
-          }
-        }
-        .text {
-          width: 364px;
-          display: inline-block;
-          font-size: 16px;
-          font-family: "PT Serif";
-          color: rgb(152, 152, 152);
-          line-height: 27px;
-          margin-top: 54px;
-          p {
-            margin: 5px 0;
-          }
-          a {
-            color: #c39c4d;
-          }
         }
       }
     }
@@ -260,33 +221,84 @@ body.about {
   }
 }
 
-body.afisha {
+body.about {
   .content {
-    .top-btns {
-      text-align: center;
-      margin-bottom: 27px;
-      margin-top: 40px;
-      &>*{
-        display: inline-block;
-        vertical-align: middle;
-      }
-      .bar {
-        width: 16px;
-        height: 1px;
+    margin-top: 30px;
+    &>.holder {
+      background: #e4e4e4;
+      .unit {
+        width: 486px;
+        height: 428px;
         background: white;
-        margin-left: -5px;
-      }
-      a {
-        font-size: 24px;
-        font-family: "bravoscregular";
-        color: rgb(255, 255, 255);
-        text-transform: uppercase;
-        line-height: 1;
+        display: block;
+        float: left;
+        margin-right: 1px;
+        margin-bottom: 1px;
         text-align: center;
-        text-decoration: none;
-        padding: 0 10px;
+        &.large {
+          width: 100%;
+        }
+        &:nth-child(even) {
+          margin-right: 0;
+          width: 487px;
+        }
+        .icon {
+          margin-top: 60px;
+          img {
+            display: inline-block;
+            height: 30px;
+          }
+        }
+        .title {
+          font-size: 20px;
+          color: rgb(195, 156, 77);
+          font-weight: bold;
+          line-height: 1.2;
+          font-family: "bravorgregular";
+          text-transform: uppercase;
+          letter-spacing: 0.025em;
+          .holder {
+            display: inline-block;
+            position: relative;
+            &:before, &:after {
+              width: 15px;
+              height: 1px;
+              background: rgb(195, 156, 77);
+              position: absolute;
+              display: block;
+              content: '';
+              top: 12px;
+            }
+            &:before {
+              left: -22px;
+            }
+            &:after {
+              right: -22px;
+            }
+          }
+        }
+        .text {
+          width: 364px;
+          display: inline-block;
+          font-size: 16px;
+          font-family: "PT Serif";
+          color: rgb(152, 152, 152);
+          line-height: 27px;
+          margin-top: 54px;
+          p {
+            margin: 5px 0;
+          }
+          a {
+            color: #c39c4d;
+          }
+        }
       }
     }
+  }
+}
+
+body.afisha {
+  .content {
     .holder {
       @include content-unit();
     }
@@ -306,6 +318,148 @@ body.specials {
           margin-right: 0;
         }
         @include content-unit();
+      }
+    }
+  }
+}
+
+body.menu {
+  .content {
+    .top-btns {
+      .bar {
+        background: #c39c4d;
+      }
+      a {
+        color: #c39c4d;
+        &.active {
+          color: black;
+          position: relative;
+          &:before {
+            position: absolute;
+            content: '';
+            display: block;
+            width: 5px;
+            height: 5px;
+            background: #c39c4d;
+            border-radius: 5px;
+            left: 50%;
+            margin-left: -2px;
+            bottom: -15px;
+          }
+        }
+      }
+    }
+    .holder {
+      .menu-cat-list {
+        float: left;
+        padding: 0;
+        margin: 0;
+        width: 220px;
+        padding-left: 5px;
+        margin-top: 42px;
+        li {
+          display: block;
+          font-size: 18px;
+          line-height: 100%;
+          font-family: "PT Serif";
+          margin-bottom: 17px;
+          a {
+            color: #c39c4d;
+            text-decoration: none;
+          }
+          &.active {
+            a {
+              color: black;
+              position: relative;
+              &:after {
+                position: absolute;
+                content: '';
+                display: block;
+                width: 5px;
+                height: 5px;
+                background: #c39c4d;
+                border-radius: 5px;
+                right: -14px;
+                top: 10px;
+              }
+            }
+          }
+        }
+      }
+      .menu-dishes-list {
+        width: 850px;
+        float: left;
+        margin-top: 12px;
+        hr {
+          border: none;
+          width: 100%;
+          height: 1px;
+          background: #e6e6e6;
+          margin-bottom: 26px;
+        }
+        .unit{
+          width: 276px;
+          margin-right: 7px;
+          display: inline-block;
+          vertical-align: top;
+          &:nth-child(3n+4){
+            margin-right: -1px;
+          }
+          .visual {
+            width: 276px;
+            height: 184px;
+          }
+          .title {
+            font-size: 19px;
+            font-family: "PT Serif";
+            color: rgb(0, 0, 0);
+            line-height: 1.211;
+            padding: 0 7px;
+            margin-top: 12px;
+          }
+          .description {
+            padding: 0 7px;
+            font-size: 12px;
+            font-family: "PT Serif";
+            color: rgb(122, 122, 122);
+            line-height: 16px;
+            margin-top: 4px;
+          }
+          .info {
+            padding: 0 7px;
+            margin-bottom: 50px;
+            margin-top: 15px;
+            .price {
+              font-size: 24px;
+              font-family: "bravoscregular";
+              color: rgb(39, 39, 39);
+              font-weight: bold;
+              line-height: 0.958;
+              display: inline-block;
+              position: relative;
+              margin-right: 20px;
+              &:after {
+                display: block;
+                content: '';
+                @include transform-origin(left bottom);
+                @include transform(rotate(18.5deg));  
+                height: 44px;
+                width: 1px;
+                background: #d7d7d7;
+                position: absolute;
+                top: -9px;
+                right: -5px;
+              }
+            }
+            .weight {
+              font-size: 18px;
+              font-family: "PT Serif";
+              color: black;
+              line-height: 1.278;
+              display: inline-block;
+            }
+          }
+        }
       }
     }
   }

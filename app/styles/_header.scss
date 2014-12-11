@@ -388,6 +388,30 @@ body.about {
   }
 }
 
+body.menu {
+  .header {
+    .title-wrapper {
+      .title-holder {
+        .title {
+          color: #c39c4d;
+          .icon {
+            img {
+              height: 70px;
+              margin-top: 20px;
+            }
+          }
+          .left, .right {
+            top: -26px;
+          }
+          &:before, &:after {
+            background: #c39c4d;
+          }
+        }
+      }
+    }
+  }
+}
+
 body.specials {
   .header {
     .title-wrapper {
