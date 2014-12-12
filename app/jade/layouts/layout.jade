@@ -26,7 +26,8 @@ html(class="#{bodyClass} no-js")
     body(class="#{bodyClass}")
       include ../includes/header.jade
       block content
-      include ../includes/footer.jade
+      block footer
+        include ../includes/footer.jade
       // build:js(.) scripts/vendor.js
       // bower:js
       script(src='bower_components/jquery/dist/jquery.js')
@@ -38,6 +39,7 @@ html(class="#{bodyClass} no-js")
       // build:js({app,.tmp}) scripts/main.js
       script(src="scripts/main.js")
       script(src="scripts/menu.js")
+      script(src="scripts/photos.js")
       // endbuild
 
       

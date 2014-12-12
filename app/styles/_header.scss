@@ -1,6 +1,7 @@
 .header {
   width: 100%;
   margin-top: 15px;
+  position: relative;
   .logo {
     margin-left: 50px;
     float: left;
@@ -350,6 +351,29 @@ body.index {
       .menu-btn {
         .label {
           color: white;
+        }
+      }
+    }
+  }
+}
+
+body.photos {
+  .header {
+    position: absolute;
+    z-index: 500;
+    .menu-wrapper {
+      .menu-btn {
+        .label {
+          color: white;
+        }
+      }
+    }
+    .title-wrapper {
+      .title-holder {
+        .title {
+          .left, .right {
+            top: -35px;
+          }
         }
       }
     }
