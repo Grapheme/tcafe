@@ -59,6 +59,9 @@
         margin-top: -74px;
         z-index: 5;
       }
+      svg {
+        @include transform(rotate(180deg));
+      }
     }
     .next {
       right: -132px;
@@ -70,18 +73,22 @@
         margin-top: -74px;
         z-index: 5;
       }
-      svg {
-        @include transform(rotate(180deg));
-      }
     }
     .close {
       width: 55px;
       height: 55px;
-      background: gold;
       top: -84px;
       right: -135px;
       cursor: pointer;
       position: absolute;
+      svg {
+        fill: white;
+        width: 55px;
+        height: 50px;
+        &:hover {
+          fill: #d09d4d;
+        }
+      }
       @media all and (max-width:1290px) { 
         right: -75px;
       }
