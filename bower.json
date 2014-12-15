@@ -6,7 +6,8 @@
     "modernizr": "~2.8.2",
     "normalize-scss": "~3.0.2",
     "bower-bourbon": "~3.1.8",
-    "sass-easing": "*"
+    "sass-easing": "*",
+    "jquery-validation": "~1.13.1"
   },
   "devDependencies": {}
 }
