@@ -128,6 +128,14 @@ module.exports = function(grunt) {
           dest: '<%= folders.tmp %>/styles',
           src: '{,*/}*.css'
         }]
+      },
+      build: {
+        files: [{
+          expand: true,
+          cwd: '<%= folders.dist %>/styles',
+          dest: '<%= folders.dist %>/styles',
+          src: '{,*/}*.css'
+        }]
       }
     },
     jade: {
@@ -366,7 +374,7 @@ module.exports = function(grunt) {
     'copy:css',
     'useminPrepare',
     'concurrent:dist',
-    'autoprefixer',
+    'autoprefixer:build',
     'concat',
     'cssmin',
     'uglify',

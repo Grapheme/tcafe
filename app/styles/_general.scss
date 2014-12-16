@@ -32,6 +32,9 @@ label.error {
   &.w860 {
     width: 860px;
   }
+  &.w874 {
+    width: 874px;
+  }
   &.w840 {
     width: 840px;
   }
@@ -331,6 +334,182 @@ body.specials {
   }
 }
 
+body.contacts {
+  .contacts-map {
+    width: 100%;
+    height: 334px;
+    margin-top: -92px;
+    margin-bottom: 32px;
+  }
+  .content {
+    .holder {
+      margin: 0 -13px;
+      .col {
+        float: left;
+        margin: 0 12px;
+      }
+      .unit {
+        width: 425px;
+        display: block;
+        float: left;
+        &.texted {
+          background: #d19e45;
+          text-align: center;
+          padding-bottom: 90px;
+          .icon {
+            img {
+              opacity: .4;
+            }
+          }
+          .title {
+            color: white;
+            .holder {
+              &:before, &:after {
+                width: 15px;
+                height: 1px;
+                background: white;
+                position: absolute;
+                display: block;
+                content: '';
+                top: 12px;
+              }
+            }
+          }
+        }
+        &.form-holder {
+          position: relative;
+          .final {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: #d19e45;
+            text-align: center;
+            display: none;
+            @include transition(all .2s ease-in-out);
+            .bar {
+              height: 100%;
+              display: inline-block;
+              vertical-align: middle;
+            }
+            .text {
+              display: inline-block;
+              vertical-align: middle;
+              font-size: 20px;
+              font-family: "bravorgregular";
+              color: white;
+              line-height: 1.2;
+              text-transform: uppercase;
+            }
+          }
+          form {
+            padding: 0 30px;
+            font-size: 16px;
+            font-family: "PT Serif";
+            color: rgb(24, 24, 24);
+            line-height: 1.688;
+            margin-top: 40px;
+            label {
+              display: block;
+              margin-bottom: 20px;
+              .label {
+                float: left;
+              }
+              input {
+                margin-left: 9px;
+                background: transparent;
+                border: none;
+                border-bottom: 1px solid #d19f46;
+              }
+              &.name {
+                input {
+                  width: 275px;
+                }
+              }
+              &.email {
+                input {
+                  width: 301px;
+                }
+              }
+              &.text {
+                margin-top: 0;
+                color: black;
+                textarea {
+                  width: 100%;
+                  background: none;
+                  border: 1px solid #d19f46;
+                  height: 109px;
+                }
+              }
+            }
+            button {
+              background: #694e22;
+              font-size: 20px;
+              color: rgb(209, 158, 69);
+              line-height: 1.2;
+              font-family: "bravorgregular";
+              border: none;
+              text-transform: uppercase;
+              padding: 5px 42px;
+            }
+          }
+        }
+        .icon {
+          margin-top: 60px;
+          img {
+            display: inline-block;
+            height: 30px;
+          }
+        }
+        .title {
+          font-size: 20px;
+          color: black;
+          font-weight: bold;
+          line-height: 1.2;
+          font-family: "bravorgregular";
+          text-transform: uppercase;
+          letter-spacing: 0.025em;
+          .holder {
+            display: inline-block;
+            position: relative;
+            &:before, &:after {
+              width: 15px;
+              height: 1px;
+              background: black;
+              position: absolute;
+              display: block;
+              content: '';
+              top: 12px;
+            }
+            &:before {
+              left: -22px;
+            }
+            &:after {
+              right: -22px;
+            }
+          }
+        }
+        .text {
+          width: 364px;
+          display: inline-block;
+          font-size: 16px;
+          font-family: "PT Serif";
+          color: white;
+          line-height: 27px;
+          margin-top: 54px;
+          p {
+            margin: 5px 0;
+          }
+          a {
+            color: #c39c4d;
+          }
+        }
+      }
+    }
+  }
+}
+
 body.reviews {
   .content {
     .holder {
@@ -558,7 +737,7 @@ body.photos {
   }
 }
 
-body.menu, body.reviews {
+body.menu, body.reviews, body.contacts {
   .content {
     .top-btns {
       .bar {
@@ -586,6 +765,7 @@ body.menu, body.reviews {
     }
   }
 }
+
 body.menu {
   .content {
     .holder {

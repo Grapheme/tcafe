@@ -1,0 +1,62 @@
+extends ./layouts/layout.jade
+
+block vars
+ - var bodyClass = "contacts";
+
+
+block logo
+  img(src="images/logo-tranparent-black.png")
+
+block title
+  .title-holder
+    .title
+      .left Как нас
+      .icon
+        img(src="images/ico-map-dots.svg")
+      .right найти
+
+block content
+  .content.w874
+    .top-btns
+      .bar
+  .contacts-map
+  .content.w874
+    .holder
+      .col
+        .unit.texted
+          .icon
+            img(src="images/ico-people.svg")
+          .title
+            .holder Сотрудничество
+          .text
+            p.
+            Сотрудничество&nbsp;&mdash; это примета нашего века.
+            Педагогика сотрудничества, разрабатываемая
+            российскими педагогами, ставит на&nbsp;новый, более
+            гуманный и&nbsp;доверительный. Не&nbsp;отличилась
+            в&nbsp;этом году особыми достижениями в&nbsp;карьере,
+            да&nbsp;и&nbsp;количество подписчиков ее&nbsp;блога
+            
+      .col
+        .unit.form-holder
+          .final
+            .bar
+            .text Спасибо! <br> Ваше сообщение отправлено.
+          center
+            .icon
+              img(src="images/ico-letter.svg")
+            .title
+              .holder Сотрудничество
+          form.contacts-form(novalidate="novalidate" action="")
+            label.name
+              .label Ваше имя:
+              input(name="name")
+            label.email
+              .label E-mail:
+              input(name="email")
+            label.text
+              .label Сообщение:
+              textarea(name="message")
+            center
+              button(type="submit") Отправить
+      .clrfx
