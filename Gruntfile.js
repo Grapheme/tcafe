@@ -35,7 +35,7 @@ module.exports = function(grunt) {
         files: [
           '<%= folders.tmp %>/*.html',
           '<%= folders.tmp %>/styles/{,*/}*.css',
-          '{.tmp,<%= folders.app %>}/scripts/{,*/}*.js',
+          '<%= folders.tmp %>}/scripts/{,*/}*.js',
           '<%= folders.app %>/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}'
         ]
       },
@@ -105,7 +105,7 @@ module.exports = function(grunt) {
         sassDir: '<%= folders.app %>/styles',
         cssDir: '<%= folders.tmp %>/styles',
         imagesDir: '<%= folders.app %>/images',
-        javascriptsDir: '<%= folders.app %>/scripts',
+        javascriptsDir: '<%= folders.tmp %>/scripts',
         fontsDir: '<%= folders.app %>/styles/fonts',
         importPath: '<%= folders.app %>/bower_components',
         relativeAssets: true
@@ -136,6 +136,19 @@ module.exports = function(grunt) {
           dest: '<%= folders.dist %>/styles',
           src: '{,*/}*.css'
         }]
+      }
+    },
+    wiredep: {
+      app: {
+        ignorePath: /^\/|\.\.\//,
+        src: ['<%= folders.app %>/*.html',
+              '<%= folders.app %>/jade/*.jade',
+              '<%= folders.app %>/jade/layouts/*.jade'
+              ]
+      },
+      sass: {
+        src: ['<%= folders.app %>/styles/{,*/}*.{scss,sass}'],
+        ignorePath: /(\.\.\/){1,2}bower_components\//
       }
     },
     jade: {
@@ -270,6 +283,34 @@ module.exports = function(grunt) {
         }]
       }
     },
+    concat: {
+      dist: {
+          src: [
+            '<%= folders.tmp %>/scripts/{,*/}*.js',
+          ],
+          dest: '<%= folders.dist %>/scripts/main.js',
+      },
+      vendor: {
+          src: [
+            '<%= folders.tmp %>/bower_components/{,*/}*.js',
+          ],
+          dest: '<%= folders.dist %>/scripts/vendor.js',
+      },
+    },
+    bower_concat: {
+      all: {
+        dest: '<%= folders.dist %>/scripts/vendor.js',
+        cssDest: '<%= folders.dist %>/style/_bower.css',
+        exclude: [
+          'bower-bourbon',
+          'normalize-scss',
+          'sass-easing'
+        ],
+        bowerOptions: {
+          relative: false
+        }
+      }
+    },
     copy: {
       dist: {
         files: [{
@@ -282,7 +323,7 @@ module.exports = function(grunt) {
             '.htaccess',
             'images/{,*/}*.{webp,gif}',
             'styles/fonts/*',
-            'json/'
+            'json/*'
           ]
         }]
       },
@@ -351,6 +392,7 @@ module.exports = function(grunt) {
 
     grunt.task.run([
       'clean:server',
+      //'wiredep',
       'jade',
       'concurrent:server',
       'autoprefixer',
@@ -369,13 +411,16 @@ module.exports = function(grunt) {
 
   grunt.registerTask('build', [
     'clean:dist',
+    //'wiredep',
     'jade',
+    //'bower_concat',
     'copy:js',
     'copy:css',
     'useminPrepare',
     'concurrent:dist',
     //'autoprefixer:build',
-    //'concat',
+    'concat',
+    //'concat:vendor',
     'cssmin',
     //'uglify',
     'copy:dist',
@@ -388,6 +433,7 @@ module.exports = function(grunt) {
   grunt.registerTask('default', [
     'jshint',
     'test',
-    'build'
+    'build',
+    'wiredep'
   ]);
 };
