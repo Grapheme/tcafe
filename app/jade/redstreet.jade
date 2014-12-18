@@ -1,0 +1,95 @@
+extends ./layouts/layout.jade
+
+block vars
+ - var bodyClass = "index redstreet";
+
+block content
+  .tilt-header
+    .wings
+      .left
+        .line-1.angle-15
+          .hr-holder
+            hr.first
+            hr.second
+          a.link(href="")
+            nobr RED STREET
+            nobr НА КРАСНОЙ, 18
+        .line-2.angle-15.nolink
+          .hr-holder
+            hr.first
+            hr.second
+        .line-3.angle-15
+          .hr-holder
+            hr.first
+            hr.second
+          a.link(href="")
+            nobr НА НАБЕРЕЖНОЙ, 3
+        .line-4.angle-15
+          .hr-holder
+            hr.first
+            hr.second
+          a.link(href="")
+            nobr НА БУЛЬВАРНОМ
+      .right
+        .line-1.angle-15
+          a.link(href="")
+            nobr Сеть кафе
+          .hr-holder
+            hr.first
+            hr.second
+        .line-2.angle-15.nolink
+          .hr-holder
+            hr.first
+            hr.second
+        .line-3.angle-15
+          a.link(href="")
+            nobr ПУШКИНА, 18
+          .hr-holder
+            hr.first
+            hr.second
+    .middle-wrapper
+      .middle-holder
+        .first Сеть
+        .second городских
+        .third кафе
+  .content.w850px
+    .rest-nav
+      .unit
+        .icon
+          img(src="images/ico-mic.svg")
+        .head-title-wrapper
+          .title
+            Скоро
+        a.link(href="")
+          .visual
+            img(src="http://dummyimage.com/440x264")
+          .title
+            Джазовый концерт
+            .date 13 ноября | Четверг | 20:30
+      .unit
+        .icon
+          img(src="images/ico-new.svg")
+        .head-title-wrapper
+          .title
+            Новинка меню
+        a.link(href="")
+          .visual
+            img(src="http://dummyimage.com/440x264")
+          .title
+            Суп с блинами и фасолью
+      .unit
+        .icon
+        .head-title-wrapper
+          .title
+            Коротко о главном
+        a.link(href="")
+          .address
+            .wrapper
+              .title-wrapper
+                include svg/ico-point.jade
+                .title Пушкина, 27
+              .text.
+                <strong>Режим работы</strong><br>
+                пн-пт: с 12<sup>00</sup> до 00<sup>00</sup><br>
+                <strong>Тел.:</strong> (834) 225-75-18
+    

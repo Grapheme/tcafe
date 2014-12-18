@@ -32,6 +32,9 @@
       }
       .menu-holder {
         max-height: 600px;
+        a.active:before {
+          background: #c39c4d;
+        }
       }
     }
     .menu-btn {
@@ -85,6 +88,24 @@
         &:hover {
           color: white;
           background: #d19d45;
+          &:before {
+            background: white !important;
+          }
+        }
+        &.active {
+          &:before {
+            position: absolute;
+            content: '';
+            display: block;
+            width: 5px;
+            height: 5px;
+            background: transparent;
+            @include transition(all 700ms $easeInOutQuart);
+            border-radius: 5px;
+            top: 50%;
+            margin-top: -6px;
+            left: 12px;
+          }
         }
       }
       .small {
@@ -116,8 +137,8 @@
         position: relative;
         font-family: "bravorgregular";
         text-transform: uppercase;
-        font-weight: bold;
-        font-size: 24px;
+        //font-weight: bold;
+        font-size: 26px;
         color: white;
         letter-spacing: 0.08em;
         padding: 0 14px;

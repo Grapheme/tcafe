@@ -73,6 +73,43 @@ label.error {
       text-decoration: none;
       padding: 0 10px;
       letter-spacing: .025em;
+      @include unhover();
+      &:hover {
+        color: black;
+        @include hover();
+      }
+      &:active {
+        color: black;
+        position: relative;
+        &:before {
+          position: absolute;
+          content: '';
+          display: block;
+          width: 5px;
+          height: 5px;
+          background: white;
+          border-radius: 5px;
+          left: 50%;
+          margin-left: -2px;
+          bottom: -15px;
+        }
+      }
+      &.active {
+        color: black;
+        position: relative;
+        &:before {
+          position: absolute;
+          content: '';
+          display: block;
+          width: 5px;
+          height: 5px;
+          background: white;
+          border-radius: 5px;
+          left: 50%;
+          margin-left: -2px;
+          bottom: -15px;
+        }
+      }
     }
   }
   .rest-nav {
@@ -93,10 +130,53 @@ label.error {
             color: white;
             @include hover();
           }
+          .address {
+            .wrapper {
+              .title-wrapper {
+                svg {
+                  fill: white;
+                  @include hover();
+                }
+              }
+            }
+          }
+        }
+        .address {
+          padding: 8px;
+          .wrapper {
+            border: 1px solid #c39c4d;
+            text-align: center;
+            .title-wrapper {
+              margin-top: 18px;
+              svg {
+                display: inline-block;
+                vertical-align: middle;
+                fill: #d19e45;
+                @include unhover();
+              }
+              .title {
+                color: black;
+                display: inline-block;
+                vertical-align: middle;
+                padding-left: 0;
+                padding-right: 0;
+                margin-left: 16px;
+              }
+            }
+            .text {
+              font-size: 16px;
+              font-family: "PT Serif";
+              color: rgb(0, 0, 0);
+              line-height: 1.875;
+              margin-top: 10px;
+              padding-bottom: 19px;
+            }
+          }
         }
       }
       .icon {
         text-align: center;
+        height: 24px;
         img {
           display: inline-block;
           //width: 14px;
@@ -737,6 +817,12 @@ body.photos {
           width: 230px;
           display: inline-block;
           vertical-align: middle;
+          &.video {
+            background: url('../images/ico-play.svg');
+            width: 93px;
+            height: 93px;
+            background-size: contain;
+          }
         }
       }
       &:hover {
@@ -758,6 +844,25 @@ body.menu, body.reviews, body.contacts {
       }
       a {
         color: #c39c4d;
+        &:hover {
+          color: black;
+        }
+        &:active {
+          color: black;
+          position: relative;
+          &:before {
+            position: absolute;
+            content: '';
+            display: block;
+            width: 5px;
+            height: 5px;
+            background: #c39c4d;
+            border-radius: 5px;
+            left: 50%;
+            margin-left: -2px;
+            bottom: -15px;
+          }
+        }
         &.active {
           color: black;
           position: relative;

@@ -8,6 +8,23 @@
   z-index: 1000;
   text-align: center;
   display: none;
+  &.video {
+    .next, .prev, .thumbs-wrapper, .title {
+      display: none !important;
+    }
+    #video {
+      display: inline-block !important;
+    }
+  }
+  .simple-video-wrapper {
+    position: relative;
+    height: 100%;
+  }
+  #video {
+    width: 100%;
+    height: 100%;
+    display: none !important;
+  }
   &>.close {
     position: absolute;
     top: 0;

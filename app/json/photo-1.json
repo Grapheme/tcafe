@@ -1,4 +1,6 @@
-[
+{
+  "type": "photo",
+  "photo-list": [
     {
       "img": "http://dummyimage.com/1952x1140",
       "thumb": "http://dummyimage.com/244x156",
@@ -50,3 +52,4 @@
       "title": "Мастер класс по выпечке французких блинов"
     }
   ]
+}

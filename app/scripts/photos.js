@@ -23,7 +23,8 @@ function photosResize() {
   $unit.slice((unit_amount_x*unit_amount_y)).addClass('hidden');
 }
 
-function photoSlider(p_list) {
+function photoSlider(data) {
+  _log(data)
   var $slider = $('.popup-slider-wrapper'),
       $close = $('.popup-slider-wrapper .close'),
       $thumb_list = $slider.find('.thumbs .holder'),
@@ -32,26 +33,53 @@ function photoSlider(p_list) {
       $title = $slider.find('.title'),
       $frame = $slider.find('.frame'),
       $next = $slider.find('.next'),
-      $prev = $slider.find('.prev');
+      $prev = $slider.find('.prev'),
+      $video = null;
 
   function photoSliderLoader(p_list) {
-    $slider.fadeIn();
-    p_list.forEach(function(element, index) {
-      var $_this = $('<img src="'+element.thumb+'">').insertBefore($thumb_list.find('.clrfx'));
-      $_this.data({
-        img: element.img,
-        title: element.title
-      })
-      if (index == 0) {
-        $_this.addClass('first')
-      }
-      if (index == p_list.length-1) {
-        $_this.addClass('last')
-      }
-    });
+    
+    $slider.removeClass('video').fadeIn();
+      p_list.forEach(function(element, index) {
+        var $_this = $('<img src="'+element.thumb+'">').insertBefore($thumb_list.find('.clrfx'));
+        $_this.data({
+          img: element.img,
+          title: element.title
+        })
+        if (index == 0) {
+          $_this.addClass('first')
+        }
+        if (index == p_list.length-1) {
+          $_this.addClass('last')
+        }
+      });
   }
   
-  photoSliderLoader(p_list);
+  function videoLoader(data) {
+    $slider.addClass('video').fadeIn();
+    $('<img src="'+data['poster']+'">').load(function(){
+      $('#video').attr('poster', data['poster']);
+      $('#video').find('source').attr('src', data['video']);
+      $video = $('<video poster="'+data['poster']+'" id="video"><source src="'+data['video']+'"></video>').appendTo($visual)
+      $visual.fadeIn(300, function(){
+        $video.get(0).play();
+      });
+      $video.click(function() {
+        if (this.paused == false) {
+            this.pause();
+        } else {
+            this.play();
+        }
+      });
+    });
+  };
+  
+  if (data['type']=="photo") {
+    var p_list = data['photo-list'];
+    photoSliderLoader(p_list);
+  };
+  if (data['type']=="video") {
+    videoLoader(data);
+  };
   
   $thumb_list.find('img').click(function(){
     if (!$(this).is('.active')) {
@@ -112,6 +140,7 @@ function photoSlider(p_list) {
       $thumb_list.find('img').remove()
     });
     $next.add($prev).add($close).off('click');
+    $video.remove();
   }
   
   $next.click(function(){
@@ -123,7 +152,9 @@ function photoSlider(p_list) {
   $close.click(function(){
     photoSliderClose();
   });
-  $thumb_list.find('img').eq(0).click();
+  _log($thumb_list.find('img.first'))
+  $thumb_list.find('img.first').click();
+  $thumb_list.find('img.first').trigger('click');
   
 }
 
@@ -136,6 +167,18 @@ $(function() {
       photoSlider(data);
     })
   });
+  
+  var hash = location.hash.split('#')
+  if (hash.length>1) {
+    hash = hash[1].split('-')
+    if (hash[0]=='gallery') {
+      var gal_id = hash[1]
+      var json_url="/json/photo-"+gal_id+'.json'
+      $.getJSON(json_url, function(data){
+        photoSlider(data);
+      })
+    }
+  }
   
 });
 
