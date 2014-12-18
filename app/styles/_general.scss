@@ -82,6 +82,19 @@ label.error {
       margin: 0 45px;
       display: inline-block;
       vertical-align: top;
+      a.link {
+        background: white;
+        text-decoration: none;
+        display: block;
+        @include fullhover();
+        &:hover {
+          background: #c39c4d;
+          .title {
+            color: white;
+            @include hover();
+          }
+        }
+      }
       .icon {
         text-align: center;
         img {
@@ -96,9 +109,9 @@ label.error {
         font-family: "bravoscregular";
         text-transform: uppercase;
         color: #d19e45;
-        background: white;
         padding: 20px;
         letter-spacing: .025em;
+        @include unhover();
         .date {
           font-size: 14px;
           font-family: 'PT Serif';

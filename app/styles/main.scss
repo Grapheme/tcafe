@@ -13,6 +13,21 @@ $fonts_path: './fonts/';
 
 $main-border-width: 10px;
 
+@mixin hover(){
+  @include transition(all 100ms $easeInOutSine);
+}
+
+@mixin unhover(){
+  @include transition(all 200ms $easeInOutSine);
+}
+
+@mixin fullhover(){
+  @include unhover();
+  &:hover {
+    @include hover();
+  }
+}
+
 @import 'fonts';
 @import 'general';
 @import 'header';

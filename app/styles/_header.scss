@@ -290,6 +290,10 @@
       vertical-align: top;
       text-align: left;
       text-transform: uppercase;
+      @include fullhover();
+      &:hover {
+        color: #d19e45;
+      }
     }
     .angle-15 {
       @include transform(rotate(-15deg));
@@ -349,8 +353,15 @@ body.index {
   .header {
     .menu-wrapper {
       .menu-btn {
+        &:hover {
+          .label {
+            @include hover();
+            color: #d19e45;
+          }
+        }
         .label {
           color: white;
+          @include unhover();
         }
       }
     }
