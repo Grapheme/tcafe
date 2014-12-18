@@ -21,6 +21,13 @@
     right: 20px;
     text-align: right;
     top: 0;
+    a{
+      color: inherit;
+      text-decoration: none;
+      &:hover {
+        text-decoration: underline;
+      }
+    }
   }
   .center {
     display: inline-block;
