@@ -1,1 +1,22 @@
-<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" preserveAspectRatio="none" width="60" height="60" viewBox="0 0 60 60"><defs><path fill="#D19E45" d="M50.8 21.35v-20H9V21.5l-7.55 6.45v32.7h57v-32.7l-7.65-6.6m-2.65-17.2V29.8l-18.1 18.1-18.3-18.25V4.15h36.4m-5.95 28.4v-4H17.45v4H42.2m0-9.65v-4H17.45v4H42.2m0-9.7v-4H17.45v4H42.2z" id="a"/></defs><use xlink:href="#a"/></svg>
+
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" preserveAspectRatio="none" x="0px" y="0px" width="60px" height="60px" viewBox="0 0 60 60">
+<defs>
+<g id="Layer5_0_FILL">
+<path fill="#D19E45" stroke="none" d="
+M 50.8 21.35
+L 50.8 1.35 9 1.35 9 21.5 1.45 27.95 1.45 60.65 58.45 60.65 58.45 27.95 50.8 21.35
+M 48.15 4.15
+L 48.15 29.8 30.05 47.9 11.75 29.65 11.75 4.15 48.15 4.15
+M 42.2 32.55
+L 42.2 28.55 17.45 28.55 17.45 32.55 42.2 32.55
+M 42.2 22.9
+L 42.2 18.9 17.45 18.9 17.45 22.9 42.2 22.9
+M 42.2 13.2
+L 42.2 9.2 17.45 9.2 17.45 13.2 42.2 13.2 Z"/>
+</g>
+</defs>
+
+<g transform="matrix( 1, 0, 0, 1, 0,0) ">
+<use xlink:href="#Layer5_0_FILL"/>
+</g>
+</svg>

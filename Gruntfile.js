@@ -356,6 +356,16 @@ module.exports = function(grunt) {
             'assets/{,*/}*.*'
           ]
         }]
+      },
+      svg: {
+        files: [{
+          expand: true,
+          cwd: '<%= folders.app %>',
+          dest: '<%= folders.dist %>',
+          src: [
+            'images/{,*/}*.svg'
+          ]
+        }]
       }
     },
     concurrent: {
@@ -368,7 +378,7 @@ module.exports = function(grunt) {
       dist: [
         'compass:dist',
         'imagemin',
-        'svgmin',
+        //'svgmin',
         'htmlmin'
       ]
     },
@@ -416,6 +426,7 @@ module.exports = function(grunt) {
     //'bower_concat',
     'copy:js',
     'copy:css',
+    'copy:svg',
     'useminPrepare',
     'concurrent:dist',
     //'autoprefixer:build',

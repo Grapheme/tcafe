@@ -1,0 +1,15 @@
+extends ./layouts/layout.jade
+
+block vars
+ - var bodyClass = "not-found";
+ - var title = "Страница не найдена – Т-Кафе"
+
+block title
+  .title-holder
+    .title
+      .left Ошибка
+      .icon
+        img(src="images/404.png")
+      .right 404
+
+block content

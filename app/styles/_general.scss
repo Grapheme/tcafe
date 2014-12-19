@@ -613,6 +613,11 @@ body.contacts {
               border: none;
               text-transform: uppercase;
               padding: 5px 42px;
+              @include fullhover();
+              &:hover {
+                color: #694e22;
+                background: rgb(209, 158, 69);
+              }
             }
           }
         }
@@ -788,6 +793,11 @@ body.reviews {
                 text-transform: uppercase;
                 margin-bottom: 26px;
                 padding: 5px 42px;
+                @include fullhover();
+                &:hover {
+                  color: #694e22;
+                  background: rgb(209, 158, 69);
+                }
               }
             }
             &.open {

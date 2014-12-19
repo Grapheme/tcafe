@@ -85,6 +85,8 @@
         text-decoration: none;
         padding-top: 7px;
         padding-bottom: 6px;
+        position: relative;
+        width: 150px;
         &:hover {
           color: white;
           background: #d19d45;
@@ -103,7 +105,7 @@
             @include transition(all 700ms $easeInOutQuart);
             border-radius: 5px;
             top: 50%;
-            margin-top: -6px;
+            margin-top: -2px;
             left: 12px;
           }
         }
@@ -482,6 +484,28 @@ body.specials {
           }
           .left, .right {
             top: -12px;
+          }
+        }
+      }
+    }
+  }
+}
+
+body.not-found {
+  .header {
+    .title-wrapper {
+      height: 100%;
+      .title-holder {
+        height: 560px;
+        .title {
+          .icon {
+            width: 70px;
+            height: 90px;
+            img {
+              position: absolute;
+              margin-left: -264px;
+              margin-top: 20px;
+            }
           }
         }
       }
