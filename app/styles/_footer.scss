@@ -31,6 +31,8 @@
   }
   .center {
     display: inline-block;
+    font-family: 'social-icon';
+    font-size: 20px;
     a {
       display: inline-block;
       vertical-align: top;
@@ -38,13 +40,11 @@
       height: 20px;
       overflow: hidden;
       margin: 0 10px;
-      img {
-        width: 20px;
-        height: 40px;
-        position: relative;
-        &:hover {
-          top: -20px;
-        }
+      color: #d4a048;
+      text-decoration: none;
+      @include fullhover();
+      &:hover {
+        color: #5a9481;
       }
     }
   }
