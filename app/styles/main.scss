@@ -9,16 +9,20 @@
  -moz-osx-font-smoothing: grayscale;
 }
 
+html {
+  //zoom: 110%;
+}
+
 $fonts_path: './fonts/';
 
 $main-border-width: 10px;
 
 @mixin hover(){
-  @include transition(all 100ms $easeInOutSine);
+  //@include transition(all 100ms $easeInOutSine);
 }
 
 @mixin unhover(){
-  @include transition(all 200ms $easeInOutSine);
+  @include transition(all 100ms $easeInOutSine);
 }
 
 @mixin fullhover(){

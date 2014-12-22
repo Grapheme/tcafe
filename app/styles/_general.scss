@@ -190,6 +190,7 @@ label.error {
       .icon {
         text-align: center;
         height: 24px;
+        margin-bottom: 3px;
         img {
           display: inline-block;
           //width: 14px;
@@ -370,7 +371,7 @@ body.about {
         .title {
           font-size: 20px;
           color: rgb(195, 156, 77);
-          font-weight: bold;
+          //font-weight: bold;
           line-height: 1.2;
           font-family: "bravorgregular";
           text-transform: uppercase;
@@ -631,7 +632,7 @@ body.contacts {
         .title {
           font-size: 20px;
           color: black;
-          font-weight: bold;
+          //font-weight: bold;
           line-height: 1.2;
           font-family: "bravorgregular";
           text-transform: uppercase;
@@ -887,7 +888,7 @@ body.photos {
         .title {
           font-size: 20px;
           color: rgb(255, 255, 255);
-          font-weight: bold;
+          //font-weight: bold;
           line-height: 1.2;
           text-align: center;
           font-family: "bravorgregular";
@@ -1065,10 +1066,10 @@ body.menu {
             margin-bottom: 50px;
             margin-top: 15px;
             .price {
-              font-size: 24px;
+              font-size: 36px;
               font-family: "bravoscregular";
               color: rgb(39, 39, 39);
-              font-weight: bold;
+              //font-weight: bold;
               line-height: 0.958;
               display: inline-block;
               position: relative;
