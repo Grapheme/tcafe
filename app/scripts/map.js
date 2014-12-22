@@ -4,8 +4,9 @@ $(function() {
   _TCAFE_.contacts_map_start_pos = new google.maps.LatLng(50, 50)
   _TCAFE_.contacts_btn=[]
   _TCAFE_.gmap_marker = {
-    url: '../images/ico-point.svg',
+    url: '../images/ico-point-w-shadow.svg',
     //size: new google.maps.Size(34, 48),
+    anchor: new google.maps.Point(18, 50)
   };
   _TCAFE_.$contacts_map.gmap({
     
