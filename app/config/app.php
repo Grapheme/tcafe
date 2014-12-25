@@ -11,7 +11,7 @@ return array(
 	
 	'default_page_title' => 'T-Cafe',
 	'template' => 'site',
-    'welcome_page_tpl' => 'templates.site.index', #'guests.welcome',
+    'welcome_page_tpl' => 'templates.site.welcome', #'guests.welcome',
 
 
 	'manifest' => storage_path('meta'),

@@ -86,7 +86,7 @@ class PublicPagesController extends BaseController {
                 ));
 
                 ## Main page for non-default locale
-                if (!$default_locale_mainpage)
+                if (!Config::get('pages.disable_mainpage_route') && !$default_locale_mainpage)
                     Route::any('/', array(
                         'as' => 'mainpage',
                         'before' => 'i18n_url',
@@ -96,7 +96,7 @@ class PublicPagesController extends BaseController {
             });
 
             ## Main page for default locale
-            if ($default_locale_mainpage)
+            if (!Config::get('pages.disable_mainpage_route') && $default_locale_mainpage)
                 Route::any('/', array(
                     'as' => 'mainpage',
                     'before' => '',
@@ -115,16 +115,19 @@ class PublicPagesController extends BaseController {
                 ));
 
                 ## Main page
-                Route::any('/', array(
-                    'as' => 'mainpage',
-                    'uses' => $class.'@showPage'
-                ));
+                if (!Config::get('pages.disable_mainpage_route')) {
+
+                    Route::any('/', array(
+                        'as' => 'mainpage',
+                        'uses' => $class.'@showPage'
+                    ));
+                }
             });
 
         }
 
     }
-    
+
     ## Shortcodes of module
     public static function returnShortCodes() {
     }
