@@ -314,7 +314,7 @@ class Dictionary extends BaseModel {
         $data = self::where('slug', $dic_slug)->with(array('value' => function($query) use ($val_slug){
                 $query->where('version_of', NULL);
                 $query->where('slug', $val_slug);
-                $query->with('meta', 'fields', 'seo', 'related_dicvals');
+                $query->with('meta', 'fields', 'textfields', 'seo', 'related_dicvals');
             }))->first();
 
         if (is_object($data)) {

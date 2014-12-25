@@ -19,50 +19,69 @@
     <div class="tilt-header">
         <div class="wings">
             <div class="left">
-                <div class="line-1 angle-15">
-                    <div class="hr-holder">
-                        <hr class="first">
-                        <hr class="second">
-                    </div><a href="redstreet.html" class="link">
-                        <nobr>RED STREET</nobr>
-                        <nobr>НА КРАСНОЙ, 16</nobr></a>
-                </div>
-                <div class="line-2 angle-15 nolink">
-                    <div class="hr-holder">
-                        <hr class="first">
-                        <hr class="second">
-                    </div>
-                </div>
-                <div class="line-3 angle-15">
-                    <div class="hr-holder">
-                        <hr class="first">
-                        <hr class="second">
-                    </div><a href="" class="link">
-                        <nobr>40 лет Победы, 144/5</nobr></a>
-                </div>
+                @if (@count($cafes_chunk[0]))
+                    @foreach ($cafes_chunk[0] as $c => $cfch)
+                        <?
+                        $cafe = @$cafes[$cfch['id']];
+                        if (!is_object($cafe))
+                            continue;
+                        $n = $c ? $c + 2 : $c + 1;
+                        ?>
+                        <div class="line-{{ $n }} angle-15">
+                            <div class="hr-holder">
+                                <hr class="first">
+                                <hr class="second">
+                            </div>
+                            <a href="{{ URL::route('app.cafe', $cafe->slug) }}" class="link">
+                                <nobr>{{ $cafe->name }}</nobr>
+                                @if ($c == 0)
+                                <nobr>НА {{ $cafe->address2 }}</nobr>
+                                @endif
+                            </a>
+                        </div>
+                        @if ($c == 0)
+                        <div class="line-2 angle-15 nolink">
+                            <div class="hr-holder">
+                                <hr class="first">
+                                <hr class="second">
+                            </div>
+                        </div>
+                        @endif
+                    @endforeach
+                @endif
                 <!--.line-4.angle-15-->
             </div>
             <div class="right">
-                <div class="line-1 angle-15"><a href="" class="link">
-                        <nobr>Красных Партизан, 173</nobr></a>
-                    <div class="hr-holder">
-                        <hr class="first">
-                        <hr class="second">
-                    </div>
-                </div>
-                <div class="line-2 angle-15 nolink">
-                    <div class="hr-holder">
-                        <hr class="first">
-                        <hr class="second">
-                    </div>
-                </div>
-                <div class="line-3 angle-15"><a href="" class="link">
-                        <nobr>Тургенева, 138/6</nobr></a>
-                    <div class="hr-holder">
-                        <hr class="first">
-                        <hr class="second">
-                    </div>
-                </div>
+
+
+                @if (@count($cafes_chunk[1]))
+                    @foreach ($cafes_chunk[1] as $c => $cfch)
+                        <?
+                        $cafe = @$cafes[$cfch['id']];
+                        if (!is_object($cafe))
+                            continue;
+                        $n = $c ? $c + 2 : $c + 1;
+                        ?>
+                        <div class="line-{{ $n }} angle-15">
+                            <a href="{{ URL::route('app.cafe', $cafe->slug) }}" class="link">
+                                <nobr>{{ $cafe->name }}</nobr>
+                            </a>
+                            <div class="hr-holder">
+                                <hr class="first">
+                                <hr class="second">
+                            </div>
+                        </div>
+                        @if ($c == 0)
+                            <div class="line-2 angle-15 nolink">
+                                <div class="hr-holder">
+                                    <hr class="first">
+                                    <hr class="second">
+                                </div>
+                            </div>
+                        @endif
+                    @endforeach
+                @endif
+
             </div>
         </div>
         <div class="middle-wrapper">

@@ -17,14 +17,14 @@
 @endif
 @section('page_class')index @stop
 <!DOCTYPE html>
-<html class="@yield('page_class') no-js">
+<html class="@yield('page_class') no-js" style="@yield('page_style')">
 <head>
 	@include(Helper::layout('head'))
 
     @section('style')
     @show
 </head>
-<body class="@yield('page_class')">
+<body class="@yield('page_class')" style="@yield('page_style')">
     <!--[if lt IE 7]>
         <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->

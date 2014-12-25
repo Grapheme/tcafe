@@ -52,6 +52,16 @@ class DicLib extends BaseController {
         if (is_array($key))
             $key = (array)$key;
 
+        if (get_class($collection) == 'DicVal') {
+
+            $temp = $collection;
+
+            $collection = new Collection();
+            $collection->put(0, $temp);
+        }
+
+        #Helper::dd($collection);
+
         if (!count($collection) || !count($key))
             return false;
 
@@ -65,6 +75,8 @@ class DicLib extends BaseController {
              * Если при вызове указано поле (связь) - берем ее вместо текущего объекта
              */
             $work_obj = $field ? $obj->$field : $obj;
+
+            #Helper::dd($work_obj);
 
             /**
              * Перебираем все переданные ключи с ID изображений
