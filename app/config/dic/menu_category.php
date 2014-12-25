@@ -71,7 +71,7 @@ return array(
         return '
             <span class="block_ margin-bottom-5_">
                 <a href="' . URL::route('entity.index', array('menu_goods', 'filter[fields][category_id]' => $dicval->id)) . '" class="btn btn-default">
-                    Продукция (' . @(int)$counts[$dicval->id][$dic_menu_goods->id]. ')
+                    Блюда (' . @(int)$counts[$dicval->id][$dic_menu_goods->id]. ')
                 </a>
             </span>
         ';
