@@ -18,7 +18,7 @@ $(function() {
 		}
 	  ]
     }).bind('init', function(event, map) {
-    $.getJSON(_TCAFE_.contacts_map_json_url, function(data) {
+	  var data = $.parseJSON(_TCAFE_.mapJson);
       $.each(data.markers, function(i, marker) {
         var _marker_ = _TCAFE_.$contacts_map.gmap('addMarker', { 
           'position': new google.maps.LatLng(marker.latitude, marker.longitude), 
@@ -102,7 +102,6 @@ $(function() {
 		var cl = hash.split('#')[1];
 		$('.top-btns a.'+cl).trigger('click');
 	  }
-    });
   });
   
 });

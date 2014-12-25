@@ -49,7 +49,7 @@ html(class="#{bodyClass} no-js")
       script(src='//ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js')
 
       block scripts
-
+      
       // build:js({app,.tmp}) scripts/main.js
       script(src="scripts/modernizr.js")
       script(src="scripts/jquery.ui.map.js")
@@ -62,5 +62,5 @@ html(class="#{bodyClass} no-js")
       script(src="scripts/reviews.js")
       script(src="scripts/map.js")
       // endbuild
-
       
+      block inline-scripts
