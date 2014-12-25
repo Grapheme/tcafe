@@ -4,12 +4,35 @@ return array(
 
     'functions' => array(
 
+
         'mainpage' => function() {
             return array(
-                'url' => URL::route('mainpage'),
-                'text' => 'ГЛАВНАЯ СТРАНИЦА',
-                'title' => 'Перейти на главную страницу',
+                'url' => URL::route('app.mainpage'),
+                'text' => 'Главная страница',
+                'type' => 'link',
             );
+        },
+
+        'allcafe' => function() {
+
+            $return = array(
+                'text' => 'Ссылки на все кафе',
+            );
+
+            $cafes = Dic::valuesBySlug('cafe');
+            $cafes = DicVal::extracts($cafes, null, true, true);
+
+            if (count($cafes)) {
+                foreach ($cafes as $cafe) {
+                    $return[] = array(
+                        'url' => URL::route('app.cafe', $cafe->slug),
+                        'text' => $cafe->name,
+                        'type' => 'link',
+                    );
+                }
+            }
+
+            return $return;
         }
 
     ),

@@ -112,6 +112,7 @@ class AdminPagesPageController extends BaseController {
 
         foreach ($this->templates(Helper::theme_dir(), '') as $key => $template)
             @$templates_theme[$key] = $template;
+
         if (@count($templates_theme)) {
 
             if (@$templates_theme[$element->template])
@@ -190,6 +191,9 @@ class AdminPagesPageController extends BaseController {
 
             if (@$templates_theme[$element->template])
                 $template_exists = true;
+
+            #die;
+            #Helper::dd($templates_theme);
 
             natsort($templates_theme);
             $templates['Тема оформления'] = $templates_theme;

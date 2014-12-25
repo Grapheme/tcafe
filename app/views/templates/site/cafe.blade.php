@@ -1,6 +1,6 @@
 <?
 /**
- * TITLE: Главная страница
+ * TITLE: Страница одного кафе
  * AVAILABLE_ONLY_IN_ADVANCED_MODE
  */
 ?>

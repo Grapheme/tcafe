@@ -1,7 +1,6 @@
 <?
 /**
- * TITLE: Главная страница
- * AVAILABLE_ONLY_IN_ADVANCED_MODE
+ * TEMPLATE_IS_NOT_SETTABLE
  */
 ?>
 @extends(Helper::layout())

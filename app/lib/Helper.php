@@ -1052,12 +1052,25 @@ HTML;
 
                     if ($value !== true && is_string($value) && mb_strlen($value)) {
 
-                        if (mb_strpos($value, '|')) {
+                        if (!mb_strpos($value, '|')) {
+                            $value .= '|';
+                        }
+
+                        #if (mb_strpos($value, '|')) {
 
                             $temp = explode('|', $value);
                             $value = array();
+
+                            foreach ($temp as $t => $tmp) {
+                                $tmp = trim($tmp);
+                                if (!$tmp)
+                                    unset($temp[$t]);
+                            }
+
                             foreach ($temp as $tmp) {
                                 $tmp = trim($tmp);
+                                if (!$tmp)
+                                    continue;
                                 #Helper::d($tmp);
                                 if (mb_strpos($tmp, '=')) {
                                     $keyval = explode('=', $tmp, 2);
@@ -1065,10 +1078,13 @@ HTML;
                                     #Helper::dd(trim($keyval[0]) . ' === ' . trim($keyval[1]));
                                 } else {
                                     #Helper::dd($tmp);
-                                    $value[$tmp] = true;
+                                    if (count($temp) == 1)
+                                        $value = $tmp;
+                                    else
+                                        $value[$tmp] = true;
                                 }
                             }
-                        }
+                        #}
                     }
 
                     $properties[@trim($buffer[0])] = $value;
@@ -1082,7 +1098,7 @@ HTML;
         }
 
         #Helper::d("PROPERTIES:");
-        #Helper::d($properties);
+        #Helper::dd($properties);
 
         return $properties;
     }
