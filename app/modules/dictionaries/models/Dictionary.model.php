@@ -44,7 +44,8 @@ class Dictionary extends BaseModel {
                 #$query->whereIn('name', array_keys((array)Config::get('dic.dic_name.fields')));
             }))
             */
-            ->orderBy('order', 'ASC')
+            #->orderBy('order', 'ASC')
+            ->orderBy(DB::raw('-lft'), 'DESC')
             ->orderBy('slug', 'ASC')
             ->orderBy('name', 'ASC')
             ->orderBy('id', 'ASC')

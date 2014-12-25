@@ -4,23 +4,19 @@ return array(
 
     'fields' => function($dicval = NULL) {
 
-        /**
-         * Предзагружаем нужные словари с данными, по системному имени словаря, для дальнейшего использования.
-         * Делается это одним SQL-запросом, для снижения нагрузки на сервер БД.
-         */
-        $dics_slugs = array(
-            'menu_category',
-        );
-        $dics = Dic::whereIn('slug', $dics_slugs)->with('values')->get();
-        $dics = DicLib::modifyKeys($dics, 'slug');
-        #Helper::tad($dics);
-        $lists = Dic::makeLists($dics, 'values', 'name', 'id');
+        $menu = Dic::valuesBySlug('menu_category', function($query){
+            $query->orderBy(DB::raw('-lft'), 'DESC'); ## 0, 1, 2 ... NULL, NULL
+        });
+        $menu = Dic::modifyKeys($menu, 'id');
+        #Helper::ta($menu);
+        $menu = DicLib::nestedModelToTree($menu);
+        #Helper::tad($menu);
 
         return array(
             'category_id' => array(
                 'title' => 'Категория меню',
                 'type' => 'select',
-                'values' => $lists['menu_category'], ## Используется предзагруженный словарь
+                'values' => $menu,
             ),
             'description' => array(
                 'title' => 'Описание',
@@ -40,6 +36,29 @@ return array(
             ),
         );
     },
+
+
+    /**
+     * MENUS - дополнительные пункты верхнего меню, под названием словаря.
+     */
+    'menus' => function($dic, $dicval = NULL) {
+
+        $menus = array();
+        $menus[] = array('raw' => '<br/>');
+
+        $menu = Dic::valuesBySlug('menu_category', function($query){
+            $query->orderBy(DB::raw('-lft'), 'DESC'); ## 0, 1, 2 ... NULL, NULL
+        });
+        $menu = Dic::modifyKeys($menu, 'id');
+        $menu = DicLib::nestedModelToTree($menu);
+
+        /**
+         * Добавляем доп. элементы в меню, в данном случае: выпадающие поля для организации фильтрации записей по их свойствам
+         */
+        $menus[] = DicLib::getDicValMenuDropdown('category_id', 'Все меню', $menu, $dic);
+        return $menus;
+    },
+
 
     'seo' => 0,
 

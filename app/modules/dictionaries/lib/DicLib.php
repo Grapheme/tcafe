@@ -132,4 +132,160 @@ class DicLib extends BaseController {
     }
 
 
+    /**
+     * Функция для вывода выпадающего списка в верхнем меню для фильтрации результатов
+     *
+     * @param $filter_name
+     * @param $filter_default_text
+     * @param $filter_dic_elements - array like: array('_id_of_the_dicval_' => '_name_of_the_dicval_')
+     * @param $dic
+     * @param bool $dicval
+     * @return array
+     */
+    public static function getDicValMenuDropdown($filter_name, $filter_default_text, $filter_dic_elements, $dic, $dicval = false) {
+
+        $filter = Input::get('filter.fields');
+        #Helper::d($filter);
+        #Helper::ta($dic);
+
+        $dic_id = $dic->entity ? $dic->slug : $dic->id;
+        $route = $dic->entity ? 'entity.index' : 'dicval.index';
+
+        ## Get dimensional array for filtration from multidimensional array (Input::get()) #NOSQL
+        $current_link_attributes = Helper::multiArrayToAttributes(Input::get('filter'), 'filter');
+
+        ## Main element of the drop-down menu
+        if (@$filter[$filter_name]) {
+
+            ## Get current dicval from array of the gettin' filter_dic_elements #NOSQL
+            $current_dicval = @$filter_dic_elements[$filter[$filter_name]];
+
+            ## Get all current link attributes & modify for next url generation
+            $array = $current_link_attributes;
+            $array["filter[fields][{$filter_name}]"] = @$filter[$filter_name];
+            $array = (array)$dic_id + $array;
+
+            $parent = array(
+                'link' => URL::route($route, $array),
+                'title' => $current_dicval,
+                'class' => 'btn btn-default',
+            );
+        } else {
+
+            ## Get all current link attributes & modify for next url generation
+            $array = $current_link_attributes;
+            unset($array["filter[fields][{$filter_name}]"]);
+            $array = (array)$dic_id + $array;
+
+            $parent = array(
+                'link' => URL::route($route, $array),
+                'title' => $filter_default_text,
+                'class' => 'btn btn-default',
+            );
+        }
+        ## Child elements
+        $product_types = array();
+        if (@$filter[$filter_name]) {
+
+            ## Get all current link attributes & modify for next url generation
+            $array = $current_link_attributes;
+            unset($array["filter[fields][{$filter_name}]"]);
+            $array = (array)$dic_id + $array;
+
+            $product_types[] = array(
+                'link' => URL::route($route, $array),
+                'title' => $filter_default_text,
+                'class' => '',
+            );
+        }
+        foreach ($filter_dic_elements as $element_id => $element_name) {
+
+            if ($element_id == @$filter[$filter_name]) {
+                continue;
+            }
+
+            ## Get all current link attributes & modify for next url generation
+            $array = $current_link_attributes;
+            $array["filter[fields][{$filter_name}]"] = $element_id;
+            $array = (array)$dic_id + $array;
+
+            $product_types[] = array(
+                'link' => URL::route($route, $array),
+                'title' => $element_name,
+                'class' => '',
+            );
+        }
+        ## Assembly
+        $parent['child'] = $product_types;
+        return $parent;
+    }
+
+
+    public static function nestedModelToTree($categories, $debug = false) {
+
+        /**
+         * Подсчитаем отступ для каждой категории
+         */
+        $indent_debug = $debug;
+        $indent = 0;
+        $last_indent_increate_rgt = array();
+        foreach ($categories as $category) {
+
+            if ($indent_debug)
+                Helper::ta($category);
+
+            $category->indent = $indent;
+
+            if ($indent_debug)
+                Helper::d("Устанавливаем текущий отступ категории: " . $indent);
+
+            if ($category->lft+1 < $category->rgt) {
+
+                ++$indent;
+                $last_indent_increate_rgt[] = $category->rgt;
+
+                if ($indent_debug) {
+                    Helper::d("Увеличиваем текущий уровень отступа: " . $indent . " (" . $category->lft . "+1 < " . $category->rgt . ")");
+                    Helper::d("Добавляем RGT в массив 'RGT родительских категории': " . $category->rgt . " => " . implode(', ', $last_indent_increate_rgt));
+                }
+            }
+
+            #/*
+
+            $plus = 1;
+            $exit = false;
+            do {
+                if (in_array(($category->lft+(++$plus)), $last_indent_increate_rgt)) {
+
+                    --$indent;
+
+                    /*
+                    Helper::d("LFT категории + " . $plus . " (" . ($category->lft+$plus) . ") найдено в массиве 'RGT родительских категорий' => " . implode(', ', $last_indent_increate_rgt));
+                    Helper::d("Уменьшаем текущий уровень отступа: " . $indent);
+                    #*/
+
+                } else {
+                    $exit = true;
+                }
+
+            } while(!$exit);
+
+            #Helper::d("<hr/>");
+        }
+
+        #Helper::tad($categories);
+
+        /**
+         * Соберем все категории в массив с отступами для select
+         */
+        $categories_for_select = array();
+        foreach ($categories as $category) {
+            $categories_for_select[$category->id] = str_repeat('&nbsp; &nbsp; &nbsp; ', $category->indent) . $category->name;
+        }
+        if ($indent_debug)
+            Helper::dd($categories_for_select);
+
+        return $categories_for_select;
+    }
+
 }
