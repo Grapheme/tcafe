@@ -437,7 +437,7 @@ module.exports = function(grunt) {
     'copy:dist',
     'copy:assets',
     'px_to_rem:build',
-    'rev',
+    //'rev',
     'usemin'
   ]);
 
