@@ -34,6 +34,12 @@ return array(
                 'title' => 'Вес, порция',
                 'type' => 'text',
             ),
+            'show_on_mainpage' => array(
+                'title' => 'Выводить на главной',
+                'type' => 'checkbox',
+                'no_label' => true,
+                'label_class' => 'normal_checkbox',
+            ),
         );
     },
 
