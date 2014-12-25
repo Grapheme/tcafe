@@ -1,15 +1,11 @@
+<?
+/**
+ * TEMPLATE_IS_NOT_SETTABLE
+ */
+?>
 
-            <footer class="main-footer">
-                <div class="copy">
-                    ©
-                    {{ trans('interface.footer.copyright') }}
-                    2014{{ date('Y')>2014 ? '-'.date('Y') : '' }}
-                </div>
-                <address>
-                    {{ trans('interface.footer.address') }}
-                </address>
-                <div class="dev">
-                    {{ trans('interface.footer.made_by_grapheme') }}
-                </div>
-            </footer>
-        </div>
+<div id="footer">
+    <div class="left">&copy; Т-кафе <span class="year"></span></div>
+    <div class="center"><a href="http://www.facebook.com/cafeTcafe" target="_blank">f</a><a href="https://vk.com/tcafe" target="_blank">v</a><a href="http://instagram.com/tcafekrasnodar/" target="_blank">i</a></div>
+    <div class="right">Сделано в <a href="http://grapheme.ru/" target="_blank">ГРАФЕМА</a></div>
+</div>
