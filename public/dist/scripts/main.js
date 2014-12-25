@@ -1362,9 +1362,16 @@ $(function() {
     anchor: new google.maps.Point(18, 50)
   };
   _TCAFE_.$contacts_map.gmap({
-    
+    styles:[
+		{ 
+		  featureType: "poi", 
+		  elementType: "labels", 
+		  stylers: [ { visibility: "off" } ] 
+	
+		}
+	  ]
     }).bind('init', function(event, map) {
-    $.getJSON(_TCAFE_.contacts_map_json_url, function(data) {
+	  var data = $.parseJSON(_TCAFE_.mapJson);
       $.each(data.markers, function(i, marker) {
         var _marker_ = _TCAFE_.$contacts_map.gmap('addMarker', { 
           'position': new google.maps.LatLng(marker.latitude, marker.longitude), 
@@ -1433,7 +1440,7 @@ $(function() {
           //alert('123')
 		});
         
-        $('<a href="">'+marker.title+'</a><div class="bar"></div>').appendTo('.top-btns').click(function(e){
+        $('<a href="" class="'+marker.slug+'">'+marker.title+'</a><div class="bar"></div>').appendTo('.top-btns').click(function(e){
           e.preventDefault();
           if (!$(this).is('.active')) {
             $('.top-btns a').removeClass('active');
@@ -1443,8 +1450,11 @@ $(function() {
         }).data('marker', _marker_)
         
       });
-      //_TCAFE_.$contacts_map.gmap('get','map').setOptions({'center':_TCAFE_.contacts_map_start_pos});
-    });
+	  var hash = window.location.hash || null;
+	  if(hash) {
+		var cl = hash.split('#')[1];
+		$('.top-btns a.'+cl).trigger('click');
+	  }
   });
   
 });
