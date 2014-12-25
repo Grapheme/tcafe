@@ -22,7 +22,7 @@ return array(
                 'title' => 'Описание',
                 'type' => 'textarea',
             ),
-            'image' => array(
+            'image_id' => array(
                 'title' => 'Изображение',
                 'type' => 'image',
             ),
