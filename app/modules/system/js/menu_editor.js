@@ -1,5 +1,5 @@
 
-var menu_items = $('.dd');
+var menu_items = $('.dd.menu-list');
 
 var menu_editor = {
 
@@ -12,7 +12,7 @@ var menu_editor = {
     },
 
     'update_output': function() {
-        updateOutput($('.dd'));
+        updateOutput($(menu_items));
         menu_editor.show_hide_info();
     },
 
@@ -283,7 +283,7 @@ if ($('.dd').length) {
     loadScript(base_url + '/private/js/plugin/jquery-nestable/jquery.nestable.js', function() {
 
 
-        if ($('.dd.menu-list').length) {
+        if ($(menu_items).length) {
 
             //alert(nesting_level);
 
@@ -291,14 +291,14 @@ if ($('.dd').length) {
                 var nesting_level = 5;
             }
 
-            $('.dd').nestable({
+            $(menu_items).nestable({
                 //group : 1
                 maxDepth: nesting_level || 5,
                 expandBtnHTML: '',
                 collapseBtnHTML: ''
             }).on('change', updateOutput);
 
-            updateOutput($('.dd').data('output', $(nestable_output)));
+            updateOutput($(menu_items).data('output', $(nestable_output)));
         }
     });
 }
