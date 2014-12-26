@@ -4,7 +4,7 @@ $(function() {
   _TCAFE_.contacts_map_start_pos = new google.maps.LatLng(50, 50)
   _TCAFE_.contacts_btn=[]
   _TCAFE_.gmap_marker = {
-    url: '../images/ico-point-w-shadow.svg',
+    url: '/dist/images/ico-point-w-shadow.svg',
     //size: new google.maps.Size(34, 48),
     anchor: new google.maps.Point(18, 50)
   };
@@ -21,7 +21,7 @@ $(function() {
 	  var data = $.parseJSON(_TCAFE_.mapJson);
       $.each(data.markers, function(i, marker) {
         var _marker_ = _TCAFE_.$contacts_map.gmap('addMarker', { 
-          'position': new google.maps.LatLng(marker.latitude, marker.longitude), 
+          'position': new google.maps.LatLng(parseFloat(marker.latitude), parseFloat(marker.longitude)), 
           'bounds': true,
           'icon': _TCAFE_.gmap_marker,
           '_id': i
@@ -67,7 +67,7 @@ $(function() {
 			,pixelOffset: new google.maps.Size(-56, -77)
 			,zIndex: null
             ,boxClass: 'contacts-info-box'
-			,closeBoxURL: "../images/ico-point.svg"
+			,closeBoxURL: "/dist/images/ico-point.svg"
 			,infoBoxClearance: new google.maps.Size(20, 20)
 			,isHidden: false
 			,pane: "floatPane"
