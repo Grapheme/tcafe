@@ -9,7 +9,8 @@ $photoalbums = Dic::valuesBySlug('photoalbums', function($query){
     $query->orderBy('created_at', 'DESC');
 });
 $photoalbums = DicVal::extracts($photoalbums, null, true, true);
-$photoalbums = DicLib::loadGallery($photoalbums, 'gallery_id');
+$photoalbums = DicLib::loadImages($photoalbums, 'image_id');
+#$photoalbums = DicLib::loadGallery($photoalbums, 'gallery_id');
 #Helper::tad($photoalbums);
 ?>
 @extends(Helper::layout())
@@ -90,198 +91,18 @@ $photoalbums = DicLib::loadGallery($photoalbums, 'gallery_id');
         </div>
     </div>
     <div class="content">
-        <div style="background-image: url('http://dummyimage.com/1000x1000')" data-json="json/photo-1.json" class="unit">
-            <div class="hover">
-                <div class="bar"></div>
-                <div class="title">Мастер класс по выпечке русских блинов</div>
-            </div>
-        </div>
-        <div style="background-image: url('http://dummyimage.com/1000x1000')" data-json="json/photo-1.json" class="unit">
-            <div class="hover">
-                <div class="bar"></div>
-                <div class="title">Мастер класс по выпечке русских блинов</div>
-            </div>
-        </div>
-        <div style="background-image: url('http://dummyimage.com/1000x1000')" data-json="json/video-1.json" class="unit">
-            <div class="hover">
-                <div class="bar"></div>
-                <div class="title video"></div>
-            </div>
-        </div>
-        <div style="background-image: url('http://dummyimage.com/1000x1000')" data-json="json/video-2.json" class="unit">
-            <div class="hover">
-                <div class="bar"></div>
-                <div class="title video"></div>
-            </div>
-        </div>
-        <div style="background-image: url('http://dummyimage.com/1000x1000')" data-json="json/photo-1.json" class="unit">
-            <div class="hover">
-                <div class="bar"></div>
-                <div class="title">Мастер класс по выпечке русских блинов</div>
-            </div>
-        </div>
-        <div style="background-image: url('http://dummyimage.com/1000x1000')" data-json="json/photo-1.json" class="unit">
-            <div class="hover">
-                <div class="bar"></div>
-                <div class="title">Мастер класс по выпечке русских блинов</div>
-            </div>
-        </div>
-        <div style="background-image: url('http://dummyimage.com/1000x1000')" data-json="json/photo-1.json" class="unit">
-            <div class="hover">
-                <div class="bar"></div>
-                <div class="title">Мастер класс по выпечке русских блинов</div>
-            </div>
-        </div>
-        <div style="background-image: url('http://dummyimage.com/1000x1000')" data-json="json/photo-1.json" class="unit">
-            <div class="hover">
-                <div class="bar"></div>
-                <div class="title">Мастер класс по выпечке русских блинов</div>
-            </div>
-        </div>
-        <div style="background-image: url('http://dummyimage.com/1000x1000')" data-json="json/photo-1.json" class="unit">
-            <div class="hover">
-                <div class="bar"></div>
-                <div class="title">Мастер класс по выпечке русских блинов</div>
-            </div>
-        </div>
-        <div style="background-image: url('http://dummyimage.com/1000x1000')" data-json="json/photo-1.json" class="unit">
-            <div class="hover">
-                <div class="bar"></div>
-                <div class="title">Мастер класс по выпечке русских блинов</div>
-            </div>
-        </div>
-        <div style="background-image: url('http://dummyimage.com/1000x1000')" data-json="json/photo-1.json" class="unit">
-            <div class="hover">
-                <div class="bar"></div>
-                <div class="title">Мастер класс по выпечке русских блинов</div>
-            </div>
-        </div>
-        <div style="background-image: url('http://dummyimage.com/1000x1000')" data-json="json/photo-1.json" class="unit">
-            <div class="hover">
-                <div class="bar"></div>
-                <div class="title">Мастер класс по выпечке русских блинов</div>
-            </div>
-        </div>
-        <div style="background-image: url('http://dummyimage.com/1000x1000')" data-json="json/photo-1.json" class="unit">
-            <div class="hover">
-                <div class="bar"></div>
-                <div class="title">Мастер класс по выпечке русских блинов</div>
-            </div>
-        </div>
-        <div style="background-image: url('http://dummyimage.com/1000x1000')" data-json="json/photo-1.json" class="unit">
-            <div class="hover">
-                <div class="bar"></div>
-                <div class="title">Мастер класс по выпечке русских блинов</div>
-            </div>
-        </div>
-        <div style="background-image: url('http://dummyimage.com/1000x1000')" data-json="json/photo-1.json" class="unit">
-            <div class="hover">
-                <div class="bar"></div>
-                <div class="title">Мастер класс по выпечке русских блинов</div>
-            </div>
-        </div>
-        <div style="background-image: url('http://dummyimage.com/1000x1000')" data-json="json/photo-1.json" class="unit">
-            <div class="hover">
-                <div class="bar"></div>
-                <div class="title">Мастер класс по выпечке русских блинов</div>
-            </div>
-        </div>
-        <div style="background-image: url('http://dummyimage.com/1000x1000')" data-json="json/photo-1.json" class="unit">
-            <div class="hover">
-                <div class="bar"></div>
-                <div class="title">Мастер класс по выпечке русских блинов</div>
-            </div>
-        </div>
-        <div style="background-image: url('http://dummyimage.com/1000x1000')" data-json="json/photo-1.json" class="unit">
-            <div class="hover">
-                <div class="bar"></div>
-                <div class="title">Мастер класс по выпечке русских блинов</div>
-            </div>
-        </div>
-        <div style="background-image: url('http://dummyimage.com/1000x1000')" data-json="json/photo-1.json" class="unit">
-            <div class="hover">
-                <div class="bar"></div>
-                <div class="title">Мастер класс по выпечке русских блинов</div>
-            </div>
-        </div>
-        <div style="background-image: url('http://dummyimage.com/1000x1000')" data-json="json/photo-1.json" class="unit">
-            <div class="hover">
-                <div class="bar"></div>
-                <div class="title">Мастер класс по выпечке русских блинов</div>
-            </div>
-        </div>
-        <div style="background-image: url('http://dummyimage.com/1000x1000')" data-json="json/photo-1.json" class="unit">
-            <div class="hover">
-                <div class="bar"></div>
-                <div class="title">Мастер класс по выпечке русских блинов</div>
-            </div>
-        </div>
-        <div style="background-image: url('http://dummyimage.com/1000x1000')" data-json="json/photo-1.json" class="unit">
-            <div class="hover">
-                <div class="bar"></div>
-                <div class="title">Мастер класс по выпечке русских блинов</div>
-            </div>
-        </div>
-        <div style="background-image: url('http://dummyimage.com/1000x1000')" data-json="json/photo-1.json" class="unit">
-            <div class="hover">
-                <div class="bar"></div>
-                <div class="title">Мастер класс по выпечке русских блинов</div>
-            </div>
-        </div>
-        <div style="background-image: url('http://dummyimage.com/1000x1000')" data-json="json/photo-1.json" class="unit">
-            <div class="hover">
-                <div class="bar"></div>
-                <div class="title">Мастер класс по выпечке русских блинов</div>
-            </div>
-        </div>
-        <div style="background-image: url('http://dummyimage.com/1000x1000')" data-json="json/photo-1.json" class="unit">
-            <div class="hover">
-                <div class="bar"></div>
-                <div class="title">Мастер класс по выпечке русских блинов</div>
-            </div>
-        </div>
-        <div style="background-image: url('http://dummyimage.com/1000x1000')" data-json="json/photo-1.json" class="unit">
-            <div class="hover">
-                <div class="bar"></div>
-                <div class="title">Мастер класс по выпечке русских блинов</div>
-            </div>
-        </div>
-        <div style="background-image: url('http://dummyimage.com/1000x1000')" data-json="json/photo-1.json" class="unit">
-            <div class="hover">
-                <div class="bar"></div>
-                <div class="title">Мастер класс по выпечке русских блинов</div>
-            </div>
-        </div>
-        <div style="background-image: url('http://dummyimage.com/1000x1000')" data-json="json/photo-1.json" class="unit">
-            <div class="hover">
-                <div class="bar"></div>
-                <div class="title">Мастер класс по выпечке русских блинов</div>
-            </div>
-        </div>
-        <div style="background-image: url('http://dummyimage.com/1000x1000')" data-json="json/photo-1.json" class="unit">
-            <div class="hover">
-                <div class="bar"></div>
-                <div class="title">Мастер класс по выпечке русских блинов</div>
-            </div>
-        </div>
-        <div style="background-image: url('http://dummyimage.com/1000x1000')" data-json="json/photo-1.json" class="unit">
-            <div class="hover">
-                <div class="bar"></div>
-                <div class="title">Мастер класс по выпечке русских блинов</div>
-            </div>
-        </div>
-        <div style="background-image: url('http://dummyimage.com/1000x1000')" data-json="json/photo-1.json" class="unit">
-            <div class="hover">
-                <div class="bar"></div>
-                <div class="title">Мастер класс по выпечке русских блинов</div>
-            </div>
-        </div>
-        <div style="background-image: url('http://dummyimage.com/1000x1000')" data-json="json/photo-1.json" class="unit">
-            <div class="hover">
-                <div class="bar"></div>
-                <div class="title">Мастер класс по выпечке русских блинов</div>
-            </div>
-        </div>
+
+        @if (count($photoalbums)))
+            @foreach ($photoalbums as $photoalbum)
+                <div style="background-image: url({{ is_object($photoalbum->image_id) ? $photoalbum->image_id->thumb() : '' }})" data-json="{{ URL::route('app.ajaxJsonPhotoalbum', $photoalbum->id) }}" class="unit">
+                    <div class="hover">
+                        <div class="bar"></div>
+                        <div class="title{{ $photoalbum->video_link ? ' video' : '' }}">{{ $photoalbum->video_link ? '' : $photoalbum->name }}</div>
+                    </div>
+                </div>
+            @endforeach
+        @endif
+
         <div class="clrfx"></div>
     </div>
 

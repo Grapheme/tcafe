@@ -58,8 +58,6 @@ return array(
                 'columns' => 2, ## Количество колонок
                 'values' => $lists['cafe'],
                 'handler' => function ($value, $element) use ($lists_ids) {
-                    #Helper::d($value);
-                    #Helper::tad($element);
                     $value = DicLib::formatDicValRel($value, 'cafe_id', $element->dic_id, $lists_ids['cafe']);
                     $element->related_dicvals()->sync($value);
                     return @count($value);

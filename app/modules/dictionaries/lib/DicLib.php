@@ -52,10 +52,12 @@ class DicLib extends BaseController {
         if (!is_array($key))
             $key = (array)$key;
 
+        $single = false;
+
         if (get_class($collection) == 'DicVal') {
 
+            $single = true;
             $temp = $collection;
-
             $collection = new Collection();
             $collection->put(0, $temp);
         }
@@ -139,7 +141,7 @@ class DicLib extends BaseController {
             }
         }
 
-        return $collection;
+        return $single ? $collection[0] : $collection;
 
     }
 
@@ -162,10 +164,12 @@ class DicLib extends BaseController {
         if (!is_array($key))
             $key = (array)$key;
 
+        $single = false;
+
         if (get_class($collection) == 'DicVal') {
 
+            $single = true;
             $temp = $collection;
-
             $collection = new Collection();
             $collection->put(0, $temp);
         }
@@ -250,7 +254,7 @@ class DicLib extends BaseController {
             }
         }
 
-        return $collection;
+        return $single ? $collection[0] : $collection;
 
     }
 

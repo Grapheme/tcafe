@@ -14,6 +14,7 @@ class ApplicationController extends BaseController {
 
             Route::get('/', array('as' => 'app.mainpage', 'uses' => __CLASS__.'@getAppMainPage'));
             Route::get('/cafe/{cafe}', array('as' => 'app.cafe', 'uses' => __CLASS__.'@getCafe'));
+            Route::get('/ajax/json-photoalbum-{id}', array('as' => 'app.ajaxJsonPhotoalbum', 'uses' => __CLASS__.'@ajaxJsonPhotoalbum'));
         });
     }
 
@@ -79,6 +80,56 @@ class ApplicationController extends BaseController {
 
 
         return View::make(Helper::layout('cafe'), compact('current_cafe', 'cafes', 'cafes_chunk'));
+    }
+
+
+    public function ajaxJsonPhotoalbum($id) {
+
+        $photoalbum = Dic::valueBySlugAndId('photoalbums', $id);
+        if (!is_object($photoalbum) || !$photoalbum->id)
+            App::abort(404);
+
+        $photoalbum->extract(true);
+        $photoalbum = DicLib::loadImages($photoalbum, 'image_id');
+        #Helper::tad($photoalbum);
+
+        if ($photoalbum->video_link) {
+
+            $json_request = array(
+                "type" => "video",
+                "poster" => is_object($photoalbum->image_id) ? $photoalbum->image_id->full() : '',
+                "video" => $photoalbum->video_link
+            );
+        } else {
+
+            $photoalbum = DicLib::loadGallery($photoalbum, 'gallery_id');
+
+            #Helper::tad($photoalbum);
+
+            $temp = array();
+            if (is_object($photoalbum->gallery_id) && is_object($photoalbum->gallery_id->photos) && count($photoalbum->gallery_id->photos)) {
+
+                foreach ($photoalbum->gallery_id->photos as $photo) {
+
+                    if (!is_object($photo))
+                        continue;
+
+                    $temp[] = array(
+                        "img" => $photo->full(),
+                        "thumb" => $photo->thumb(),
+                        "title" => $photoalbum->name
+                    );
+                }
+            }
+
+            $json_request = array(
+                "type" => "photo",
+                "photo-list" => $temp
+            );
+
+        }
+
+        return Response::json($json_request, 200);
     }
 
 }
