@@ -188,7 +188,10 @@ class PublicPagesController extends BaseController {
         #Helper::dd($url);
         #Helper::dd( Request::segment(1) );
 
-        $page = $this->page->where('publication', 1);
+        $page = $this->page
+            ->where('publication', 1)
+            ->where('version_of', NULL)
+        ;
 
         ## Page by ID
         if (is_numeric($url)) {
@@ -248,8 +251,8 @@ class PublicPagesController extends BaseController {
 
             } else {
 
-                ## Search slug in SLUG
-                $page = $this->page
+                ## Search page in pages by slug
+                $page = $page
                     ->where('slug', $url)
                     ->with('meta', 'blocks.meta', 'seo')
                     ->first();
@@ -276,15 +279,15 @@ class PublicPagesController extends BaseController {
 
         } else {
 
-            $page = $page->where('start_page', 1)
-                ->where('version_of', NULL)
+            $page = $page
+                ->where('start_page', 1)
                 ->with('meta', 'blocks.meta', 'seo')
                 ->first();
 
         }
 
-        Helper::smartQueries(1); #die;
-        Helper::tad($page);
+        #Helper::smartQueries(1); #die;
+        #Helper::tad($page);
 
         ## Page not found... Hmmm... Check template dir...
         if (!@is_object($page)) {

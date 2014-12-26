@@ -34,7 +34,9 @@
         {{ @$content }}
     @show
 
-    @include(Helper::layout('footer'))
+    @section('footer')
+        @include(Helper::layout('footer'))
+    @show
     @include(Helper::layout('scripts'))
 
     @section('scripts')

@@ -4,7 +4,7 @@ return array(
 
     'functions' => array(
 
-        /*
+        #/*
         'mainpage' => function() {
             return array(
                 'url' => URL::route('app.mainpage'),
@@ -12,7 +12,7 @@ return array(
                 'type' => 'link',
             );
         },
-        */
+        #*/
 
         'allcafe' => function() {
 

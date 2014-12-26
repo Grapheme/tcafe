@@ -47,7 +47,7 @@ class DicLib extends BaseController {
      * @param string/null $field
      * @return bool
      */
-	public static function loadImages($collection, $key = 'image_id', $field = null){
+    public static function loadImages($collection, $key = 'image_id', $field = null){
 
         if (!is_array($key))
             $key = (array)$key;
@@ -135,6 +135,117 @@ class DicLib extends BaseController {
                     $obj->$field = $work_obj;
                 }
 
+                $collection->put($o, $obj);
+            }
+        }
+
+        return $collection;
+
+    }
+
+
+
+    /**
+     * С помощью данного метода можно подгрузить галереи (Gallery) к элементам коллекции по их ID, хранящемся в поле
+     * В качестве третьего параметра можно передать название поля элемента коллекции, например связи один-ко-многим.
+     *
+     * Пример вызова:
+     * $specials = DicLib::loadImages($specials, ['special_photo', 'special_plan']);
+     *
+     * @param $collection
+     * @param string $key
+     * @param string/null $field
+     * @return bool
+     */
+    public static function loadGallery($collection, $key = 'gallery_id', $field = null){
+
+        if (!is_array($key))
+            $key = (array)$key;
+
+        if (get_class($collection) == 'DicVal') {
+
+            $temp = $collection;
+
+            $collection = new Collection();
+            $collection->put(0, $temp);
+        }
+
+        #Helper::dd($collection);
+
+        if (!count($collection) || !count($key))
+            return false;
+
+        $ids = array();
+        /**
+         * Перебираем все объекты в коллекции
+         */
+        foreach ($collection as $obj) {
+
+            /**
+             * Если при вызове указано поле (связь) - берем ее вместо текущего объекта
+             */
+            $work_obj = $field ? $obj->$field : $obj;
+
+            #Helper::dd($work_obj);
+
+            /**
+             * Перебираем все переданные ключи с ID
+             */
+            foreach ($key as $attr)
+                if (is_numeric($work_obj->$attr)) {
+
+                    /**
+                     * Собираем ID - в общий список и в список с разбиением по ключу
+                     */
+                    $ids_attr[$attr][] = $work_obj->$attr;
+                    $ids[] = $work_obj->$attr;
+                }
+        }
+        #Helper::dd($images_ids);
+        #Helper::d($images_ids_attr);
+
+
+        $objects = [];
+        if (count($ids)) {
+
+            $objects = Gallery::whereIn('id', $ids)->with('photos')->get();
+            $objects = self::modifyKeys($objects, 'id');
+            #Helper::tad($objects);
+        }
+
+
+        if (count($objects)) {
+
+            /**
+             * Перебираем все объекты в коллекции
+             */
+            foreach ($collection as $o => $obj) {
+
+                /**
+                 * Если при вызове указано поле (связь) - берем ее вместо текущего объекта
+                 */
+                $work_obj = $field ? $obj->$field : $obj;
+
+                /**
+                 * Перебираем все переданные ключи с ID изображений
+                 */
+                foreach ($key as $attr)
+                    if (is_numeric($work_obj->$attr)) {
+
+                        if (@$objects[$work_obj->$attr]) {
+
+                            $tmp = $work_obj->$attr;
+                            $image = $objects[$tmp];
+
+                            $work_obj->setAttribute($attr, $image);
+                        }
+                    }
+
+                if ($field) {
+                    $obj->$field = $work_obj;
+                }
+
+                #$collection->relations[$o] = $obj;
                 $collection->put($o, $obj);
             }
         }

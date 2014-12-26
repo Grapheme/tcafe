@@ -588,12 +588,13 @@
         @endif
 
         @if ($element->order)
-            $('.dd').data('output').text('{{ $element->order }}');
+            $('.dd.menu-list').data('output').text('{{ $element->order }}');
         @else
-            updateOutputMenuList($('.dd'));
+            updateOutputMenuList($('.dd.menu-list'));
         @endif
 
         //$('.menu_list_item_dd-handle_custom').css('height', $('.panel-default').css('height'));
+
 
         menu_items_loaded = true;
 

@@ -280,8 +280,16 @@ var updateOutput = function(e) {
 //init_sortable(false, '.menu_items');
 if ($('.dd').length) {
 
-    loadScript(base_url + '/private/js/plugin/jquery-nestable/jquery.nestable.js', function() {
+    /*
+    var script = document.createElement('script');
+    script.type = 'text/javascript';
+    script.src = base_url + '/private/js/plugin/jquery-nestable/jquery.nestable.js';
+    document.getElementsByTagName('head')[0].appendChild(script);
+    //*/
 
+    //loadScript(base_url + '/private/js/plugin/jquery-nestable/jquery.nestable.js', function() {
+
+        //console.log($.nestable);
 
         if ($(menu_items).length) {
 
@@ -300,7 +308,7 @@ if ($('.dd').length) {
 
             updateOutput($(menu_items).data('output', $(nestable_output)));
         }
-    });
+    //});
 }
 
 function str_replace(search, replace, subject) {
