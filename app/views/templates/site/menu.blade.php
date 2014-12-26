@@ -66,26 +66,47 @@ if (Input::get('cat')) {
     });
     $child_cats = DicVal::extracts($child_cats, null, true, true);
     foreach ($child_cats as $c => $child_cat) {
-        if (!is_object($child_cat) || !$child_cat->cafe_id || !count($child_cat->cafe_id) || !isset($child_cat->cafe_id[$current_cafe->id])) {
-            unset($child_cats[$c]);
-        }
-        $ids[] = $child_cat->id;
-    }
-    #Helper::tad($child_cats);
 
-    #Helper::tad($ids);
+        if (!is_object($child_cat) || !$child_cat->cafe_id || !count($child_cat->cafe_id) || !isset($child_cat->cafe_id[$current_cafe->id])) {
+
+            unset($child_cats[$c]);
+
+        } else {
+
+            $ids[] = $child_cat->id;
+        }
+    }
+    #Helper::ta($child_cats);
+    #Helper::ta($ids);
 
     /**
      * Загружаем товары в текущей категории, и во всех ее дочерних категориях
      */
     $goods = Dic::valuesBySlug('menu_goods', function($query) use ($ids) {
 
-        $query->filter_by_field('category_id', 'IN', '(' . implode(',', $ids) . ')');
+        $qjf = $query->join_field('category_id', 'category_id');
+        $query->whereIn($qjf.'.value', $ids);
     });
+    #Helper::smartQueries(1);
+    $goods = DicVal::extracts($goods, null, true, true);
+    #Helper::ta($goods);
 
-    Helper::smartQueries(1);
+    /**
+     * Раскладываем товары по категориям
+     */
+    $cat_good = new Collection();
+    foreach ($goods as $good) {
+        if (!isset($cat_good[$good->category_id]))
+            $cat_good[$good->category_id] = new Collection();
+        $cat_good[$good->category_id][$good->id] = $good;
+    }
+    #Helper::tad($cat_good);
 
-    Helper::tad($goods);
+    /**
+     *
+     * МОЖНО ВЫВОДИТЬ!
+     *
+     */
 
 }
 
@@ -136,7 +157,7 @@ if (Input::get('cat')) {
                         if (!$menu_el || !is_object($menu_el) || !$menu_el->cafe_id || !count($menu_el->cafe_id) || !@$menu_el->cafe_id[$current_cafe->id])
                             continue;
                         ?>
-                        <li{{ Input::get('cat') == $menu_el->slug ? ' class="active"' : '' }}><a href="{{ URL::route('page', ['menu'] + Input::all() + ['cat' => $menu_el->slug]) }}">{{ $menu_el->name }}</a></li>
+                        <li{{ Input::get('cat') == $menu_el->slug ? ' class="active"' : '' }}><a href="{{ URL::route('page', ['menu', 'cafe' => Input::get('cafe'), 'cat' => $menu_el->slug]) }}">{{ $menu_el->name }}</a></li>
                     @endforeach
                 </ul>
             @endif

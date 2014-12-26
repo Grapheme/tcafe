@@ -311,7 +311,7 @@ class DicVal extends BaseModel {
             else
                 $condition = '=';
 
-        Helper::d('-'.$condition.'-'.$value.'-');
+        #Helper::d('-'.$condition.'-'.$value.'-');
 
         $tbl_dicval = (new DicVal())->getTable();
         $tbl_dic_field_val = (new DicFieldVal())->getTable();
