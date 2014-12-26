@@ -21,7 +21,6 @@ $measures = DicLib::loadImages($measures, 'image_id');
 #Helper::tad($measures);
 
 #setlocale(LC_TIME, 'ru_RU.CP1251', 'ru_RU','rus_RUS','Russian');
-$monthes = array("Января", "Февраля", "Марта", "Апреля", "Мая", "Июня", "Июля", "Августа", "Сентября", "Октября", "Ноября", "Декабря");
 ?>
 @extends(Helper::layout())
 
@@ -80,11 +79,16 @@ $monthes = array("Января", "Февраля", "Марта", "Апреля",
                         </div>
                         <div class="title">{{ $measure->name }}</div>
                         <div class="where">
-                        @if (count($measure->cafe_id) > 1)
-                            Вся сеть
-                        @else
-                            {{ $measure->cafe_id[0]->address1 }}
-                        @endif
+                            @if (count($special->cafe_id) > 1)
+                                Вся сеть
+                            @elseif (count($special->cafe_id) == 1)
+                                <?
+                                $cafe = $special->cafe_id->toArray();
+                                $cafe = array_shift($cafe);
+                                #Helper::ta($cafe);
+                                ?>
+                                {{ $cafe['name'] }}
+                            @endif
                         </div>
                     </a>
                 @endforeach

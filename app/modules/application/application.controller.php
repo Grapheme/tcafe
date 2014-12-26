@@ -15,7 +15,13 @@ class ApplicationController extends BaseController {
             Route::get('/', array('as' => 'app.mainpage', 'uses' => __CLASS__.'@getAppMainPage'));
             Route::get('/cafe/{cafe}', array('as' => 'app.cafe', 'uses' => __CLASS__.'@getCafe'));
             Route::get('/ajax/json-photoalbum-{id}', array('as' => 'app.ajaxJsonPhotoalbum', 'uses' => __CLASS__.'@ajaxJsonPhotoalbum'));
+
+            Route::any('/ajax/send-review', array('as' => 'app.ajaxSendReview', 'uses' => __CLASS__.'@ajaxSendReview'));
+            Route::any('/ajax/send-message', array('as' => 'app.ajaxSendMessage', 'uses' => __CLASS__.'@ajaxSendMessage'));
         });
+
+        $monthes = array("Января", "Февраля", "Марта", "Апреля", "Мая", "Июня", "Июля", "Августа", "Сентября", "Октября", "Ноября", "Декабря");
+        View::share('monthes', $monthes);
     }
 
     /****************************************************************************/
@@ -23,7 +29,7 @@ class ApplicationController extends BaseController {
 
 	public function __construct(){
         #
-	}
+    }
 
 
     public function getAppMainPage() {
@@ -130,6 +136,39 @@ class ApplicationController extends BaseController {
         }
 
         return Response::json($json_request, 200);
+    }
+
+
+    public function ajaxSendReview() {
+
+        $name = Input::get('name');
+        $email = Input::get('email');
+        $review = Input::get('review');
+
+        $dicval = DicVal::inject('reviews', array(
+            'slug' => NULL,
+            'name' => $name,
+            'fields' => array(
+                'email' => $email,
+                'active' => 1,
+            ),
+            'textfields' => array(
+                'review' => $review,
+            ),
+        ));
+
+        return '1';
+    }
+
+    public function ajaxSendMessage() {
+
+        $name = Input::get('name');
+        $email = Input::get('email');
+        $text = Input::get('text');
+
+
+
+        return '1';
     }
 
 }

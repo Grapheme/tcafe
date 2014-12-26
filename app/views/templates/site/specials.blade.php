@@ -49,9 +49,12 @@ $specials_chunk = array_chunk($specials->toArray(), 2);
                         @foreach ($special_chunk as $special_chunk_one)
                             <?
                             $special = $specials[$special_chunk_one['id']];
+                            #Helper::tad($special);
                             ?>
                             <div class="unit">
-                                <img src="http://dummyimage.com/572x392" class="visual">
+                                @if (is_object($special->image_id))
+                                    <img src="{{ $special->image_id->full() }}" class="visual">
+                                @endif
                                 <div class="title">{{ $special->name }}</div>
                                 <div class="description">
                                     {{ $special->description }}
@@ -60,7 +63,12 @@ $specials_chunk = array_chunk($specials->toArray(), 2);
                                     @if (count($special->cafe_id) > 1)
                                         Вся сеть
                                     @elseif (count($special->cafe_id) == 1)
-                                        {{ @array_shift($special->cafe_id->toArray())['address1'] }}
+                                        <?
+                                        $cafe = $special->cafe_id->toArray();
+                                        $cafe = array_shift($cafe);
+                                        #Helper::ta($cafe);
+                                        ?>
+                                        {{ $cafe['name'] }}
                                     @endif
                                 </div>
                             </div>
