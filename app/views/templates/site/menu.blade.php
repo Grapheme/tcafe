@@ -80,8 +80,11 @@ if (Input::get('cat')) {
      */
     $goods = Dic::valuesBySlug('menu_goods', function($query) use ($ids) {
 
-        $query->filter_by_field('category_id', DB::raw('IN'), '(' . implode(',', $ids) . ')');
+        $query->filter_by_field('category_id', 'IN', '(' . implode(',', $ids) . ')');
     });
+
+    Helper::smartQueries(1);
+
     Helper::tad($goods);
 
 }

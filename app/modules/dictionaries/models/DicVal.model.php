@@ -311,6 +311,8 @@ class DicVal extends BaseModel {
             else
                 $condition = '=';
 
+        Helper::d('-'.$condition.'-'.$value.'-');
+
         $tbl_dicval = (new DicVal())->getTable();
         $tbl_dic_field_val = (new DicFieldVal())->getTable();
         $rand_tbl_alias = md5(time() . rand(999999, 9999999));
