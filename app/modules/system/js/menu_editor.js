@@ -283,6 +283,10 @@ if ($('.dd').length) {
 
         //alert(nesting_level);
 
+        if (typeof nesting_level == 'undefined' || !nesting_level) {
+            var nesting_level = 5;
+        }
+
         $('.dd').nestable({
             //group : 1
             maxDepth: nesting_level || 5,

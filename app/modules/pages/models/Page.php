@@ -56,8 +56,6 @@ class Page extends BaseModel {
 
     /**
      * Depricated - use $page->extract(true);
-     *
-     * @return $this
      */
     public function blocksBySlug() {
         #$return = $this;
@@ -168,7 +166,7 @@ class Page extends BaseModel {
             }
         }
 
-        #Helper::ta($this);
+;
 
         return $this;
     }

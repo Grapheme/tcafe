@@ -36,7 +36,7 @@ class DicLib extends BaseController {
 
 
     /**
-     * С помощью данного метода можно подгрузить изображения (Photo) к элементам коллекции
+     * С помощью данного метода можно подгрузить изображения (Photo) к элементам коллекции по их ID, хранящемся в поле
      * В качестве третьего параметра можно передать название поля элемента коллекции, например связи один-ко-многим.
      *
      * Пример вызова:
@@ -49,7 +49,7 @@ class DicLib extends BaseController {
      */
 	public static function loadImages($collection, $key = 'image_id', $field = null){
 
-        if (is_array($key))
+        if (!is_array($key))
             $key = (array)$key;
 
         if (get_class($collection) == 'DicVal') {
@@ -298,6 +298,30 @@ class DicLib extends BaseController {
             Helper::dd($categories_for_select);
 
         return $categories_for_select;
+    }
+
+
+    /**
+     * Добавляем недостающие данные для связи многи-ко-многим между записями словаря
+     *
+     * @param $value
+     * @param $field
+     * @param $dicval_parent_dic_id
+     * @param $dicval_child_dic_id
+     * @return array
+     */
+    public static function formatDicValRel($values, $dicval_parent_field, $dicval_parent_dic_id, $dicval_child_dic_id) {
+
+        $temp = (array)$values;
+        $values = array();
+        foreach ($temp as $tmp) {
+            $values[$tmp] = array(
+                'dicval_parent_dic_id' => $dicval_parent_dic_id,
+                'dicval_child_dic_id' => $dicval_child_dic_id,
+                'dicval_parent_field' => $dicval_parent_field,
+            );
+        }
+        return $values;
     }
 
 }

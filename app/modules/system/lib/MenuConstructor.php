@@ -205,10 +205,13 @@ class MenuConstructor {
 
         if (@$data['type'] == 'function') {
 
+            #Helper::d($data);
+
             $function = Config::get('menu.functions.' . $data['function_name']);
             if (isset($function) && is_callable($function)) {
                 $result = $function();
                 #Helper::d($result);
+
 
                 if (isset($result['url']))
                     $result = array($result);
@@ -217,6 +220,11 @@ class MenuConstructor {
                 foreach ($result as $res) {
 
                     #Helper::d($res);
+
+                    if (!@$data['use_function_data']) {
+                        $res['text'] = @$data['text'];
+                        $res['title'] = @$data['title'];
+                    }
 
                     #@$return .=
                     #return $this->get_element_info_by_data($res);

@@ -56,7 +56,10 @@ class DicVal extends BaseModel {
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
     public function related_dicvals() {
-        return $this->belongsToMany('DicVal', 'dictionary_values_rel', 'dicval_parent_id', 'dicval_child_id');
+        return $this
+            ->belongsToMany('DicVal', 'dictionary_values_rel', 'dicval_parent_id', 'dicval_child_id')
+            ->withPivot('dicval_parent_dic_id', 'dicval_child_dic_id', 'dicval_parent_field')
+            ;
     }
 
     /**
@@ -566,6 +569,42 @@ class DicVal extends BaseModel {
                         unset($this->versions[$v]);
                 }
         }
+
+        /**
+         * Extract related_dicvals
+         */
+        if (isset($this->related_dicvals) && count($this->related_dicvals)) {
+
+            $fields_arrays = new Collection();
+            foreach ($this->related_dicvals as $related_dicval) {
+
+                $field = $related_dicval->pivot->dicval_parent_field;
+                if ($field) {
+
+                    if (!isset($fields_arrays[$field]))
+                        $fields_arrays[$field] = new Collection();
+
+                    if ($related_dicval->id)
+                        $fields_arrays[$field][$related_dicval->id] = $related_dicval;
+                    else
+                        $fields_arrays[$field][] = $related_dicval;
+                }
+
+                #Helper::dd($related_dicval->pivot->dicval_parent_field);
+            }
+            #Helper::tad($fields_arrays);
+
+            if (count($fields_arrays)) {
+                foreach ($fields_arrays as $field_name => $field_array) {
+                    unset($this->attributes[$field_name]);
+                    $this->relations[$field_name] = $field_array;
+                }
+            }
+        }
+        if ($unset)
+            unset($this->relations['related_dicvals']);
+
+        #Helper::tad($this);
 
         return $this;
     }

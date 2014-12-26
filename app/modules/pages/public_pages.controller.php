@@ -283,8 +283,8 @@ class PublicPagesController extends BaseController {
 
         }
 
-        #Helper::smartQueries(1); #die;
-        #Helper::tad($page);
+        Helper::smartQueries(1); #die;
+        Helper::tad($page);
 
         ## Page not found... Hmmm... Check template dir...
         if (!@is_object($page)) {
