@@ -1366,12 +1366,14 @@ $(function() {
 		{ 
 		  featureType: "poi", 
 		  elementType: "labels", 
-		  stylers: [ { visibility: "off" } ] 
-	
+		  stylers: [ { visibility: "off" } ]
 		}
 	  ]
     }).bind('init', function(event, map) {
-	  var data = $.parseJSON(_TCAFE_.mapJson);
+	  var ecaped_json = _TCAFE_.mapJson.replace(/[\n]/g, '')
+									  .replace(/[\r]/g, '')
+									  .replace(/[\t]/g, '');
+	  var data = $.parseJSON(ecaped_json);
       $.each(data.markers, function(i, marker) {
         var _marker_ = _TCAFE_.$contacts_map.gmap('addMarker', { 
           'position': new google.maps.LatLng(parseFloat(marker.latitude), parseFloat(marker.longitude)), 
