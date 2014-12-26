@@ -94,7 +94,7 @@ $json = array(
                         </label>
                         <label class="text">
                             <div class="label">Сообщение:</div>
-                            <textarea name="message"></textarea>
+                            <textarea name="text"></textarea>
                         </label>
                         <center>
                             <button type="submit">Отправить</button>
@@ -113,6 +113,6 @@ $json = array(
 @section('scripts')
     <script>
         _TCAFE_.mapJson = '{{ json_encode($json) }}';
-        _TCAFE_.mapJson = '{"markers":[{"latitude":45.017031,"longitude":38.964304,"title":"На Пушкина","slug":"pushkina27","address":"Пушкина 27","content":"<strong>Режим работы</strong><br>пн-пт: с 12<sup>00</sup> до 00<sup>00</sup><br><strong>Тел.:</strong> (834) 225-75-18"},{"latitude":45.02707292149134,"longitude":38.86372348070145,"title":"На Бульварном","slug":"bulvarniy28","address":"Бульварный 28","content":"<strong>Режим работы</strong><br>пн-пт: с 12<sup>00</sup> до 00<sup>00</sup><br><strong>Тел.:</strong> (834) 225-75-18"}]}';
+        //_TCAFE_.mapJson = '{"markers":[{"latitude":45.017031,"longitude":38.964304,"title":"На Пушкина","slug":"pushkina27","address":"Пушкина 27","content":"<strong>Режим работы</strong><br>пн-пт: с 12<sup>00</sup> до 00<sup>00</sup><br><strong>Тел.:</strong> (834) 225-75-18"},{"latitude":45.02707292149134,"longitude":38.86372348070145,"title":"На Бульварном","slug":"bulvarniy28","address":"Бульварный 28","content":"<strong>Режим работы</strong><br>пн-пт: с 12<sup>00</sup> до 00<sup>00</sup><br><strong>Тел.:</strong> (834) 225-75-18"}]}';
     </script>
 @stop

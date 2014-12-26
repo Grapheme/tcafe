@@ -3,9 +3,8 @@
 return array(
 
     'feedback' => array(
-        'address' => 'support@grapheme.ru',
-        #'address' => 'az@grapheme.ru',
-        #'address' => 'reserved@mail.ru',
+        #'address' => 'support@grapheme.ru',
+        'address' => 'az@grapheme.ru',
         #'subject' => 'ВидеоГид, обратная связь',
     ),
 
@@ -14,7 +13,7 @@ return array(
     'port' => 587,
     'from' => array(
         'address' => 'support@grapheme.ru',
-        'name' => 'Sarykum'
+        'name' => 'Support'
     ),
     'username' => '0d8dd8623bd38b41c43683c41c0558eb',
     'password' => '465c500abd5f680f0b20405deb967b36',

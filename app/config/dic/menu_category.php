@@ -15,6 +15,7 @@ return array(
         $dics = Dic::modifyKeys($dics, 'slug');
         #Helper::tad($dics);
         $lists = Dic::makeLists($dics, 'values', 'name', 'id');
+        $lists_ids = Dic::makeLists($dics, null, 'id', 'slug');
         #Helper::dd($lists);
 
         /**
@@ -34,8 +35,8 @@ return array(
                 'type' => 'checkboxes',
                 'columns' => 2, ## Количество колонок
                 'values' => $lists['cafe'],
-                'handler' => function ($value, $element) {
-                    $value = (array)$value;
+                'handler' => function ($value, $element) use ($lists_ids) {
+                    $value = DicLib::formatDicValRel($value, 'cafe_id', $element->dic_id, $lists_ids['cafe']);
                     $element->related_dicvals()->sync($value);
                     return @count($value);
                 },
