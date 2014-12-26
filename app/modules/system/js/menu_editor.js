@@ -279,22 +279,27 @@ var updateOutput = function(e) {
 
 //init_sortable(false, '.menu_items');
 if ($('.dd').length) {
+
     loadScript(base_url + '/private/js/plugin/jquery-nestable/jquery.nestable.js', function() {
 
-        //alert(nesting_level);
 
-        if (typeof nesting_level == 'undefined' || !nesting_level) {
-            var nesting_level = 5;
+        if ($('.dd.menu-list').length) {
+
+            //alert(nesting_level);
+
+            if (typeof nesting_level == 'undefined' || !nesting_level) {
+                var nesting_level = 5;
+            }
+
+            $('.dd').nestable({
+                //group : 1
+                maxDepth: nesting_level || 5,
+                expandBtnHTML: '',
+                collapseBtnHTML: ''
+            }).on('change', updateOutput);
+
+            updateOutput($('.dd').data('output', $(nestable_output)));
         }
-
-        $('.dd').nestable({
-            //group : 1
-            maxDepth: nesting_level || 5,
-            expandBtnHTML: '',
-            collapseBtnHTML: ''
-        }).on('change', updateOutput);
-
-        updateOutput($('.dd').data('output', $(nestable_output)));
     });
 }
 
