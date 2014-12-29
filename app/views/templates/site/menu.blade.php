@@ -18,11 +18,7 @@ $cafes = DicVal::extracts($cafes, null, true, true);
 if (!Input::get('cafe')) {
     $first_cafe = $cafes->toArray();
     $first_cafe = array_shift($first_cafe);
-    #Helper::dd($first_cafe);
-
-    /**
-     * Редиректить нужно сразу на первую категорию меню
-     */
+    #Helper::ta($first_cafe);
 
     Redirect(URL::route('page', array('menu', 'cafe' => $first_cafe['slug'])));
 }
@@ -35,11 +31,36 @@ if (!is_object($current_cafe) || !$current_cafe->id)
     Redirect(URL::route('page', 'menu'));
 
 /**
+ * Если не выбрана категори - определяем первую в текущем кафе и редиректим
+ */
+if (!Input::get('cat')) {
+    /**
+     * Получаем первую категорию в текущем кафе
+     */
+    $first_cafe_menu_cat = Dic::valuesBySlug('menu_category', function($query) use ($current_cafe) {
+        $query->filter_by_related($current_cafe->id);
+        $query->orderBy('lft', 'ASC');
+        $query->take(1);
+    });
+    #Helper::tad($first_cafe_menu_cat);
+    $first_cafe_menu_cat = isset($first_cafe_menu_cat) && count($first_cafe_menu_cat) ? $first_cafe_menu_cat[0] : null;
+    #Helper::tad($first_cafe_menu_cat);
+
+    Redirect(URL::route('page', array('menu', 'cafe' => $current_cafe->slug, 'cat' => is_object($first_cafe_menu_cat) ? $first_cafe_menu_cat->slug : null)));
+}
+
+/**
  * Категории меню в текущем кафе
  */
-$menu = Dic::valuesBySlug('menu_category');
+$menu = Dic::valuesBySlug('menu_category', function($query) use ($current_cafe) {
+    /**
+     * Фильтр по related_dicvals - тут не нужен! Иначе неверно построится Nested Set Model Tree!!
+     */
+    #$query->filter_by_related($current_cafe->id);
+});
+#Helper::smartQueries(1);
 $menu = DicVal::extracts($menu, null, true, true);
-#Helper::tad($menu);
+#Helper::ta($menu);
 /**
  * Nested Set Model
  */
