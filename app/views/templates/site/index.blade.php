@@ -61,7 +61,7 @@
                         ?>
                         <div class="line-{{ $n }} angle-15">
                             <a href="{{ URL::route('app.cafe', $cafe->slug) }}" class="link">
-                                <nobr>{{ $cafe->name }}</nobr>
+                                {{ $cafe->name_mainpage }}
                             </a>
                             <div class="hr-holder">
                                 <hr class="first">
