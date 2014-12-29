@@ -92,7 +92,7 @@ $photoalbums = DicLib::loadImages($photoalbums, 'image_id');
     </div>
     <div class="content">
 
-        @if (count($photoalbums)))
+        @if (count($photoalbums))
             @foreach ($photoalbums as $photoalbum)
                 <div style="background-image: url({{ is_object($photoalbum->image_id) ? $photoalbum->image_id->thumb() : '' }})" data-json="{{ URL::route('app.ajaxJsonPhotoalbum', $photoalbum->id) }}" class="unit">
                     <div class="hover">
