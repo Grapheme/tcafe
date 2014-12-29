@@ -13,6 +13,10 @@ return array(
                 'title' => 'Адрес (предложный падеж)',
                 'type' => 'text',
             ),
+            'name_mainpage' => array(
+                'title' => 'Название в меню на главной странице',
+                'type' => 'textarea',
+            ),
             'fullname' => array(
                 'title' => 'Полное название (заголовок на странице)',
                 'type' => 'textarea',
