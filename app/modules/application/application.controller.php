@@ -107,8 +107,11 @@ class ApplicationController extends BaseController {
         });
         #Helper::tad($measure);
         $measure = @$measure[0];
-        if (is_object($measure))
+        if (is_object($measure)) {
+
             $measure->extract(1);
+            $measure = DicLib::loadImages($measure, 'image_id');
+        }
 
         /**
          * Новинка меню
