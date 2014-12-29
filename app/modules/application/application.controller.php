@@ -22,6 +22,8 @@ class ApplicationController extends BaseController {
 
         $monthes = array("Января", "Февраля", "Марта", "Апреля", "Мая", "Июня", "Июля", "Августа", "Сентября", "Октября", "Ноября", "Декабря");
         View::share('monthes', $monthes);
+        $days = array("Воскресенье", "Понедельник", "Вторник", "Среда", "Четверг", "Пятница", "Суббота");
+        View::share('days', $days);
     }
 
     /****************************************************************************/
@@ -68,6 +70,51 @@ class ApplicationController extends BaseController {
         #Helper::tad($current_cafe);
 
         /**
+         * Мероприятие
+         */
+        $measure = Dic::valuesBySlug('measure', function($query) use ($current_cafe) {
+            $query->filter_by_related($current_cafe->id);
+        });
+        #Helper::tad($measure);
+        $measure = @$measure[0];
+        if (is_object($measure))
+            $measure->extract(1);
+
+        /**
+         * Новинка меню
+         */
+        $menu = Dic::valuesBySlug('menu_category', function($query) use ($current_cafe) {
+            $query->filter_by_related($current_cafe->id);
+        });
+        $menu = DicVal::extracts($menu, null, true, true);
+        #Helper::tad($menu);
+        $menu_cat_ids = Dic::makeLists($menu, null, 'id');
+        #Helper::ta($menu_cat_ids);
+
+        $dish = false;
+        if (count($menu_cat_ids)) {
+
+            $dish = Dic::valuesBySlug('menu_goods', function($query) use ($menu_cat_ids) {
+                $rand_alias = $query->join_field('category_id');
+                $query->whereIn($rand_alias.'.value', $menu_cat_ids);
+                $query->orderBy('created_at', 'DESC');
+                $query->take(1);
+
+                #$rand_alias2 = $query->join_field('show_on_mainpage');
+                #$query->where($rand_alias2.'.value', 1);
+
+            });
+            $dish = @$dish[0];
+            if (is_object($dish)) {
+
+                $dish->extract(1);
+                $dish = DicLib::loadImages($dish, 'image_id');
+            }
+
+            #Helper::tad($dish);
+        }
+
+        /**
          * Все кафе
          */
         $cafes = Dic::valuesBySlug('cafe');
@@ -85,7 +132,7 @@ class ApplicationController extends BaseController {
 
 
 
-        return View::make(Helper::layout('cafe'), compact('current_cafe', 'cafes', 'cafes_chunk'));
+        return View::make(Helper::layout('cafe'), compact('current_cafe', 'measure', 'menu', 'dish', 'cafes', 'cafes_chunk'));
     }
 
 

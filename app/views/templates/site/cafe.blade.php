@@ -107,24 +107,54 @@
     </div>
     <div class="content w850px">
         <div class="rest-nav">
+
+            @if (is_object($measure) && $measure->id)
             <div class="unit">
                 <div class="icon"><img src="{{ Config::get('site.theme_path') }}/images/ico-mic-min.svg"></div>
                 <div class="head-title-wrapper">
                     <div class="title">Скоро</div>
                 </div><a href="" class="link">
                     <div class="visual"><img src="http://dummyimage.com/440x264"></div>
-                    <div class="title">Джазовый концерт
-                        <div class="date">13 ноября | Четверг | 20:30</div>
+                    <div class="title">
+                        {{ $measure->name }}
+                        <div class="date">
+                            @if (preg_match('~\d{4}-\d{2}-\d{2}~is', $measure->measure_date))
+                                <?
+                                $md = (new \Carbon\Carbon())->createFromFormat('Y-m-d', $measure->measure_date);
+                                ?>
+                                {{ mb_strtolower($md->formatLocalized('%d')) }}
+                                {{ @mb_strtolower($monthes[$md->formatLocalized('%m')-1]) }}
+                                | {{ $days[$md->formatLocalized('%w')] }}
+
+                                @if ($measure->measure_time)
+                                | {{ $measure->measure_time }}
+                                @endif
+                            @endif
+                        </div>
                     </div></a>
             </div>
+            @endif
+
+            @if (is_object($dish) && $dish->id)
+            <?
+            $image = $dish->image_id;
+            ?>
             <div class="unit">
                 <div class="icon"><img src="{{ Config::get('site.theme_path') }}/images/ico-new.svg"></div>
                 <div class="head-title-wrapper">
                     <div class="title">Новинка меню</div>
-                </div><a href="" class="link">
-                    <div class="visual"><img src="http://dummyimage.com/440x264"></div>
-                    <div class="title">Суп с блинами и фасолью</div></a>
+                </div>
+                <a href="{{ URL::route('page', ['menu', 'cafe' => $current_cafe->slug]) }}" class="link">{{-- , 'cat' => $menu[$dish->category_id]->slug --}}
+                    @if (is_object($image) && $image->id)
+                    <div class="visual">
+                        <img src="{{ $image->full() }}">
+                    </div>
+                    @endif
+                    <div class="title">{{ $dish->name }}</div>
+                </a>
             </div>
+            @endif
+
             <div class="unit">
                 <div class="icon"></div>
                 <div class="head-title-wrapper">
