@@ -172,6 +172,9 @@ if (Input::get('cat')) {
 
 @section('content')
 
+    <!--
+    {{ print_r($menu_tree, 1) }}
+    -->
     <div class="content w1076">
         <div class="top-btns">
             @if (count($cafes))
