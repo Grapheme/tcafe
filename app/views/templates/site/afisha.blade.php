@@ -79,11 +79,11 @@ $measures = DicLib::loadImages($measures, 'image_id');
                         </div>
                         <div class="title">{{ $measure->name }}</div>
                         <div class="where">
-                            @if (count($special->cafe_id) > 1)
+                            @if (count($measure->cafe_id) > 1)
                                 Вся сеть
-                            @elseif (count($special->cafe_id) == 1)
+                            @elseif (count($measure->cafe_id) == 1)
                                 <?
-                                $cafe = $special->cafe_id->toArray();
+                                $cafe = $measure->cafe_id->toArray();
                                 $cafe = array_shift($cafe);
                                 #Helper::ta($cafe);
                                 ?>
