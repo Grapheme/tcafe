@@ -19,6 +19,11 @@ if (!Input::get('cafe')) {
     $first_cafe = $cafes->toArray();
     $first_cafe = array_shift($first_cafe);
     #Helper::dd($first_cafe);
+
+    /**
+     * Редиректить нужно сразу на первую категорию меню
+     */
+
     Redirect(URL::route('page', array('menu', 'cafe' => $first_cafe['slug'])));
 }
 
@@ -30,15 +35,16 @@ if (!is_object($current_cafe) || !$current_cafe->id)
     Redirect(URL::route('page', 'menu'));
 
 /**
- * Категории меню
+ * Категории меню в текущем кафе
  */
 $menu = Dic::valuesBySlug('menu_category');
 $menu = DicVal::extracts($menu, null, true, true);
+#Helper::tad($menu);
 /**
  * Nested Set Model
  */
-$menu_tree = DicLib::nestedModelToTree($menu);
-#Helper::tad($menu);
+$menu_tree = DicLib::nestedModelToTree($menu, '|');
+#Helper::tad($menu_tree);
 
 /**
  * Если выбрана категория - загрузим блюда
@@ -50,7 +56,7 @@ if (Input::get('cat')) {
      */
     $current_cat = Dic::valueBySlugs('menu_category', Input::get('cat'));
     if (!is_object($current_cat) || !$current_cat->id)
-        Redirect(URL::route('page', ['menu'] + ['cafe' => Input::get('cafe')]));
+        Redirect(URL::route('page', ['menu', 'cafe' => Input::get('cafe')]));
 
     $ids = array($current_cat->id);
 
@@ -67,12 +73,18 @@ if (Input::get('cat')) {
     $child_cats = DicVal::extracts($child_cats, null, true, true);
     foreach ($child_cats as $c => $child_cat) {
 
+        /**
+         * Отфильтруем категории, которых нет в текущем кафе
+         */
         if (!is_object($child_cat) || !$child_cat->cafe_id || !count($child_cat->cafe_id) || !isset($child_cat->cafe_id[$current_cafe->id])) {
 
             unset($child_cats[$c]);
 
         } else {
 
+            /**
+             * Собираем ID всех категорий, по которым нужно загрузить блюда
+             */
             $ids[] = $child_cat->id;
         }
     }
@@ -89,22 +101,27 @@ if (Input::get('cat')) {
     });
     #Helper::smartQueries(1);
     $goods = DicVal::extracts($goods, null, true, true);
-    #Helper::ta($goods);
+    $goods = DicLib::loadImages($goods, 'image_id');
+    #Helper::tad($goods);
+    #dd($goods);
 
     /**
      * Раскладываем товары по категориям
      */
     $cat_good = new Collection();
-    foreach ($goods as $good) {
-        if (!isset($cat_good[$good->category_id]))
-            $cat_good[$good->category_id] = new Collection();
-        $cat_good[$good->category_id][$good->id] = $good;
+    if ($goods && count($goods)) {
+        foreach ($goods as $good) {
+            if (!isset($cat_good[$good->category_id]))
+                $cat_good[$good->category_id] = new Collection();
+            $cat_good[$good->category_id][$good->id] = $good;
+        }
     }
     #Helper::tad($cat_good);
 
     /**
      *
      * МОЖНО ВЫВОДИТЬ!
+     * с учетом $current_cat и $child_cats
      *
      */
 
@@ -151,7 +168,7 @@ if (Input::get('cat')) {
                 <ul class="menu-cat-list">
                     @foreach ($menu_tree as $m => $m_tree)
                         <?
-                        if (mb_substr($m_tree, 0, 1) == '&')
+                        if (mb_substr($m_tree, 0, 1) == '|')
                             continue;
                         $menu_el = @$menu[$m];
                         if (!$menu_el || !is_object($menu_el) || !$menu_el->cafe_id || !count($menu_el->cafe_id) || !@$menu_el->cafe_id[$current_cafe->id])
@@ -163,138 +180,80 @@ if (Input::get('cat')) {
             @endif
 
             <div class="menu-dishes-list">
-                <h2>Вегетарианская</h2>
-                <div href="" class="unit"><img src="http://dummyimage.com/552x368" class="visual">
-                    <div class="title">Маргарита с грибами</div>
-                    <div class="description">Сыр, томатная паста, базилик, лимон, специи, cыр, томатная паста, базилик, лимон, специи</div>
-                    <div class="info">
-                        <div class="price">359.-</div>
-                        <div class="weight">550 гр.</div>
-                    </div>
-                </div>
-                <div href="" class="unit"><img src="http://dummyimage.com/552x368" class="visual">
-                    <div class="title">Маргарита с грибами</div>
-                    <div class="description">Сыр, томатная паста, базилик</div>
-                    <div class="info">
-                        <div class="price">359.-</div>
-                        <div class="weight">300/550/30 гр.</div>
-                    </div>
-                </div>
-                <div href="" class="unit"><img src="http://dummyimage.com/552x368" class="visual">
-                    <div class="title">Маргарита с грибами</div>
-                    <div class="description">Сыр, томатная паста, базилик, лимон, специи, cыр, томатная паста, базилик, лимон, специи</div>
-                    <div class="info">
-                        <div class="price">359.-</div>
-                        <div class="weight">300/550/30 гр.</div>
-                    </div>
-                </div>
-                <div href="" class="unit"><img src="http://dummyimage.com/552x368" class="visual">
-                    <div class="title">Маргарита с грибами</div>
-                    <div class="description">Сыр, томатная паста, базилик, лимон, специи, cыр, томатная паста, базилик, лимон, специи</div>
-                    <div class="info">
-                        <div class="price">359.-</div>
-                        <div class="weight">550 гр.</div>
-                    </div>
-                </div>
-                <div class="clrfx"></div>
-                <h2>Вегетарианская</h2>
-                <div href="" class="unit"><img src="http://dummyimage.com/552x368" class="visual">
-                    <div class="title">Маргарита с грибами</div>
-                    <div class="description">Сыр, томатная паста, базилик, лимон, специи, cыр, томатная паста, базилик, лимон, специиСыр, томатная паста, базилик, лимон, специи, cыр, томатная паста, базилик, лимон, специиСыр, томатная паста, базилик, лимон, специи, cыр, томатная паста, базилик, лимон, специиСыр, томатная паста, базилик, лимон, специи, cыр, томатная паста, базилик, лимон, специи</div>
-                    <div class="info">
-                        <div class="price">359.-</div>
-                        <div class="weight">550 гр.</div>
-                    </div>
-                </div>
-                <div href="" class="unit"><img src="http://dummyimage.com/552x368" class="visual">
-                    <div class="title">Маргарита с грибами</div>
-                    <div class="description">Сыр, томатная паста, базилик</div>
-                    <div class="info">
-                        <div class="price">359.-</div>
-                        <div class="weight">300/550/30 гр.</div>
-                    </div>
-                </div>
-                <div href="" class="unit"><img src="http://dummyimage.com/552x368" class="visual">
-                    <div class="title">Маргарита с грибами</div>
-                    <div class="description">Сыр, томатная паста, базилик, лимон, специи, cыр, томатная паста, базилик, лимон, специи</div>
-                    <div class="info">
-                        <div class="price">359.-</div>
-                        <div class="weight">300/550/30 гр.</div>
-                    </div>
-                </div>
-                <div href="" class="unit"><img src="http://dummyimage.com/552x368" class="visual">
-                    <div class="title">Маргарита с грибами</div>
-                    <div class="description">Сыр, томатная паста, базилик, лимон, специи, cыр, томатная паста, базилик, лимон, специи</div>
-                    <div class="info">
-                        <div class="price">359.-</div>
-                        <div class="weight">550 гр.</div>
-                    </div>
-                </div>
-                <div href="" class="unit"><img src="http://dummyimage.com/552x368" class="visual">
-                    <div class="title">Маргарита с грибами</div>
-                    <div class="description">Сыр, томатная паста, базилик, лимон, специи, cыр, томатная паста, базилик, лимон, специиСыр, томатная паста, базилик, лимон, специи, cыр, томатная паста, базилик, лимон, специиСыр, томатная паста, базилик, лимон, специи, cыр, томатная паста, базилик, лимон, специиСыр, томатная паста, базилик, лимон, специи, cыр, томатная паста, базилик, лимон, специи</div>
-                    <div class="info">
-                        <div class="price">359.-</div>
-                        <div class="weight">550 гр.</div>
-                    </div>
-                </div>
-                <div href="" class="unit"><img src="http://dummyimage.com/552x368" class="visual">
-                    <div class="title">Маргарита с грибами</div>
-                    <div class="description">Сыр, томатная паста, базилик</div>
-                    <div class="info">
-                        <div class="price">359.-</div>
-                        <div class="weight">300/550/30 гр.</div>
-                    </div>
-                </div>
-                <div href="" class="unit"><img src="http://dummyimage.com/552x368" class="visual">
-                    <div class="title">Маргарита с грибами</div>
-                    <div class="description">Сыр, томатная паста, базилик, лимон, специи, cыр, томатная паста, базилик, лимон, специи</div>
-                    <div class="info">
-                        <div class="price">359.-</div>
-                        <div class="weight">300/550/30 гр.</div>
-                    </div>
-                </div>
-                <div href="" class="unit"><img src="http://dummyimage.com/552x368" class="visual">
-                    <div class="title">Маргарита с грибами</div>
-                    <div class="description">Сыр, томатная паста, базилик, лимон, специи, cыр, томатная паста, базилик, лимон, специи</div>
-                    <div class="info">
-                        <div class="price">359.-</div>
-                        <div class="weight">550 гр.</div>
-                    </div>
-                </div>
-                <div href="" class="unit"><img src="http://dummyimage.com/552x368" class="visual">
-                    <div class="title">Маргарита с грибами</div>
-                    <div class="description">Сыр, томатная паста, базилик, лимон, специи, cыр, томатная паста, базилик, лимон, специиСыр, томатная паста, базилик, лимон, специи, cыр, томатная паста, базилик, лимон, специиСыр, томатная паста, базилик, лимон, специи, cыр, томатная паста, базилик, лимон, специиСыр, томатная паста, базилик, лимон, специи, cыр, томатная паста, базилик, лимон, специи</div>
-                    <div class="info">
-                        <div class="price">359.-</div>
-                        <div class="weight">550 гр.</div>
-                    </div>
-                </div>
-                <div href="" class="unit"><img src="http://dummyimage.com/552x368" class="visual">
-                    <div class="title">Маргарита с грибами</div>
-                    <div class="description">Сыр, томатная паста, базилик</div>
-                    <div class="info">
-                        <div class="price">359.-</div>
-                        <div class="weight">300/550/30 гр.</div>
-                    </div>
-                </div>
-                <div href="" class="unit"><img src="http://dummyimage.com/552x368" class="visual">
-                    <div class="title">Маргарита с грибами</div>
-                    <div class="description">Сыр, томатная паста, базилик, лимон, специи, cыр, томатная паста, базилик, лимон, специи</div>
-                    <div class="info">
-                        <div class="price">359.-</div>
-                        <div class="weight">300/550/30 гр.</div>
-                    </div>
-                </div>
-                <div href="" class="unit"><img src="http://dummyimage.com/552x368" class="visual">
-                    <div class="title">Маргарита с грибами</div>
-                    <div class="description">Сыр, томатная паста, базилик, лимон, специи, cыр, томатная паста, базилик, лимон, специи</div>
-                    <div class="info">
-                        <div class="price">359.-</div>
-                        <div class="weight">550 гр.</div>
-                    </div>
-                </div>
-                <div class="clrfx"></div>
+
+                @if (@count($cat_good))
+
+                    @if (@count($cat_good[$current_cat->id]))
+                        @foreach ($cat_good[$current_cat->id] as $good)
+                            <?
+                            $image = $good->image_id;
+                            ?>
+                            <div class="unit">
+                                @if (is_object($image) && $image->id)
+                                    <img src="{{ $image->full() }}" class="visual">
+                                @endif
+                                <div class="title">{{ $good->name }}</div>
+                                <div class="description">{{ $good->description }}</div>
+                                <div class="info">
+                                    @if ($good->price)
+                                        <div class="price">{{ $good->price }}.-</div>
+                                    @endif
+                                    @if ($good->serving)
+                                        <div class="weight">{{ $good->serving }}</div>
+                                    @endif
+                                </div>
+                            </div>
+                        @endforeach
+                    @endif
+
+                    @if (count($cat_good))
+                        @foreach ($cat_good as $cat_id => $cat)
+                            <?
+                            if ($cat_id == $current_cat->id || !isset($child_cats[$cat_id]) || !is_object($child_cats[$cat_id]))
+                                continue;
+                            $child_cat = $child_cats[$cat_id];
+                            ?>
+
+                            @if (@count($cat_good[$child_cat->id]))
+
+                                <h2>{{ $child_cat->name }}</h2>
+
+                                @foreach ($cat_good[$child_cat->id] as $good)
+                                    <?
+                                    $image = $good->image_id;
+                                    ?>
+                                    <div class="unit">
+                                        @if (is_object($image) && $image->id)
+                                            <img src="{{ $image->full() }}" class="visual">
+                                        @endif
+                                        <div class="title">{{ $good->name }}</div>
+                                        <div class="description">{{ $good->description }}</div>
+                                        <div class="info">
+                                            @if ($good->price)
+                                                <div class="price">{{ $good->price }}.-</div>
+                                            @endif
+                                            @if ($good->serving)
+                                                <div class="weight">{{ $good->serving }}</div>
+                                            @endif
+                                        </div>
+                                    </div>
+                                @endforeach
+
+                                <div class="clrfx"></div>
+
+                            @endif
+
+                        @endforeach
+                    @endif
+
+                @else
+
+                    Категория пуста
+
+                @endif
+
+
+
             </div>
             <div class="clrfx"></div>
         </div>

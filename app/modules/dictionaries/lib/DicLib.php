@@ -348,7 +348,7 @@ class DicLib extends BaseController {
     }
 
 
-    public static function nestedModelToTree($categories, $debug = false) {
+    public static function nestedModelToTree($categories, $indent_string = '&nbsp; &nbsp; &nbsp; ', $debug = false) {
 
         /**
          * Подсчитаем отступ для каждой категории
@@ -407,7 +407,7 @@ class DicLib extends BaseController {
          */
         $categories_for_select = array();
         foreach ($categories as $category) {
-            $categories_for_select[$category->id] = str_repeat('&nbsp; &nbsp; &nbsp; ', $category->indent) . $category->name;
+            $categories_for_select[$category->id] = str_repeat($indent_string, $category->indent) . $category->name;
         }
         if ($indent_debug)
             Helper::dd($categories_for_select);

@@ -17,6 +17,7 @@ return array(
                 'title' => 'Категория меню',
                 'type' => 'select',
                 'values' => $menu,
+                'default' => Input::get('filter.fields.category_id') ?: null,
             ),
             'description' => array(
                 'title' => 'Описание',
