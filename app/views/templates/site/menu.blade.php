@@ -31,26 +31,7 @@ if (!is_object($current_cafe) || !$current_cafe->id)
     Redirect(URL::route('page', 'menu'));
 
 /**
- * Если не выбрана категори - определяем первую в текущем кафе и редиректим
- */
-if (!Input::get('cat')) {
-    /**
-     * Получаем первую категорию в текущем кафе
-     */
-    $first_cafe_menu_cat = Dic::valuesBySlug('menu_category', function($query) use ($current_cafe) {
-        $query->filter_by_related($current_cafe->id);
-        $query->orderBy('lft', 'ASC');
-        $query->take(1);
-    });
-    #Helper::tad($first_cafe_menu_cat);
-    $first_cafe_menu_cat = isset($first_cafe_menu_cat) && count($first_cafe_menu_cat) ? $first_cafe_menu_cat[0] : null;
-    #Helper::tad($first_cafe_menu_cat);
-
-    Redirect(URL::route('page', array('menu', 'cafe' => $current_cafe->slug, 'cat' => is_object($first_cafe_menu_cat) ? $first_cafe_menu_cat->slug : null)));
-}
-
-/**
- * Категории меню в текущем кафе
+ * Категории меню ВО ВСЕХ КАФЕ
  */
 $menu = Dic::valuesBySlug('menu_category', function($query) use ($current_cafe) {
     /**
@@ -65,7 +46,29 @@ $menu = DicVal::extracts($menu, null, true, true);
  * Nested Set Model
  */
 $menu_tree = DicLib::nestedModelToTree($menu, '|');
-#Helper::tad($menu_tree);
+#Helper::ta($menu_tree);
+
+/**
+ * Если не выбрана категори - определяем первую в текущем кафе и редиректим
+ */
+if (!Input::get('cat')) {
+
+    /**
+     * Получаем первую категорию в текущем кафе - комбинируя все категории и Nested Set Model из них
+     */
+    $first_cat = false;
+    foreach ($menu_tree as $cat_id => $cat_name) {
+        $cat = isset($menu[$cat_id]) ? $menu[$cat_id] : false;
+        if (mb_substr($cat_name, 0, 1) == '|' || !$cat || !is_object($cat) || !$cat->cafe_id || !count($cat->cafe_id) || !isset($cat->cafe_id[$current_cafe->id]))
+            continue;
+        $first_cat = $cat;
+        break;
+    }
+    #Helper::tad($first_cat);
+
+    if (is_object($first_cat) && $first_cat->slug)
+        Redirect(URL::route('page', array('menu', 'cafe' => $current_cafe->slug, 'cat' => $first_cat->slug)));
+}
 
 /**
  * Если выбрана категория - загрузим блюда
