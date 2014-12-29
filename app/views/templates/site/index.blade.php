@@ -33,10 +33,7 @@
                                 <hr class="second">
                             </div>
                             <a href="{{ URL::route('app.cafe', $cafe->slug) }}" class="link">
-                                <nobr>{{ $cafe->name }}</nobr>
-                                @if ($c == 0)
-                                <nobr>НА {{ $cafe->address2 }}</nobr>
-                                @endif
+                                {{ $cafe->name_mainpage }}
                             </a>
                         </div>
                         @if ($c == 0)
