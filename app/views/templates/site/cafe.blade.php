@@ -109,13 +109,20 @@
         <div class="rest-nav">
 
             @if (is_object($measure) && $measure->id)
+            <?
+            $image = $measure->image_id;
+            ?>
             <div class="unit">
                 <div class="icon"><img src="{{ Config::get('site.theme_path') }}/images/ico-mic-min.svg"></div>
                 <div class="head-title-wrapper">
                     <div class="title">Скоро</div>
                 </div>
                 <a href="{{ URL::route('page', 'afisha') }}" class="link">
-                    <div class="visual"><img src="http://dummyimage.com/440x264"></div>
+                    @if (is_object($image) && $image->id)
+                        <div class="visual">
+                            <img src="{{ $image->full() }}">
+                        </div>
+                    @endif
                     <div class="title">
                         {{ $measure->name }}
                         <div class="date">
