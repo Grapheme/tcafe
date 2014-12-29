@@ -61,6 +61,7 @@ class ApplicationController extends BaseController {
             $query->filter_by_field('measure_date', '>', date('Y-m-d'));
         });
         $measures = DicVal::extracts($measures, null, true, true);
+        $measures = DicLib::loadImages($measures, 'image_id');
         #Helper::tad($measures);
 
         /**
