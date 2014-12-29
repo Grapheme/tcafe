@@ -150,7 +150,7 @@ class ApplicationController extends BaseController {
             'name' => $name,
             'fields' => array(
                 'email' => $email,
-                'active' => 1,
+                'active' => 0,
             ),
             'textfields' => array(
                 'review' => $review,
