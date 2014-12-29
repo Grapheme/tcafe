@@ -53,10 +53,39 @@ class ApplicationController extends BaseController {
         #Helper::tad($cafes_chunk);
 
         /**
-         * Мероприятие, Новинка меню, Акция недели
+         * Мероприятия - предстоящие
          */
+        $measures = Dic::valuesBySlug('measure', function($query) {
+            #$rand_alias = $query->join_field('measure_date');
+            #$query->where($rand_alias.'.value', '>', date('Y-m-d'));
+            $query->filter_by_field('measure_date', '>', date('Y-m-d'));
+        });
+        $measures = DicVal::extracts($measures, null, true, true);
+        #Helper::tad($measures);
 
-        return View::make(Helper::layout('index'), compact('cafes', 'cafes_chunk', 'measure', 'new_menu', 'action'));
+        /**
+         * Новинки меню - все отмеченные для вывода на главной
+         */
+        $new_menu = Dic::valuesBySlug('menu_goods', function($query) {
+            $rand_alias = $query->join_field('show_on_mainpage');
+            $query->where($rand_alias.'.value', 1);
+            #$query->filter_by_field('show_on_mainpage', '=', 1);
+        });
+        $new_menu = DicVal::extracts($new_menu, null, true, true);
+        $new_menu = DicLib::loadImages($new_menu, 'image_id');
+        #Helper::tad($new_menu);
+
+        /**
+         * Акции - все активные
+         */
+        $actions = Dic::valuesBySlug('actions', function($query) {
+            $query->filter_by_field('active', '=', 1);
+        });
+        $actions = DicVal::extracts($actions, null, true, true);
+        $actions = DicLib::loadImages($actions, 'image_id');
+        #Helper::tad($actions);
+
+        return View::make(Helper::layout('index'), compact('cafes', 'cafes_chunk', 'measures', 'new_menu', 'actions'));
     }
 
     public function getCafe($cafe_slug) {

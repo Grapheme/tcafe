@@ -53,7 +53,7 @@ $measures = DicLib::loadImages($measures, 'image_id');
         </div>
         <div class="holder">
 
-            @if (is_object($measures) && count($measures)))
+            @if (is_object($measures) && count($measures))
                 @foreach ($measures as $measure)
                     <a href="{{ URL::route('page', 'photos') }}{{ $measure->photoalbum_id ? '#gallery-' . $measure->photoalbum_id : '' }}" class="unit">
                         @if (is_object($measure->image_id))

@@ -113,7 +113,8 @@
                 <div class="icon"><img src="{{ Config::get('site.theme_path') }}/images/ico-mic-min.svg"></div>
                 <div class="head-title-wrapper">
                     <div class="title">Скоро</div>
-                </div><a href="" class="link">
+                </div>
+                <a href="{{ URL::route('page', 'afisha') }}" class="link">
                     <div class="visual"><img src="http://dummyimage.com/440x264"></div>
                     <div class="title">
                         {{ $measure->name }}
@@ -131,7 +132,8 @@
                                 @endif
                             @endif
                         </div>
-                    </div></a>
+                    </div>
+                </a>
             </div>
             @endif
 
