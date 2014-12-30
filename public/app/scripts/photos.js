@@ -144,10 +144,10 @@ function photoSlider(data) {
   }
   
   $next.click(function(){
-    $thumb_list.find('.active').next('img').click();
+    $thumb_list.find('.active').next('img').trigger('click');
   });
   $prev.click(function(){
-    $thumb_list.find('.active').prev('img').click();
+    $thumb_list.find('.active').prev('img').trigger('click');
   });
   $close.click(function(){
     photoSliderClose();
