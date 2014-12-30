@@ -458,6 +458,11 @@ body.photos {
     z-index: 500;
     .menu-wrapper {
       .menu-btn {
+        &:hover {
+          .label {
+            color: #d19e45;
+          }
+        }
         .label {
           color: white;
         }
@@ -487,6 +492,11 @@ body.afisha {
     }
     .menu-wrapper {
       .menu-btn {
+        &:hover {
+          .label {
+            color: #d19e45;
+          }
+        }
         .label {
           color: white;
         }
@@ -501,6 +511,18 @@ body.about {
       .icon {
         img {
           height: 90px;
+        }
+      }
+    }
+    .menu-wrapper {
+      .menu-btn {
+        &:hover {
+          .label {
+            color: white;
+          }
+        }
+        .label {
+          color: #d19e45;
         }
       }
     }
@@ -548,6 +570,18 @@ body.specials {
           }
         }
       }
+    }
+    .menu-wrapper {
+     .menu-btn {
+       &:hover {
+         .label {
+           color: white;
+         }
+       }
+       .label {
+         color: #d19e45;
+       }
+     }
     }
   }
 }
