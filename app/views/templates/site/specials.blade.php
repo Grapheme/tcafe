@@ -53,7 +53,7 @@ $specials_chunk = array_chunk($specials->toArray(), 2);
                             ?>
                             <div class="unit">
                                 @if (is_object($special->image_id))
-                                    <img src="{{ $special->image_id->full() }}" class="visual">
+                                    <div style="background-image:url('{{ $special->image_id->full() }}')" class="visual"></div>
                                 @endif
                                 <div class="title">{{ $special->name }}</div>
                                 <div class="description">

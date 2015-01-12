@@ -104,9 +104,7 @@
                         </div>
                         <a href="{{ URL::route('page', 'afisha') }}" class="link">
                             @if (is_object($image) && $image->id)
-                                <div class="visual">
-                                    <img src="{{ $image->full() }}">
-                                </div>
+                                <div style="background-image: url('{{ $image->full() }}')" class="visual"></div>
                             @endif
                             <div class="title">
                                 {{ $measure->name }}
@@ -142,9 +140,7 @@
                         </div>
                         <a href="{{ URL::route('page', ['menu']) }}" class="link">{{-- , 'cafe' => $current_cafe->slug, 'cat' => $menu[$dish->category_id]->slug --}}
                             @if (is_object($image) && $image->id)
-                                <div class="visual">
-                                    <img src="{{ $image->full() }}">
-                                </div>
+                                <div style="background-image: url('{{ $image->full() }}')" class="visual"></div>
                             @endif
                             <div class="title">{{ $dish->name }}</div>
                         </a>
@@ -164,9 +160,7 @@
                         </div>
                         <a href="{{ URL::route('page', ['specials']) }}" class="link">{{-- , 'cafe' => $current_cafe->slug, 'cat' => $menu[$dish->category_id]->slug --}}
                             @if (is_object($image) && $image->id)
-                                <div class="visual">
-                                    <img src="{{ $image->full() }}">
-                                </div>
+                                <div style="background-image: url('{{ $image->full() }}')" class="visual"></div>
                             @endif
                             <div class="title">{{ $action->name }}</div>
                         </a>

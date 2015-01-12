@@ -57,7 +57,7 @@ $measures = DicLib::loadImages($measures, 'image_id');
                 @foreach ($measures as $measure)
                     <a href="{{ URL::route('page', 'photos') }}{{ $measure->photoalbum_id ? '#gallery-' . $measure->photoalbum_id : '' }}" class="unit">
                         @if (is_object($measure->image_id))
-                            <img src="{{ $measure->image_id->full() }}" class="visual">
+                            <div style="background-image:url('{{ $measure->image_id->full() }}')" class="visual"></div>
                         @endif
                         <div class="info">
 

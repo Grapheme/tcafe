@@ -217,7 +217,7 @@ if (Input::get('cat')) {
                             ?>
                             <div class="unit">
                                 @if (is_object($image) && $image->id)
-                                    <img src="{{ $image->full() }}" class="visual">
+                                    <div style="background-image:url('{{ $image->full() }}')" class="visual"></div>
                                 @endif
                                 <div class="title">{{ $good->name }}</div>
                                 <div class="description">{{ $good->description }}</div>
@@ -251,7 +251,7 @@ if (Input::get('cat')) {
                                     ?>
                                     <div class="unit">
                                         @if (is_object($image) && $image->id)
-                                            <img src="{{ $image->full() }}" class="visual">
+                                            <div style="background-image:url('{{ $image->full() }}')" class="visual"></div>
                                         @endif
                                         <div class="title">{{ $good->name }}</div>
                                         <div class="description">{{ $good->description }}</div>
