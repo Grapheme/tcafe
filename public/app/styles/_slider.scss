@@ -173,11 +173,14 @@
           width: 9999999px;
           @include transition(all 0.3s ease-in-out);
           margin-left: 0;
-          img {
+          .img {
             width: 122px;
             height: 78px;
             float: left;
             cursor: pointer;
+            background-position: center;
+            background-size: cover;
+            background-repeat: no-repeat;
           }
         }
       }

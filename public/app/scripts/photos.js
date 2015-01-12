@@ -9,15 +9,18 @@ function photosResize() {
       unit_amount_y = parseInt(window_height/unit_min_height),
       unit_width = window_width/unit_amount_x,
       unit_height = window_height/unit_amount_y;
+
   if (unit_amount_x==0) {
     unit_amount_x=1
   }
   if (unit_amount_y==0) {
     unit_amount_y=1
   }
+  
   $unit.css({
     width: 100/unit_amount_x+"%"
   });
+  
   $unit.height(unit_height)
   $unit.slice(0 , unit_amount_x*unit_amount_y).removeClass('hidden');
   $unit.slice((unit_amount_x*unit_amount_y)).addClass('hidden');
@@ -40,7 +43,7 @@ function photoSlider(data) {
     
     $slider.removeClass('video').fadeIn();
       p_list.forEach(function(element, index) {
-        var $_this = $('<img src="'+element.thumb+'">').insertBefore($thumb_list.find('.clrfx'));
+        var $_this = $('<div class="img" style="background-image:url('+element.thumb+');">').insertBefore($thumb_list.find('.clrfx'));
         $_this.data({
           img: element.img,
           title: element.title
@@ -81,7 +84,7 @@ function photoSlider(data) {
     videoLoader(data);
   };
   
-  $thumb_list.find('img').click(function(){
+  $thumb_list.find('.img').click(function(){
     if (!$(this).is('.active')) {
       var img_pos = $(this).offset(),
           start_pos = $thumb_wrapper.offset(),
@@ -89,7 +92,7 @@ function photoSlider(data) {
           title = $(this).data().title;
       $visual.fadeOut(300);
       $title.text(' ')
-      $thumb_list.find('img').removeClass('active');
+      $thumb_list.find('.img').removeClass('active');
       $(this).addClass('active');
       $('<img src="'+img_path+'">').load(function(){
         $visual.css({
@@ -137,24 +140,24 @@ function photoSlider(data) {
   function photoSliderClose() {
     $slider.fadeOut(300, function(){
       $visual.add($frame).add($thumb_list).attr('style', '');
-      $thumb_list.find('img').remove()
+      $thumb_list.find('.img').remove()
     });
     $next.add($prev).add($close).off('click');
     $video.remove();
   }
   
   $next.click(function(){
-    $thumb_list.find('.active').next('img').trigger('click');
+    $thumb_list.find('.active').next('.img').trigger('click');
   });
   $prev.click(function(){
-    $thumb_list.find('.active').prev('img').trigger('click');
+    $thumb_list.find('.active').prev('.img').trigger('click');
   });
   $close.click(function(){
     photoSliderClose();
   });
-  _log($thumb_list.find('img.first'))
-  $thumb_list.find('img.first').click();
-  $thumb_list.find('img.first').trigger('click');
+  _log($thumb_list.find('.img.first'))
+  $thumb_list.find('.img.first').click();
+  $thumb_list.find('.img.first').trigger('click');
   
 }
 

@@ -253,11 +253,17 @@ label.error {
         }
       }
       .visual {
-        img {
+        width: 220px;
+        height: 132px;
+        display: block;
+        background-position: center;
+        background-size: cover;
+        background-repeat: no-repeat;
+        /*img {
           width: 220px;
           height: 132px;
           display: block;
-        }
+        }*/
       }
     }
   }
@@ -281,6 +287,9 @@ label.error {
       width: 286px;
       height: 196px;
       display: block;
+      background-position: center;
+      background-size: cover;
+      background-repeat: no-repeat;
     }
     .info {
       font-size: 21px;
@@ -1045,6 +1054,9 @@ body.menu {
           .visual {
             width: 276px;
             height: 184px;
+            background-position: center;
+            background-size: cover;
+            background-repeat: no-repeat;
           }
           .title {
             font-size: 19px;
