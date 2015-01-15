@@ -149,7 +149,7 @@
             <div class="unit">
                 <div class="icon"><img src="{{ Config::get('site.theme_path') }}/images/ico-new.svg"></div>
                 <div class="head-title-wrapper">
-                    <div class="title">Новинка меню</div>
+                    <div class="title">Акция</div>
                 </div>
                 <a href="{{ URL::route('page', ['menu', 'cafe' => $current_cafe->slug]) }}" class="link">{{-- , 'cat' => $menu[$dish->category_id]->slug --}}
                     @if (is_object($image) && $image->id)
