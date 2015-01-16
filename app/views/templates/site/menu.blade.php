@@ -49,7 +49,7 @@ $menu_tree = DicLib::nestedModelToTree($menu, '|');
 #Helper::ta($menu_tree);
 
 /**
- * Если не выбрана категори - определяем первую в текущем кафе и редиректим
+ * Если не выбрана категория - определяем первую в текущем кафе и редиректим
  */
 if (!Input::get('cat')) {
 
@@ -122,6 +122,7 @@ if (Input::get('cat')) {
 
         $qjf = $query->join_field('category_id', 'category_id');
         $query->whereIn($qjf.'.value', $ids);
+        $query->orderBy('lft', 'ASC');
     });
     #Helper::smartQueries(1);
     $goods = DicVal::extracts($goods, null, true, true);
