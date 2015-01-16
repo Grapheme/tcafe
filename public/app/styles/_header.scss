@@ -550,6 +550,18 @@ body.menu, body.reviews, body.contacts {
         }
       }
     }
+    .menu-wrapper {
+      .menu-btn {
+        &:hover {
+          .label {
+            color: black;
+          }
+        }
+        .label {
+          color: #d19e45;
+        }
+      }
+    }
   }
 }
 
