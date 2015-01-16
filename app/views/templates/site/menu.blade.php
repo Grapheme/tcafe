@@ -38,6 +38,7 @@ $menu = Dic::valuesBySlug('menu_category', function($query) use ($current_cafe) 
      * Фильтр по related_dicvals - тут не нужен! Иначе неверно построится Nested Set Model Tree!!
      */
     #$query->filter_by_related($current_cafe->id);
+    $query->orderBy('lft', 'ASC');
 });
 #Helper::smartQueries(1);
 $menu = DicVal::extracts($menu, null, true, true);
