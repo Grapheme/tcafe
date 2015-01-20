@@ -3105,8 +3105,8 @@ $(function() {
   if (hash.length>1) {
     hash = hash[1].split('-')
     if (hash[0]=='gallery') {
-      var gal_id = hash[1]
-      var json_url="/json/photo-"+gal_id+'.json'
+      var gal_id = hash[1];
+      var json_url="/ajax/json-photoalbum-"+gal_id;
       $.getJSON(json_url, function(data){
         photoSlider(data);
       })
@@ -3177,13 +3177,16 @@ $(function() {
     submitHandler: function(form) {
       var _url = $(form).attr('action'),
           _data = $(form).serialize(),
-          _method = $(form).attr('method')||'POST';
+          _method = $(form).attr('method')||'POST',
+          $form = $(form);
       $.ajax({
         type: _method,
         url: _url,
         data: _data,
         success: function(data) {
           $('.unit.form-holder .final').fadeIn();
+          $form.blur();
+          $form.find('button').blur();
         }
       })
     }
