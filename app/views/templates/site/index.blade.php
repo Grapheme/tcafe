@@ -145,6 +145,14 @@
                                 <div style="background-image: url('{{ $image->full() }}')" class="visual"></div>
                             @endif
                             <div class="title">{{ $dish->name }}</div>
+                            <div class="info">
+                                @if ($dish->price)
+                                    <div class="price">{{ $dish->price }}.-</div>
+                                @endif
+                                @if ($dish->serving)
+                                    <div class="weight">{{ $dish->serving }}</div>
+                                @endif
+                            </div>
                         </a>
                     </div>
                 @endforeach
