@@ -107,7 +107,7 @@
     </div>
     <div class="content w850px">
         <div class="rest-nav">
-            @if (is_object($measure) && $measure->id && FALSE)
+            @if (isset($measure) && is_object($measure) && $measure->id && FALSE)
              <div class="unit-wrapper">
                 <?
                 $image = $measure->image_id;
