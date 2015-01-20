@@ -57,13 +57,16 @@ $(function() {
     submitHandler: function(form) {
       var _url = $(form).attr('action'),
           _data = $(form).serialize(),
-          _method = $(form).attr('method')||'POST';
+          _method = $(form).attr('method')||'POST',
+          $form = $(form);
       $.ajax({
         type: _method,
         url: _url,
         data: _data,
         success: function(data) {
           $('.unit.form-holder .final').fadeIn();
+          $form.blur();
+          $form.find('button').blur();
         }
       })
     }
