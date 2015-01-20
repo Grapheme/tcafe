@@ -112,7 +112,7 @@
             <?
             $image = $measure->image_id;
             ?>
-            <div class="unit">
+            <div class="unit" data-type="measure">
                 <div class="icon"><img src="{{ Config::get('site.theme_path') }}/images/ico-mic-min.svg"></div>
                 <div class="head-title-wrapper">
                     <div class="title">Скоро</div>
@@ -142,14 +142,15 @@
             </div>
             @endif
 
-            @if (is_object($dish) && $dish->id)
+
+            @if (isset($dish) && is_object($dish) && $dish->id && FALSE)
             <?
             $image = $dish->image_id;
             ?>
-            <div class="unit">
+            <div class="unit" data-type="menu">
                 <div class="icon"><img src="{{ Config::get('site.theme_path') }}/images/ico-new.svg"></div>
                 <div class="head-title-wrapper">
-                    <div class="title">Акция</div>
+                    <div class="title">Новинка меню</div>
                 </div>
                 <a href="{{ URL::route('page', ['menu', 'cafe' => $current_cafe->slug]) }}" class="link">{{-- , 'cat' => $menu[$dish->category_id]->slug --}}
                     @if (is_object($image) && $image->id)
@@ -158,6 +159,27 @@
                     <div class="title">{{ $dish->name }}</div>
                 </a>
             </div>
+            @endif
+
+
+            @if (is_object($actions) && $actions->count())
+                @foreach ($actions as $action)
+                    <?
+                    $image = $action->image_id;
+                    ?>
+                    <div class="unit" data-type="action">
+                        <div class="icon"><img src="{{ Config::get('site.theme_path') }}/images/ico-act.svg"></div>
+                        <div class="head-title-wrapper">
+                            <div class="title">Акция</div>
+                        </div>
+                        <a href="{{ URL::route('page', ['specials']) }}" class="link">{{-- , 'cafe' => $current_cafe->slug, 'cat' => $menu[$dish->category_id]->slug --}}
+                            @if (is_object($image) && $image->id)
+                                <div style="background-image: url('{{ $image->full() }}')" class="visual"></div>
+                            @endif
+                            <div class="title">{{ $action->name }}</div>
+                        </a>
+                    </div>
+                @endforeach
             @endif
 
             <div class="unit">
