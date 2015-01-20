@@ -7,6 +7,7 @@
 <?
 $specials = Dic::valuesBySlug('actions', function($query){
     #$query->orderBy('created_at', 'DESC');
+    $query->orderBy('lft', 'ASC');
 });
 $specials = DicVal::extracts($specials, null, true, true);
 $specials = DicLib::loadImages($specials, 'image_id');
