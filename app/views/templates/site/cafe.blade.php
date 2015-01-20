@@ -107,7 +107,7 @@
     </div>
     <div class="content w850px">
         <div class="rest-nav">
-            @if (is_object($measure) && $measure->id)
+            @if (is_object($measure) && $measure->id && FALSE)
              <div class="unit-wrapper">
                 <?
                 $image = $measure->image_id;
@@ -163,6 +163,46 @@
             </div>
             @endif
 
+
+
+            @if (is_object($measures) && $measures->count())
+            <div class="unit-wrapper">
+                @foreach ($measures as $measure)
+                    <?
+                    $image = $measure->image_id;
+                    ?>
+                    <div class="unit" data-type="action">
+                        <div class="icon"><img src="{{ Config::get('site.theme_path') }}/images/ico-act.svg"></div>
+                        <div class="head-title-wrapper">
+                            <div class="title">Скоро</div>
+                        </div>
+                        <a href="{{ URL::route('page', 'afisha') }}" class="link">
+                            @if (is_object($image) && $image->id)
+                                <div style="background-image: url('{{ $image->full() }}')" class="visual"></div>
+                            @endif
+                            <div class="title">
+                                {{ $measure->name }}
+                                <div class="date">
+                                    @if (preg_match('~\d{4}-\d{2}-\d{2}~is', $measure->measure_date))
+                                        <?
+                                        $md = (new \Carbon\Carbon())->createFromFormat('Y-m-d', $measure->measure_date);
+                                        ?>
+                                        {{ mb_strtolower($md->formatLocalized('%d')) }}
+                                        {{ @mb_strtolower($monthes[$md->formatLocalized('%m')-1]) }}
+                                        | {{ $days[$md->formatLocalized('%w')] }}
+
+                                        @if ($measure->measure_time)
+                                            | {{ $measure->measure_time }}
+                                        @endif
+                                    @endif
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                @endforeach
+            </div>
+            @endif
+            
             @if (is_object($actions) && $actions->count())
             <div class="unit-wrapper">
                 @foreach ($actions as $action)
@@ -184,7 +224,9 @@
                 @endforeach
             </div>
             @endif
-            
+
+
+
             <div class="unit-wrapper">
                 <div class="unit">
                     <div class="icon"></div>
