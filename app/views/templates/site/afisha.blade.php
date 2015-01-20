@@ -9,13 +9,19 @@ $status = Input::get('show') == 'archive' ? 'archive' : 'active';
 $measures = Dic::valuesBySlug('measure', function($query) use ($status) {
     if ($status == 'active') {
         $query->filter_by_field('measure_date', '>', date('Y-m-d'));
-        $query->filter_by_field('measure_time', '>', date('H:i'));
+        #$query->filter_by_field('measure_time', '>', date('H:i'));
     } else {
         $query->filter_by_field('measure_date', '<=', date('Y-m-d'));
-        $query->filter_by_field('measure_time', '<=', date('H:i'));
+        #$query->filter_by_field('measure_time', '<=', date('H:i'));
     }
 });
+#Helper::smartQueries(1);
 #Helper::tad($measures);
+
+if ($status == 'active' && !count($measures)) {
+    Redirect(URL::route('page', ['afisha', 'show' => 'archive', 'noactive' => 1]));
+}
+
 $measures = DicVal::extracts($measures, null, true, true);
 $measures = DicLib::loadImages($measures, 'image_id');
 #Helper::tad($measures);
@@ -47,8 +53,10 @@ $measures = DicLib::loadImages($measures, 'image_id');
 
     <div class="content w860">
         <div class="top-btns">
+            @if (!Input::get('noactive'))
             <div class="bar"></div><a href="{{ URL::route('page', 'afisha') }}"{{ $status == 'active'  ? ' class="active"' : '' }}>Предстоящие</a>
             <div class="bar"></div><a href="{{ URL::route('page', 'afisha') }}?show=archive"{{ $status == 'archive' ? ' class="active"' : '' }}>Архив и фото</a>
+            @endif
             <div class="bar"></div>
         </div>
         <div class="holder">
