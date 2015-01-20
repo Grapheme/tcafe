@@ -56,8 +56,8 @@ $measures = DicLib::loadImages($measures, 'image_id');
             @if (!Input::get('noactive'))
             <div class="bar"></div><a href="{{ URL::route('page', 'afisha') }}"{{ $status == 'active'  ? ' class="active"' : '' }}>Предстоящие</a>
             <div class="bar"></div><a href="{{ URL::route('page', 'afisha') }}?show=archive"{{ $status == 'archive' ? ' class="active"' : '' }}>Архив и фото</a>
-            @endif
             <div class="bar"></div>
+            @endif
         </div>
         <div class="holder">
 
