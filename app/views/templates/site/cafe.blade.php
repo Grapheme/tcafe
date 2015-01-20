@@ -171,7 +171,7 @@
                     <?
                     $image = $measure->image_id;
                     ?>
-                    <div class="unit" data-type="action">
+                    <div class="unit" data-type="measure">
                         <div class="icon"><img src="{{ Config::get('site.theme_path') }}/images/ico-act.svg"></div>
                         <div class="head-title-wrapper">
                             <div class="title">Скоро</div>
