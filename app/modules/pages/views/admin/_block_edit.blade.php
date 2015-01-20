@@ -57,7 +57,7 @@ $method     = 'POST';
                             <label class="control-label">
                                 Шаблон блока
                             </label>
-                            {{ Form::select('template', array('Выберите...')+$templates, null, array('class' => 'form-control')) }}
+                            {{ Form::select('template', array('Выберите...')+(array)$templates, null, array('class' => 'form-control')) }}
                         </section>
 
                     </fieldset>
