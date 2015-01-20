@@ -107,8 +107,8 @@
     </div>
     <div class="content w850px">
         <div class="rest-nav">
-            <div class="unit-wrapper">
-                @if (is_object($measure) && $measure->id)
+            @if (is_object($measure) && $measure->id)
+             <div class="unit-wrapper">
                 <?
                 $image = $measure->image_id;
                 ?>
@@ -140,14 +140,14 @@
                         </div>
                     </a>
                 </div>
-                @endif
             </div>
+            @endif
 
+            @if (isset($dish) && is_object($dish) && $dish->id && FALSE)
+            <?
+            $image = $dish->image_id;
+            ?>
             <div class="unit-wrapper">
-                @if (isset($dish) && is_object($dish) && $dish->id && FALSE)
-                <?
-                $image = $dish->image_id;
-                ?>
                 <div class="unit" data-type="menu">
                     <div class="icon"><img src="{{ Config::get('site.theme_path') }}/images/ico-new.svg"></div>
                     <div class="head-title-wrapper">
@@ -160,30 +160,30 @@
                         <div class="title">{{ $dish->name }}</div>
                     </a>
                 </div>
-                @endif
             </div>
+            @endif
 
+            @if (is_object($actions) && $actions->count())
             <div class="unit-wrapper">
-                @if (is_object($actions) && $actions->count())
-                    @foreach ($actions as $action)
-                        <?
-                        $image = $action->image_id;
-                        ?>
-                        <div class="unit" data-type="action">
-                            <div class="icon"><img src="{{ Config::get('site.theme_path') }}/images/ico-act.svg"></div>
-                            <div class="head-title-wrapper">
-                                <div class="title">Акция</div>
-                            </div>
-                            <a href="{{ URL::route('page', ['specials']) }}" class="link">{{-- , 'cafe' => $current_cafe->slug, 'cat' => $menu[$dish->category_id]->slug --}}
-                                @if (is_object($image) && $image->id)
-                                    <div style="background-image: url('{{ $image->full() }}')" class="visual"></div>
-                                @endif
-                                <div class="title">{{ $action->name }}</div>
-                            </a>
+                @foreach ($actions as $action)
+                    <?
+                    $image = $action->image_id;
+                    ?>
+                    <div class="unit" data-type="action">
+                        <div class="icon"><img src="{{ Config::get('site.theme_path') }}/images/ico-act.svg"></div>
+                        <div class="head-title-wrapper">
+                            <div class="title">Акция</div>
                         </div>
-                    @endforeach
-                @endif
+                        <a href="{{ URL::route('page', ['specials']) }}" class="link">{{-- , 'cafe' => $current_cafe->slug, 'cat' => $menu[$dish->category_id]->slug --}}
+                            @if (is_object($image) && $image->id)
+                                <div style="background-image: url('{{ $image->full() }}')" class="visual"></div>
+                            @endif
+                            <div class="title">{{ $action->name }}</div>
+                        </a>
+                    </div>
+                @endforeach
             </div>
+            @endif
             
             <div class="unit-wrapper">
                 <div class="unit">

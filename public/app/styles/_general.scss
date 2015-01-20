@@ -137,6 +137,7 @@ label.error {
       height: 0;
       @include transition(all 300ms ease);
       &.relative {
+        height: auto;
         .unit {
           position: relative;
         }
