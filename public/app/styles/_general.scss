@@ -381,15 +381,21 @@ body.about {
     margin-top: 30px;
     &>.holder {
       background: #e4e4e4;
+      .wrapper {
+        .unit {
+        }
+      }
       .unit {
         width: 486px;
-        height: 428px;
+        min-height: 428px;
         background: white;
         display: block;
         float: left;
         margin-right: 1px;
         margin-bottom: 1px;
         text-align: center;
+        padding-bottom: 100px;
+        box-sizing: border-box;
         &.large {
           width: 100%;
         }

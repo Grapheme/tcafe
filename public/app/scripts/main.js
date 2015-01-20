@@ -43,4 +43,10 @@ $(function() {
     });
   }
   
+  $('body.about > .content > .holder > .wrapper').each(function(){
+    var _h = $(this).height();
+    _log(_h)
+    $(this).find('.unit').height(_h-100);
+  });
+  
 });

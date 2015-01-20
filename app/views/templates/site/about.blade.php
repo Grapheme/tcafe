@@ -39,12 +39,13 @@
                     ++$i;
                     ?>
                     @if ($i%2 == 1)
-                        <div class="">
+                        <div class="wrapper">
                     @endif
                     <div class="unit{{ $i == $c ? ' large' : '' }}">
                         {{ $page->block($block_slug) }}
                     </div>
                     @if ($i%2 == 0 || ($i%2 == 1 && $i == $c))
+                        <div class="clrfx"></div>
                         </div>
                     @endif
                 @endforeach
