@@ -30,17 +30,23 @@
     <div class="content w974">
         <div class="holder">
 
-            <?
-            $i = 0;
-            ?>
             @if (NULL !== ($c = count($page->blocks)))
+                <?
+                $i = 0;
+                ?>
                 @foreach($page->blocks as $block_slug => $block)
                     <?
                     ++$i;
                     ?>
+                    @if ($i%2 == 1)
+                        <div class="">
+                    @endif
                     <div class="unit{{ $i == $c ? ' large' : '' }}">
                         {{ $page->block($block_slug) }}
                     </div>
+                    @if ($i%2 == 0 || ($i%2 == 1 && $i == $c))
+                        </div>
+                    @endif
                 @endforeach
             @endif
 
