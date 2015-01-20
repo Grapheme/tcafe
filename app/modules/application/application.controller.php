@@ -100,18 +100,24 @@ class ApplicationController extends BaseController {
         #Helper::tad($current_cafe);
 
         /**
-         * Мероприятие
+         * МероприятиЯ
          */
-        $measure = Dic::valuesBySlug('measure', function($query) use ($current_cafe) {
+        $measures = Dic::valuesBySlug('measure', function($query) use ($current_cafe) {
             $query->filter_by_related($current_cafe->id);
         });
+        /*
         #Helper::tad($measure);
-        $measure = @$measure[0];
-        if (is_object($measure)) {
+        #$measure = @$measure[0];
+        if (is_object($measures)) {
 
             $measure->extract(1);
             $measure = DicLib::loadImages($measure, 'image_id');
         }
+        */
+        $measures = DicVal::extracts($measures, null, true, true);
+        $measures = DicLib::loadImages($measures, 'image_id');
+        #Helper::tad($measures);
+
 
         /**
          * Новинка меню
@@ -178,7 +184,7 @@ class ApplicationController extends BaseController {
 
 
 
-        return View::make(Helper::layout('cafe'), compact('current_cafe', 'measure', 'menu', 'actions', 'dish', 'cafes', 'cafes_chunk'));
+        return View::make(Helper::layout('cafe'), compact('current_cafe', 'measures', 'menu', 'actions', 'dish', 'cafes', 'cafes_chunk'));
     }
 
 
