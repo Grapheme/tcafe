@@ -74,7 +74,7 @@ class ApplicationController extends BaseController {
         });
         $new_menu = DicVal::extracts($new_menu, null, true, true);
         $new_menu = DicLib::loadImages($new_menu, 'image_id');
-        Helper::tad($new_menu);
+        #Helper::tad($new_menu);
 
         /**
          * Акции - все активные
