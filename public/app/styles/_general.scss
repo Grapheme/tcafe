@@ -246,6 +246,51 @@ label.error {
           color: black;
         }
       }
+      .info {
+        padding: 20px;
+        padding-top: 0;
+        margin-top: -12px;
+        .price {
+          font-size: 32px;
+          font-family: "bravoscregular";
+          color: rgb(39, 39, 39);
+          //font-weight: bold;
+          line-height: 0.958;
+          display: inline-block;
+          position: relative;
+          margin-right: 20px;
+          &:after {
+            display: block;
+            content: '';
+            @include transform-origin(left bottom);
+            @include transform(rotate(18.5deg));  
+            height: 44px;
+            width: 1px;
+            background: #d7d7d7;
+            position: absolute;
+            top: -9px;
+            right: -5px;
+          }
+        }
+        .weight {
+          font-size: 16px;
+          font-family: "PT Serif";
+          color: black;
+          line-height: 1.278;
+          display: inline-block;
+        }
+      }
+      .where {
+        font-size: 18px;
+        font-family: "PT Serif";
+        color: #1a1a1a;
+        line-height: 1;
+        margin-left: 20px;
+        background: url("../images/ico-point.png") no-repeat left 2px;
+        padding-left: 18px;
+        margin-top: -6px;
+        padding-bottom: 26px;
+      }
       .head-title-wrapper {
         text-align: center;
         overflow: hidden;
@@ -278,6 +323,7 @@ label.error {
             top: 11px;
           }
         }
+        
       }
       .visual {
         width: 220px;
