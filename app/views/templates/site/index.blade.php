@@ -91,8 +91,9 @@
     </div>
     <div class="content w850px">
         <div class="rest-nav">
-
+        
             @if (is_object($measures) && $measures->count())
+            <div class="unit-wrapper">
                 @foreach ($measures as $measure)
                     <?
                     $image = $measure->image_id;
@@ -126,9 +127,10 @@
                         </a>
                     </div>
                 @endforeach
+            </div>
             @endif
-
             @if (is_object($new_menu) && $new_menu->count())
+            <div class="unit-wrapper">
                 @foreach ($new_menu as $dish)
                     <?
                     $image = $dish->image_id;
@@ -146,9 +148,11 @@
                         </a>
                     </div>
                 @endforeach
+            </div>
             @endif
-
+            
             @if (is_object($actions) && $actions->count())
+            <div class="unit-wrapper">
                 @foreach ($actions as $action)
                     <?
                     $image = $action->image_id;
@@ -156,7 +160,7 @@
                     <div class="unit" data-type="action">
                         <div class="icon"><img src="{{ Config::get('site.theme_path') }}/images/ico-act.svg"></div>
                         <div class="head-title-wrapper">
-                            <div class="title">Акция недели</div>
+                            <div class="title">Акция</div>
                         </div>
                         <a href="{{ URL::route('page', ['specials']) }}" class="link">{{-- , 'cafe' => $current_cafe->slug, 'cat' => $menu[$dish->category_id]->slug --}}
                             @if (is_object($image) && $image->id)
@@ -166,8 +170,9 @@
                         </a>
                     </div>
                 @endforeach
+            </div>
             @endif
-
+                
         </div>
     </div>
 

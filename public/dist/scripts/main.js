@@ -1350,6 +1350,37 @@ _TCAFE_.setYear = function(){
 
 $(function() {
   _TCAFE_.setYear();
+  
+  var $restNav = $('.rest-nav')
+  
+  if ($('.rest-nav').size()) {
+    $restNav.find('.unit-wrapper').each(function(index){
+      var $wrapper = $(this);
+      var $units = $(this).find('.unit');
+      var count = $units.size();
+      var curent = 0;
+      var delay = 5 * 1000;
+      var _index = index
+      
+      $units.eq(0).addClass('active');
+      if (count>1) {
+        setInterval(function(){
+          curent += 1
+          if (curent > (count-1)) {
+            curent = 0
+          }
+          if ($units.eq(curent).height()>$($wrapper).height()) {
+            $($wrapper).height($units.eq(curent).height());
+          }
+          $units.removeClass('active');
+          $units.eq(curent).addClass('active');
+        }, delay + (_index * 100));
+      } else {
+        $(this).addClass('relative');
+      }
+    });
+  }
+  
 });
 $(function() {
   _TCAFE_.$contacts_map = $('.contacts-map');
