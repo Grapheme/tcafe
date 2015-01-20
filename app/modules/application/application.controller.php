@@ -104,6 +104,7 @@ class ApplicationController extends BaseController {
          */
         $measures = Dic::valuesBySlug('measure', function($query) use ($current_cafe) {
             $query->filter_by_related($current_cafe->id);
+            $query->filter_by_field('measure_date', '>', date('Y-m-d'));
         });
         /*
         #Helper::tad($measure);
