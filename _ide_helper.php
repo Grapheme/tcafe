@@ -1,7 +1,7 @@
 <?php
 /**
  * An helper file for Laravel 4, to provide autocomplete information to your IDE
- * Generated for Laravel 4.2.9 on 2014-10-07.
+ * Generated for Laravel 4.2.9 on 2015-01-21.
  *
  * @author Barry vd. Heuvel <barryvdh@gmail.com>
  * @see https://github.com/barryvdh/laravel-ide-helper
@@ -2747,206 +2747,6 @@ namespace {
     }
 
 
-    class DbView extends \Flynsarmy\DbBladeCompiler\Facades\DbView{
-        
-        /**
-         * Get a evaluated view contents for the given view.
-         *
-         * @param \Flynsarmy\DbBladeCompiler\Illuminate\Database\Eloquent\Model $view
-         * @param array $data
-         * @param array $mergeData
-         * @param string $content_field
-         * @return \Illuminate\View\View 
-         * @static 
-         */
-        public static function make($view, $data = array(), $mergeData = array(), $content_field = null){
-            return \Flynsarmy\DbBladeCompiler\DbView::make($view, $data, $mergeData, $content_field);
-        }
-        
-        /**
-         * 
-         *
-         * @static 
-         */
-        public static function field($content_field){
-            return \Flynsarmy\DbBladeCompiler\DbView::field($content_field);
-        }
-        
-        /**
-         * Get the string contents of the view.
-         *
-         * @param \Closure $callback
-         * @return string 
-         * @static 
-         */
-        public static function render($callback = null){
-            return \Flynsarmy\DbBladeCompiler\DbView::render($callback);
-        }
-        
-        /**
-         * Add a view instance to the view data.
-         *
-         * @param string $key
-         * @param string $view
-         * @param array $data
-         * @return \Illuminate\View\View 
-         * @static 
-         */
-        public static function nest($key, $view, $data = array()){
-            return \Flynsarmy\DbBladeCompiler\DbView::nest($key, $view, $data);
-        }
-        
-        /**
-         * Determine if a piece of data is bound.
-         *
-         * @param string $key
-         * @return bool 
-         * @static 
-         */
-        public static function offsetExists($key){
-            return \Flynsarmy\DbBladeCompiler\DbView::offsetExists($key);
-        }
-        
-        /**
-         * Get a piece of bound data to the view.
-         *
-         * @param string $key
-         * @return mixed 
-         * @static 
-         */
-        public static function offsetGet($key){
-            return \Flynsarmy\DbBladeCompiler\DbView::offsetGet($key);
-        }
-        
-        /**
-         * Set a piece of data on the view.
-         *
-         * @param string $key
-         * @param mixed $value
-         * @return void 
-         * @static 
-         */
-        public static function offsetSet($key, $value){
-            \Flynsarmy\DbBladeCompiler\DbView::offsetSet($key, $value);
-        }
-        
-        /**
-         * Unset a piece of data from the view.
-         *
-         * @param string $key
-         * @return void 
-         * @static 
-         */
-        public static function offsetUnset($key){
-            \Flynsarmy\DbBladeCompiler\DbView::offsetUnset($key);
-        }
-        
-        /**
-         * Get the sections of the rendered view.
-         *
-         * @return array 
-         * @static 
-         */
-        public static function renderSections(){
-            //Method inherited from \Illuminate\View\View            
-            return \Flynsarmy\DbBladeCompiler\DbView::renderSections();
-        }
-        
-        /**
-         * Add a piece of data to the view.
-         *
-         * @param string|array $key
-         * @param mixed $value
-         * @return $this 
-         * @static 
-         */
-        public static function with($key, $value = null){
-            //Method inherited from \Illuminate\View\View            
-            return \Flynsarmy\DbBladeCompiler\DbView::with($key, $value);
-        }
-        
-        /**
-         * Add validation errors to the view.
-         *
-         * @param \Illuminate\Support\Contracts\MessageProviderInterface|array $provider
-         * @return $this 
-         * @static 
-         */
-        public static function withErrors($provider){
-            //Method inherited from \Illuminate\View\View            
-            return \Flynsarmy\DbBladeCompiler\DbView::withErrors($provider);
-        }
-        
-        /**
-         * Get the view factory instance.
-         *
-         * @return \Illuminate\View\Factory 
-         * @static 
-         */
-        public static function getFactory(){
-            //Method inherited from \Illuminate\View\View            
-            return \Flynsarmy\DbBladeCompiler\DbView::getFactory();
-        }
-        
-        /**
-         * Get the view's rendering engine.
-         *
-         * @return \Illuminate\View\Engines\EngineInterface 
-         * @static 
-         */
-        public static function getEngine(){
-            //Method inherited from \Illuminate\View\View            
-            return \Flynsarmy\DbBladeCompiler\DbView::getEngine();
-        }
-        
-        /**
-         * Get the name of the view.
-         *
-         * @return string 
-         * @static 
-         */
-        public static function getName(){
-            //Method inherited from \Illuminate\View\View            
-            return \Flynsarmy\DbBladeCompiler\DbView::getName();
-        }
-        
-        /**
-         * Get the array of view data.
-         *
-         * @return array 
-         * @static 
-         */
-        public static function getData(){
-            //Method inherited from \Illuminate\View\View            
-            return \Flynsarmy\DbBladeCompiler\DbView::getData();
-        }
-        
-        /**
-         * Get the path to the view file.
-         *
-         * @return string 
-         * @static 
-         */
-        public static function getPath(){
-            //Method inherited from \Illuminate\View\View            
-            return \Flynsarmy\DbBladeCompiler\DbView::getPath();
-        }
-        
-        /**
-         * Set the path to the view.
-         *
-         * @param string $path
-         * @return void 
-         * @static 
-         */
-        public static function setPath($path){
-            //Method inherited from \Illuminate\View\View            
-            \Flynsarmy\DbBladeCompiler\DbView::setPath($path);
-        }
-        
-    }
-
-
     class DB extends \Illuminate\Support\Facades\DB{
         
         /**
@@ -3737,6 +3537,206 @@ namespace {
         public static function withTablePrefix($grammar){
             //Method inherited from \Illuminate\Database\Connection            
             return \Illuminate\Database\MySqlConnection::withTablePrefix($grammar);
+        }
+        
+    }
+
+
+    class DbView extends \Flynsarmy\DbBladeCompiler\Facades\DbView{
+        
+        /**
+         * Get a evaluated view contents for the given view.
+         *
+         * @param \Flynsarmy\DbBladeCompiler\Illuminate\Database\Eloquent\Model $view
+         * @param array $data
+         * @param array $mergeData
+         * @param string $content_field
+         * @return \Illuminate\View\View 
+         * @static 
+         */
+        public static function make($view, $data = array(), $mergeData = array(), $content_field = null){
+            return \Flynsarmy\DbBladeCompiler\DbView::make($view, $data, $mergeData, $content_field);
+        }
+        
+        /**
+         * 
+         *
+         * @static 
+         */
+        public static function field($content_field){
+            return \Flynsarmy\DbBladeCompiler\DbView::field($content_field);
+        }
+        
+        /**
+         * Get the string contents of the view.
+         *
+         * @param \Closure $callback
+         * @return string 
+         * @static 
+         */
+        public static function render($callback = null){
+            return \Flynsarmy\DbBladeCompiler\DbView::render($callback);
+        }
+        
+        /**
+         * Add a view instance to the view data.
+         *
+         * @param string $key
+         * @param string $view
+         * @param array $data
+         * @return \Illuminate\View\View 
+         * @static 
+         */
+        public static function nest($key, $view, $data = array()){
+            return \Flynsarmy\DbBladeCompiler\DbView::nest($key, $view, $data);
+        }
+        
+        /**
+         * Determine if a piece of data is bound.
+         *
+         * @param string $key
+         * @return bool 
+         * @static 
+         */
+        public static function offsetExists($key){
+            return \Flynsarmy\DbBladeCompiler\DbView::offsetExists($key);
+        }
+        
+        /**
+         * Get a piece of bound data to the view.
+         *
+         * @param string $key
+         * @return mixed 
+         * @static 
+         */
+        public static function offsetGet($key){
+            return \Flynsarmy\DbBladeCompiler\DbView::offsetGet($key);
+        }
+        
+        /**
+         * Set a piece of data on the view.
+         *
+         * @param string $key
+         * @param mixed $value
+         * @return void 
+         * @static 
+         */
+        public static function offsetSet($key, $value){
+            \Flynsarmy\DbBladeCompiler\DbView::offsetSet($key, $value);
+        }
+        
+        /**
+         * Unset a piece of data from the view.
+         *
+         * @param string $key
+         * @return void 
+         * @static 
+         */
+        public static function offsetUnset($key){
+            \Flynsarmy\DbBladeCompiler\DbView::offsetUnset($key);
+        }
+        
+        /**
+         * Get the sections of the rendered view.
+         *
+         * @return array 
+         * @static 
+         */
+        public static function renderSections(){
+            //Method inherited from \Illuminate\View\View            
+            return \Flynsarmy\DbBladeCompiler\DbView::renderSections();
+        }
+        
+        /**
+         * Add a piece of data to the view.
+         *
+         * @param string|array $key
+         * @param mixed $value
+         * @return $this 
+         * @static 
+         */
+        public static function with($key, $value = null){
+            //Method inherited from \Illuminate\View\View            
+            return \Flynsarmy\DbBladeCompiler\DbView::with($key, $value);
+        }
+        
+        /**
+         * Add validation errors to the view.
+         *
+         * @param \Illuminate\Support\Contracts\MessageProviderInterface|array $provider
+         * @return $this 
+         * @static 
+         */
+        public static function withErrors($provider){
+            //Method inherited from \Illuminate\View\View            
+            return \Flynsarmy\DbBladeCompiler\DbView::withErrors($provider);
+        }
+        
+        /**
+         * Get the view factory instance.
+         *
+         * @return \Illuminate\View\Factory 
+         * @static 
+         */
+        public static function getFactory(){
+            //Method inherited from \Illuminate\View\View            
+            return \Flynsarmy\DbBladeCompiler\DbView::getFactory();
+        }
+        
+        /**
+         * Get the view's rendering engine.
+         *
+         * @return \Illuminate\View\Engines\EngineInterface 
+         * @static 
+         */
+        public static function getEngine(){
+            //Method inherited from \Illuminate\View\View            
+            return \Flynsarmy\DbBladeCompiler\DbView::getEngine();
+        }
+        
+        /**
+         * Get the name of the view.
+         *
+         * @return string 
+         * @static 
+         */
+        public static function getName(){
+            //Method inherited from \Illuminate\View\View            
+            return \Flynsarmy\DbBladeCompiler\DbView::getName();
+        }
+        
+        /**
+         * Get the array of view data.
+         *
+         * @return array 
+         * @static 
+         */
+        public static function getData(){
+            //Method inherited from \Illuminate\View\View            
+            return \Flynsarmy\DbBladeCompiler\DbView::getData();
+        }
+        
+        /**
+         * Get the path to the view file.
+         *
+         * @return string 
+         * @static 
+         */
+        public static function getPath(){
+            //Method inherited from \Illuminate\View\View            
+            return \Flynsarmy\DbBladeCompiler\DbView::getPath();
+        }
+        
+        /**
+         * Set the path to the view.
+         *
+         * @param string $path
+         * @return void 
+         * @static 
+         */
+        public static function setPath($path){
+            //Method inherited from \Illuminate\View\View            
+            \Flynsarmy\DbBladeCompiler\DbView::setPath($path);
         }
         
     }
@@ -11715,11 +11715,6 @@ namespace {
     }
 
 
-    class StringView extends \sngrl\StringBladeCompiler\StringBladeCompilerServiceProvider{
-        
-    }
-
-
     class URL extends \Illuminate\Support\Facades\CustomURL{
         
         /**
@@ -12507,6 +12502,214 @@ namespace {
          */
         public static function cache($callback, $lifetime = null, $returnObj = false){
             return \Intervention\Image\ImageManager::cache($callback, $lifetime, $returnObj);
+        }
+        
+    }
+
+
+    class Collection extends \Illuminate\Database\Eloquent\Collection{
+        
+    }
+
+
+    class StringView extends \sngrl\StringBladeCompiler\Facades\StringView{
+        
+        /**
+         * Get a evaluated view contents for the given view.
+         *
+         * @param object $view
+         * @param array $data
+         * @param array $mergeData
+         * @return \Illuminate\View\View 
+         * @static 
+         */
+        public static function make($view, $data = array(), $mergeData = array()){
+            return \sngrl\StringBladeCompiler\StringView::make($view, $data, $mergeData);
+        }
+        
+        /**
+         * Get the string contents of the view.
+         *
+         * @param \Closure $callback
+         * @return string 
+         * @static 
+         */
+        public static function render($callback = null){
+            return \sngrl\StringBladeCompiler\StringView::render($callback);
+        }
+        
+        /**
+         * Add a view instance to the view data.
+         *
+         * @param string $key
+         * @param string $view
+         * @param array $data
+         * @return \Illuminate\View\View 
+         * @static 
+         */
+        public static function nest($key, $view, $data = array()){
+            return \sngrl\StringBladeCompiler\StringView::nest($key, $view, $data);
+        }
+        
+        /**
+         * Determine if a piece of data is bound.
+         *
+         * @param string $key
+         * @return bool 
+         * @static 
+         */
+        public static function offsetExists($key){
+            return \sngrl\StringBladeCompiler\StringView::offsetExists($key);
+        }
+        
+        /**
+         * Get a piece of bound data to the view.
+         *
+         * @param string $key
+         * @return mixed 
+         * @static 
+         */
+        public static function offsetGet($key){
+            return \sngrl\StringBladeCompiler\StringView::offsetGet($key);
+        }
+        
+        /**
+         * Set a piece of data on the view.
+         *
+         * @param string $key
+         * @param mixed $value
+         * @return void 
+         * @static 
+         */
+        public static function offsetSet($key, $value){
+            \sngrl\StringBladeCompiler\StringView::offsetSet($key, $value);
+        }
+        
+        /**
+         * Unset a piece of data from the view.
+         *
+         * @param string $key
+         * @return void 
+         * @static 
+         */
+        public static function offsetUnset($key){
+            \sngrl\StringBladeCompiler\StringView::offsetUnset($key);
+        }
+        
+        /**
+         * Checks if a string is a valid timestamp.
+         * 
+         * from https://gist.github.com/sepehr/6351385
+         *
+         * @param string $timestamp Timestamp to validate.
+         * @return bool 
+         * @static 
+         */
+        public static function is_timestamp($timestamp){
+            return \sngrl\StringBladeCompiler\StringView::is_timestamp($timestamp);
+        }
+        
+        /**
+         * Get the sections of the rendered view.
+         *
+         * @return array 
+         * @static 
+         */
+        public static function renderSections(){
+            //Method inherited from \Illuminate\View\View            
+            return \sngrl\StringBladeCompiler\StringView::renderSections();
+        }
+        
+        /**
+         * Add a piece of data to the view.
+         *
+         * @param string|array $key
+         * @param mixed $value
+         * @return $this 
+         * @static 
+         */
+        public static function with($key, $value = null){
+            //Method inherited from \Illuminate\View\View            
+            return \sngrl\StringBladeCompiler\StringView::with($key, $value);
+        }
+        
+        /**
+         * Add validation errors to the view.
+         *
+         * @param \Illuminate\Support\Contracts\MessageProviderInterface|array $provider
+         * @return $this 
+         * @static 
+         */
+        public static function withErrors($provider){
+            //Method inherited from \Illuminate\View\View            
+            return \sngrl\StringBladeCompiler\StringView::withErrors($provider);
+        }
+        
+        /**
+         * Get the view factory instance.
+         *
+         * @return \Illuminate\View\Factory 
+         * @static 
+         */
+        public static function getFactory(){
+            //Method inherited from \Illuminate\View\View            
+            return \sngrl\StringBladeCompiler\StringView::getFactory();
+        }
+        
+        /**
+         * Get the view's rendering engine.
+         *
+         * @return \Illuminate\View\Engines\EngineInterface 
+         * @static 
+         */
+        public static function getEngine(){
+            //Method inherited from \Illuminate\View\View            
+            return \sngrl\StringBladeCompiler\StringView::getEngine();
+        }
+        
+        /**
+         * Get the name of the view.
+         *
+         * @return string 
+         * @static 
+         */
+        public static function getName(){
+            //Method inherited from \Illuminate\View\View            
+            return \sngrl\StringBladeCompiler\StringView::getName();
+        }
+        
+        /**
+         * Get the array of view data.
+         *
+         * @return array 
+         * @static 
+         */
+        public static function getData(){
+            //Method inherited from \Illuminate\View\View            
+            return \sngrl\StringBladeCompiler\StringView::getData();
+        }
+        
+        /**
+         * Get the path to the view file.
+         *
+         * @return string 
+         * @static 
+         */
+        public static function getPath(){
+            //Method inherited from \Illuminate\View\View            
+            return \sngrl\StringBladeCompiler\StringView::getPath();
+        }
+        
+        /**
+         * Set the path to the view.
+         *
+         * @param string $path
+         * @return void 
+         * @static 
+         */
+        public static function setPath($path){
+            //Method inherited from \Illuminate\View\View            
+            \sngrl\StringBladeCompiler\StringView::setPath($path);
         }
         
     }
