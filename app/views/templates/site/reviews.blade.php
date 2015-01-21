@@ -117,8 +117,8 @@ $reviews = DicVal::extracts($reviews, null, true, true);
                     @endforeach
                 @endif
 
-                <div class="clrfx"></div>
             </div>
+            <div class="clrfx"></div>
         </div>
     </div>
 
