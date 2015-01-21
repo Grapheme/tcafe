@@ -35,7 +35,7 @@
     text-transform: uppercase;
     letter-spacing: .025em;
     position: relative;
-    z-index: 100;
+    z-index: 1000;
     @include user-select(none);
     &.open {
       .menu-btn {
