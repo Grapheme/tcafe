@@ -86,6 +86,9 @@ $reviews = DicVal::extracts($reviews, null, true, true);
 
                 @if (count($reviews))
                     @foreach ($reviews as $review)
+                        <?
+                            @++$i;
+                        ?>
                         <div class="unit">
                             <div class="q">
                                 {{ $review->review }}
@@ -104,6 +107,13 @@ $reviews = DicVal::extracts($reviews, null, true, true);
                             </div>
                             @endif
                         </div>
+
+                    @if (count($reviews) > 1 && ceil(count($reviews)/2) == $i)
+                    </div>
+                    <div class="col">
+                    @endif
+
+
                     @endforeach
                 @endif
 
