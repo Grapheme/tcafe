@@ -31,6 +31,18 @@ return array(
                 'type' => 'checkbox',
                 'label_class' => 'normal_checkbox',
             ),
+            'showonmainpage' => array(
+                'no_label' => true,
+                'title' => 'Отображать на главной странице',
+                'type' => 'checkbox',
+                'label_class' => 'normal_checkbox',
+            ),
+            'showoncafepage' => array(
+                'no_label' => true,
+                'title' => 'Отображать на странице кафе',
+                'type' => 'checkbox',
+                'label_class' => 'normal_checkbox',
+            ),
             'image_id' => array(
                 'title' => 'Изображение',
                 'type' => 'image',

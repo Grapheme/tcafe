@@ -81,9 +81,11 @@ class ApplicationController extends BaseController {
          */
         $actions = Dic::valuesBySlug('actions', function($query) {
             $query->filter_by_field('active', '=', 1);
+            $query->filter_by_field('showonmainpage', '=', 1);
             $query->orderBy('lft', 'ASC');
         });
         $actions = DicVal::extracts($actions, null, true, true);
+        #Helper::tad($actions);
         $actions = DicLib::loadImages($actions, 'image_id');
         #Helper::tad($actions);
 
@@ -162,10 +164,12 @@ class ApplicationController extends BaseController {
          */
         $actions = Dic::valuesBySlug('actions', function($query) use ($current_cafe) {
             $query->filter_by_field('active', '=', 1);
+            $query->filter_by_field('showoncafepage', '=', 1);
             $query->orderBy('lft', 'ASC');
             $query->filter_by_related($current_cafe->id);
         });
         $actions = DicVal::extracts($actions, null, true, true);
+        #Helper::tad($actions);
         $actions = DicLib::loadImages($actions, 'image_id');
         #Helper::tad($actions);
 
