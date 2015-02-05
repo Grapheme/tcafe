@@ -37,6 +37,16 @@
     position: relative;
     z-index: 1000;
     @include user-select(none);
+    &:hover {
+      .menu-holder {
+        max-height: 66px;
+      }
+      .menu-btn {
+        .label {
+          color: #d19e45 !important;
+        }
+      }
+    }
     &.open {
       .menu-btn {
         .label {
