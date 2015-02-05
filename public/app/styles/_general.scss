@@ -147,7 +147,7 @@ label.error {
       width: 220px;
       //margin: 0 45px;
       //display: none;
-      min-height: 312px;
+      //min-height: 312px;
       vertical-align: top;
       margin-bottom: 10px;
       position: absolute;
@@ -165,6 +165,7 @@ label.error {
         text-decoration: none;
         display: block;
         @include fullhover();
+        min-height: 256px;
         &:hover {
           background: #c39c4d;
           .title {
