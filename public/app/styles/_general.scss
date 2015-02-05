@@ -8,6 +8,9 @@ body {
   min-height: 100%;
   min-width: 920px;
   position: relative;
+  &.menu {
+    min-width: 1076px;
+  }
 }
 
 .clrfx {
@@ -40,7 +43,8 @@ label.error {
     overflow: hidden;
   }
   &.w974 {
-    width: 974px;
+    //width: 974px;
+    width: 900px;
   }
   &.w860 {
     width: 860px;
@@ -435,7 +439,7 @@ body.about {
         }
       }
       .unit {
-        width: 486px;
+        width: 449px;
         min-height: 428px;
         background: white;
         display: block;
@@ -450,7 +454,7 @@ body.about {
         }
         &:nth-child(even) {
           margin-right: 0;
-          width: 487px;
+          width: 450px;
         }
         .icon {
           margin-top: 60px;
@@ -674,6 +678,8 @@ body.contacts {
                 background: transparent;
                 border: none;
                 border-bottom: 1px solid #d19f46;
+                border-radius: 0;
+                padding: 0;
               }
               &.name {
                 input {
@@ -855,6 +861,8 @@ body.reviews {
                   background: transparent;
                   border: none;
                   border-bottom: 1px solid #d19f46;
+                  border-radius: 0;
+                  padding: 0;
                 }
                 &.name {
                   input {
