@@ -133,7 +133,7 @@ label.error {
       display: inline-block;
       vertical-align: top;
       position: relative;
-      min-height: 275px;
+      min-height: 312px;
       height: 0;
       @include transition(all 300ms ease);
       &.relative {
@@ -147,10 +147,11 @@ label.error {
       width: 220px;
       //margin: 0 45px;
       //display: none;
+      min-height: 312px;
       vertical-align: top;
       margin-bottom: 10px;
       position: absolute;
-      top: 100px;
+      //top: 100px;
       opacity: 0;
       @include transition(all 300ms ease);
       &.active {

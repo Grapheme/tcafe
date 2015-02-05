@@ -528,11 +528,11 @@ body.about {
       .menu-btn {
         &:hover {
           .label {
-            color: white;
+            color: #d19e45;
           }
         }
         .label {
-          color: #d19e45;
+          color: white;
         }
       }
     }
@@ -597,11 +597,12 @@ body.specials {
      .menu-btn {
        &:hover {
          .label {
-           color: white;
+          
+          color: #d19e45;
          }
        }
        .label {
-         color: #d19e45;
+         color: white;
        }
      }
     }
