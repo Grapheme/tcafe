@@ -188,6 +188,7 @@ label.error {
           .wrapper {
             border: 1px solid #c39c4d;
             text-align: center;
+            min-height: 238px;
             .title-wrapper {
               margin-top: 18px;
               svg {
@@ -1233,6 +1234,50 @@ body.menu {
             }
           }
         }
+      }
+    }
+  }
+}
+
+.text-block-wrapper {
+  text-align: center;
+  margin-top: 44px;
+  .text-block {
+    width: 845px;
+    display: inline-block;
+    border: 1px solid #d19e45;
+    font-size: 18px;
+    font-family: "PT Serif";
+    color: white;    
+    padding: 0px 100px;
+    box-sizing: border-box;
+    .title {
+      font-size: 26px;
+      line-height: 90%;
+      font-family: "bravoscregular";
+      text-transform: uppercase;
+      color: white;
+      margin-top: 25px;
+      margin-bottom: 20px;
+    }
+    .btn {
+      background: #694e22;
+      font-size: 20px;
+      color: rgb(209, 158, 69);
+      line-height: 1.2;
+      font-family: "bravorgregular";
+      border: none;
+      text-transform: uppercase;
+      padding: 5px 42px;
+      @include fullhover();
+      text-decoration: none;
+      cursor: pointer;      
+      display: inline-block;
+      margin: 10px 10px;
+      &:hover {
+        color: #694e22;
+        background: rgb(209, 158, 69);
+        cursor: pointer;      
       }
     }
   }
