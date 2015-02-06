@@ -287,7 +287,9 @@
                 <div class="text-block">
                     <div class="title">Коротко о нас</div>
                     <p>{{ $current_cafe->description }}</p>
+                    {{--
                     <p><a href="{{ URL::route('page', 'about') }}" class="btn">О сети кафе</a></p>
+                    --}}
                 </div>
             </div>
         @endif
