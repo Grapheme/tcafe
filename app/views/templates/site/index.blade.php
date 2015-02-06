@@ -194,6 +194,15 @@
             @endif
                 
         </div>
+        @if ($page->block('description'))
+            <div class="text-block-wrapper">
+                <div class="text-block">
+                    <div class="title">Коротко о нас</div>
+                    <p>{{ $page->block('description') }}</p>
+                    <p><a href="{{ URL::route('page', 'about') }}" class="btn">О сети кафе</a></p>
+                </div>
+            </div>
+        @endif
     </div>
 
 @stop

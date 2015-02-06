@@ -54,6 +54,13 @@ class Page extends BaseModel {
         return $this->hasOne('Page', 'id', 'version_of');
     }
 
+    public static function startPage() {
+        $page = Page::firstOrNew(['start_page' => '1']);
+        $page->load('meta', 'blocks.meta', 'seo');
+        $page->extract(true);
+        return $page;
+    }
+
     /**
      * Depricated - use $page->extract(true);
      */

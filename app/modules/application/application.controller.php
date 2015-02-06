@@ -89,7 +89,10 @@ class ApplicationController extends BaseController {
         $actions = DicLib::loadImages($actions, 'image_id');
         #Helper::tad($actions);
 
-        return View::make(Helper::layout('index'), compact('cafes', 'cafes_chunk', 'measures', 'new_menu', 'actions'));
+        $page = Page::startPage();
+        #Helper::tad($page);
+
+        return View::make(Helper::layout('index'), compact('cafes', 'cafes_chunk', 'measures', 'new_menu', 'actions', 'page'));
     }
 
     public function getCafe($cafe_slug) {
