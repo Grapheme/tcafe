@@ -219,6 +219,18 @@
                                 <div style="background-image: url('{{ $image->full() }}')" class="visual"></div>
                             @endif
                             <div class="title">{{ $action->name }}</div>
+                            <div class="where">
+                                @if (count($action->cafe_id) > 1)
+                                    Вся сеть
+                                @elseif (count($action->cafe_id) == 1)
+                                    <?
+                                    $cafe = $action->cafe_id->toArray();
+                                    $cafe = array_shift($cafe);
+                                    #Helper::ta($cafe);
+                                    ?>
+                                    {{ $cafe['name'] }}
+                                @endif
+                            </div>
                         </a>
                     </div>
                 @endforeach
