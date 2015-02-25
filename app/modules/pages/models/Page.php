@@ -54,6 +54,13 @@ class Page extends BaseModel {
         return $this->hasOne('Page', 'id', 'version_of');
     }
 
+    public static function startPage() {
+        $page = Page::firstOrNew(['start_page' => '1']);
+        $page->load('meta', 'blocks.meta', 'seo');
+        $page->extract(true);
+        return $page;
+    }
+
     /**
      * Depricated - use $page->extract(true);
      */
@@ -69,7 +76,7 @@ class Page extends BaseModel {
         return $this;
     }
 
-    public function block($slug = false, $variables = array(), $force_compile = true) {
+    public function block($slug = false, $field = 'content', $variables = array(), $force_compile = true) {
 
         if (
             !$slug || !@count($this->blocks) || !@is_object($this->blocks[$slug])
@@ -100,8 +107,9 @@ class Page extends BaseModel {
         #unset($this->blocks[$slug]->meta->updated_at);
 
         ## Return compiled field of the model
-        return DbView::make($content_container)->field('content')->with($variables)->render();
+        return DbView::make($content_container)->field($field)->with($variables)->render();
     }
+
 
     public function extract($unset = false) {
 

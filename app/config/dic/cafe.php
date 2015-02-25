@@ -37,6 +37,10 @@ return array(
                 'title' => 'Долгота',
                 'type' => 'text',
             ),
+            'description' => array(
+                'title' => 'Несколько слов о кафе',
+                'type' => 'textarea',
+            ),
         );
     },
 

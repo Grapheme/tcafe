@@ -107,6 +107,7 @@ class AdminPagesPageController extends BaseController {
         $locales = $this->locales;
         #Helper::dd($locales);
 
+        $templates = array();
 
         $template_exists = false;
 

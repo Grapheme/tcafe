@@ -12,7 +12,7 @@ $specials = Dic::valuesBySlug('actions', function($query){
 $specials = DicVal::extracts($specials, null, true, true);
 $specials = DicLib::loadImages($specials, 'image_id');
 #Helper::tad($specials);
-$specials_chunk = array_chunk($specials->toArray(), 2);
+$specials_chunk = Helper::partition($specials->toArray(), 3);
 #Helper::tad($specials_chunk);
 ?>
 @extends(Helper::layout())

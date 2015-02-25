@@ -219,6 +219,18 @@
                                 <div style="background-image: url('{{ $image->full() }}')" class="visual"></div>
                             @endif
                             <div class="title">{{ $action->name }}</div>
+                            <div class="where">
+                                @if (count($action->cafe_id) > 1)
+                                    Вся сеть
+                                @elseif (count($action->cafe_id) == 1)
+                                    <?
+                                    $cafe = $action->cafe_id->toArray();
+                                    $cafe = array_shift($cafe);
+                                    #Helper::ta($cafe);
+                                    ?>
+                                    {{ $cafe['name'] }}
+                                @endif
+                            </div>
                         </a>
                     </div>
                 @endforeach
@@ -270,6 +282,17 @@
                 </div>
             </div>
         </div>
+        @if ($current_cafe->description)
+            <div class="text-block-wrapper">
+                <div class="text-block">
+                    <div class="title">Приятно проведенное время!</div>
+                    <p>{{ $current_cafe->description }}</p>
+                    {{--
+                    <p><a href="{{ URL::route('page', 'about') }}" class="btn">О сети кафе</a></p>
+                    --}}
+                </div>
+            </div>
+        @endif
     </div>
 
 @stop
