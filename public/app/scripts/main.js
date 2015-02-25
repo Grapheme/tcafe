@@ -64,7 +64,6 @@ $(function() {
   
   if (url_arr.length>3) {
     if (url_arr[3]=='cafe' && !isInArray(exclude_arr,location.href.split('/')[3])) {
-      alert('!')
       $('.back-url-wrapper').show();
     };
   };
