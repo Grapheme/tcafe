@@ -49,4 +49,29 @@ $(function() {
     $(this).find('.unit').height(_h-100);
   });
   
+  var url_arr = document.referrer.split('/');
+  var exclude_arr = [
+    '',
+    '/cafe/'
+  ]
+  
+  isInArray = function(array, element){
+    if (array.indexOf(element)>=0){
+      return true
+    };
+    return false
+  }
+  
+  if (url_arr.length>3) {
+    if (url_arr[3]=='cafe' && !isInArray(exclude_arr,location.href.split('/')[3])) {
+      alert('!')
+      $('.back-url-wrapper').show();
+    };
+  };
+  
+  $('.back-url-wrapper a').click(function(e){
+    e.preventDefault();
+    window.history.back();
+  });
+  
 });
