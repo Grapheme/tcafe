@@ -1,0 +1,28 @@
+extends ./layouts/layout.jade
+
+block vars
+ - var bodyClass = "about common";
+ - var title = "Обычная страница – Т-Кафе"
+
+block title
+  .title-holder
+    .title
+      .left О сети
+      .icon
+        img(src="images/ico-cup.svg")
+      .right кафе
+
+block content
+  .content.w974
+    .holder
+      .where Красная, 16
+      h1 Кулинарный мастер класс для детей
+      .info 31 декабря | 22:00
+        .photo
+      p.
+        Мы рады предложить Вам полный комплекс работ по 
+        организации и проведению праздничных и деловых мероприятий в Ростове-на-Дону.
+      img(src="http://dummyimage.com/660x480")
+      p.
+        Мы рады предложить Вам полный комплекс работ по 
+        организации и проведению праздничных и деловых мероприятий в Ростове-на-Дону.

@@ -1076,6 +1076,31 @@ body.common {
       line-height: 27px;
       color: #989898;
       padding-bottom: 80px;
+      .where {
+        font-size: 18px;
+        font-family: "PT Serif";
+        color: #1a1a1a;
+        line-height: 1;
+        background: url("../images/ico-point.png") no-repeat left 2px;
+        padding-left: 18px;
+        margin-top: -6px;
+        padding-bottom: 18px;
+      }
+      .info {
+        font-size: 21px;
+        font-family: "PT Serif";
+        color: rgb(26, 26, 26);
+        text-align: left;
+        margin-top: -15px;
+        .photo {
+          display: inline-block;
+          background: url('../images/ico-photo.svg') no-repeat;
+          background-size: contain;
+          width: 27px;
+          height: 20px;
+          margin-bottom: -2px;
+        }
+      }
       h1 {
         font-family: "bravorgregular";
         font-size: 36px;
