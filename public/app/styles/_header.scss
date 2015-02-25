@@ -602,6 +602,34 @@ body.menu, body.reviews, body.contacts {
       }
     }
   }
+    .back-url-wrapper {
+        margin-left: 50px;
+        margin-top: 30px;
+        display: none;
+        svg {
+            display: inline-block;
+            vertical-align: middle;
+            fill: #d19e45;
+            stroke: #d19e45;
+        }
+        .type {
+            display: inline-block;
+            vertical-align: middle;
+            color: #d19e45;
+            font-family: "PT Serif";
+            font-size: 14px;
+            line-height: 18px;
+        }
+        .back-url {
+            text-decoration: none;
+            &:hover {
+                svg {
+                    fill:black;
+                    stroke:black;
+                }
+            }
+        }
+    }
 }
 
 body.specials {
