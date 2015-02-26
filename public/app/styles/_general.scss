@@ -146,6 +146,12 @@ label.error {
           position: relative;
         }
       }
+      &.no-padding {
+        .where {
+          background: none !important;
+          padding-left: 0 !important;
+        }
+      }
     }
     .unit {
       width: 220px;
