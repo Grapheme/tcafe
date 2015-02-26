@@ -52,7 +52,7 @@ $(function() {
   var url_arr = document.referrer.split('/');
   var exclude_arr = [
     '',
-    '/cafe/'
+    'cafe'
   ]
   
   isInArray = function(array, element){
