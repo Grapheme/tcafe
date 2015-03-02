@@ -155,9 +155,6 @@ label.error {
     }
     .unit {
       width: 220px;
-      //margin: 0 45px;
-      //display: none;
-      //min-height: 312px;
       vertical-align: top;
       margin-bottom: 10px;
       position: absolute;
@@ -437,7 +434,7 @@ label.error {
 
 body.about {
   .content {
-    margin-top: 30px;
+    margin-top: 96px;
     &>.holder {
       background: #e4e4e4;
       .wrapper {
@@ -522,6 +519,7 @@ body.about {
 
 body.afisha {
   .content {
+    margin-top: 96px;
     .holder {
       @include content-unit();
     }
@@ -531,7 +529,7 @@ body.afisha {
 body.specials {
   &>.content {
     &>.holder {
-      margin-top: 72px;
+      margin-top: 92px;
       .col {
         display: block;
         width: 286px;
@@ -547,6 +545,9 @@ body.specials {
 }
 
 body.contacts {
+  .content {
+    margin-top: 80px;
+  }
   .contacts-info-box {
     display: block;
     background: white;
@@ -784,7 +785,7 @@ body.reviews {
   .content {
     .holder {
       margin: 0 -12px;
-      margin-top: 60px;
+      margin-top: 96px;
       .col {
         margin: 0 12px;
         width: 405px;

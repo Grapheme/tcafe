@@ -566,6 +566,23 @@ body.about {
         }
       }
     }
+    .back-url-wrapper {
+        svg {
+            fill: #d19e45;
+            stroke: #d19e45;
+        }
+        .type {
+            color: #d19e45;
+        }
+        .back-url {
+            &:hover {
+                svg {
+                    fill:black;
+                    stroke:black;
+                }
+            }
+        }
+    }
   }
 }
 
