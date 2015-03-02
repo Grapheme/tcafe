@@ -52,14 +52,12 @@ $specials_chunk = Helper::partition($specials->toArray(), 3);
                             $special = $specials[$special_chunk_one['id']];
                             #Helper::tad($special);
                             ?>
-                            <div class="unit">
+                            <a href="{{ URL::route('app.special', $special->id) }}" class="unit">
                                 @if (is_object($special->image_id))
                                     <div style="background-image:url('{{ $special->image_id->full() }}')" class="visual"></div>
                                 @endif
                                 <div class="title">
-                                    <a href="{{ URL::route('app.special', $special->id) }}" class="link">
-                                        {{ $special->name }}
-                                    </a>
+                                    {{ $special->name }}
                                 </div>
                                 <div class="description">
                                     {{ $special->description }}
@@ -76,7 +74,7 @@ $specials_chunk = Helper::partition($specials->toArray(), 3);
                                         {{ $cafe['name'] }}
                                     @endif
                                 </div>
-                            </div>
+                            </a>
 
                         @endforeach
 
