@@ -51,6 +51,10 @@ return array(
                 'title' => 'Описание',
                 'type' => 'textarea',
             ),
+            'full_description' => array(
+                'title' => 'Полное описание',
+                'type' => 'textarea_redactor',
+            ),
             'cafe_id' => array(
                 'title' => 'Место проведения:',
                 'type' => 'checkboxes',

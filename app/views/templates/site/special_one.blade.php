@@ -49,7 +49,7 @@ $seo = $special->seo;
                 <img src="{{ $special->image_id->full() }}"/>
             @endif
             <br/>
-            {{ $special->description }}
+            {{ $special->full_description ? $special->full_description : $special->description }}
         </div>
     </div>
 

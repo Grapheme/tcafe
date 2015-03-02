@@ -63,10 +63,13 @@ $measures = DicLib::loadImages($measures, 'image_id');
 
             @if (is_object($measures) && count($measures))
                 @foreach ($measures as $measure)
-                    <?
-                    $tag = $measure->photoalbum_id ? 'a' : 'span';
-                    ?>
-                    <{{ $tag }} href="{{ URL::route('page', 'photos') }}{{ $measure->photoalbum_id ? '#gallery-' . $measure->photoalbum_id : '' }}" class="unit">
+                    @if (0)
+                        <?
+                        $tag = $measure->photoalbum_id ? 'a' : 'span';
+                        ?>
+                        <{{ $tag }} href="{{ URL::route('page', 'photos') }}{{ $measure->photoalbum_id ? '#gallery-' . $measure->photoalbum_id : '' }}" class="unit">
+                    @endif
+                    <a href="{{ URL::route('app.event', $measure->id) }}" class="unit">
                         @if (is_object($measure->image_id))
                             <div style="background-image:url('{{ $measure->image_id->full() }}')" class="visual"></div>
                         @endif
@@ -101,7 +104,7 @@ $measures = DicLib::loadImages($measures, 'image_id');
                                 {{ $cafe['name'] }}
                             @endif
                         </div>
-                    </{{ $tag }}>
+                    </a>
                 @endforeach
             @else
                 <h1>Нет событий</h1>
