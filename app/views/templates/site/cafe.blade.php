@@ -281,6 +281,11 @@
                     </a>
                 </div>
             </div>
+
+
+            {{ $current_cafe->additional_blocks }}
+
+
         </div>
         @if ($current_cafe->description)
             <div class="text-block-wrapper">

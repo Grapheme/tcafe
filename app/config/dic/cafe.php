@@ -41,6 +41,10 @@ return array(
                 'title' => 'Несколько слов о кафе',
                 'type' => 'textarea',
             ),
+            'additional_blocks' => array(
+                'title' => 'Дополнительные блоки на странице кафе (html)',
+                'type' => 'textarea',
+            ),
         );
     },
 
