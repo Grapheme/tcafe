@@ -14,6 +14,8 @@ class ApplicationController extends BaseController {
 
             Route::get('/', array('as' => 'app.mainpage', 'uses' => __CLASS__.'@getAppMainPage'));
             Route::get('/cafe/{cafe}', array('as' => 'app.cafe', 'uses' => __CLASS__.'@getCafe'));
+            Route::get('/special/{id}', array('as' => 'app.special', 'uses' => __CLASS__.'@getSpecial'));
+
             Route::get('/ajax/json-photoalbum-{id}', array('as' => 'app.ajaxJsonPhotoalbum', 'uses' => __CLASS__.'@ajaxJsonPhotoalbum'));
 
             Route::any('/ajax/send-review', array('as' => 'app.ajaxSendReview', 'uses' => __CLASS__.'@ajaxSendReview'));
@@ -195,6 +197,21 @@ class ApplicationController extends BaseController {
 
 
         return View::make(Helper::layout('cafe'), compact('current_cafe', 'measures', 'menu', 'actions', 'dish', 'cafes', 'cafes_chunk'));
+    }
+
+
+    public function getSpecial($id) {
+
+        $special = Dic::valueBySlugAndId('actions', $id);
+
+        if (!is_object($special))
+            App::abort(404);
+
+        $special->extract(1);
+        $special = DicLib::loadImages($special, 'image_id');
+        #Helper::tad($special);
+
+        return View::make(Helper::layout('special_one'), compact('special'));
     }
 
 

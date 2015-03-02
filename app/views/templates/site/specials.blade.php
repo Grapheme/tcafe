@@ -56,7 +56,11 @@ $specials_chunk = Helper::partition($specials->toArray(), 3);
                                 @if (is_object($special->image_id))
                                     <div style="background-image:url('{{ $special->image_id->full() }}')" class="visual"></div>
                                 @endif
-                                <div class="title">{{ $special->name }}</div>
+                                <div class="title">
+                                    <a href="{{ URL::route('app.special', $special->id) }}" class="link">
+                                        {{ $special->name }}
+                                    </a>
+                                </div>
                                 <div class="description">
                                     {{ $special->description }}
                                 </div>

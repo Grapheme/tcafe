@@ -506,6 +506,7 @@ class DicVal extends BaseModel {
                 } else {
                     $element[$field] = $el;
                 }
+
             } else {
 
                 $element->extract($unset);

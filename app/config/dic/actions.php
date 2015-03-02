@@ -72,7 +72,7 @@ return array(
     },
 
 
-    'seo' => 0,
+    'seo' => 1,
 
     'versions' => 0,
 );
