@@ -48,7 +48,7 @@
     </div>
     <div class="back-url-wrapper">
         <a href="#" class="back-url">
-            <?xml version="1.0"?>
+            <{{ '?' }}xml version="1.0"{{ '?' }}>
             <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="27" height="24">
                 <desc ivinci="yes" version="4.5" gridstep="20" showgrid="no" snaptogrid="no" codeplatform="0">
                 <g id="Layer1" opacity="1">
