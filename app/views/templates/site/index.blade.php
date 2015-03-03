@@ -103,7 +103,7 @@
                         <div class="head-title-wrapper">
                             <div class="title">Скоро</div>
                         </div>
-                        <a href="{{ URL::route('page', 'afisha') }}" class="link">
+                        <a href="{{ URL::route('app.event', $measure->id) }}" class="link">
                             @if (is_object($image) && $image->id)
                                 <div style="background-image: url('{{ $image->full() }}')" class="visual"></div>
                             @endif
