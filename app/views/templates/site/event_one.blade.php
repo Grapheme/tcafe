@@ -32,7 +32,7 @@ $status = Input::get('show') == 'archive' ? 'archive' : 'active';
 
     <div class="content w974">
         <div class="holder">
-            <a href="../" class="back-cross">
+            <a href="/afisha/" class="back-cross">
                 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" preserveAspectRatio="none" x="0px" y="0px" width="120px" height="100px" viewBox="0 0 120 100">
                     <defs>
                         <g id="Layer0_0_FILL">
