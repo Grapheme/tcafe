@@ -214,7 +214,7 @@
                         <div class="head-title-wrapper">
                             <div class="title">Акция</div>
                         </div>
-                        <a href="{{ URL::route('page', ['specials']) }}" class="link">{{-- , 'cafe' => $current_cafe->slug, 'cat' => $menu[$dish->category_id]->slug --}}
+                        <a href="{{ URL::route('app.special', $action->id) }}" class="link">{{-- , 'cafe' => $current_cafe->slug, 'cat' => $menu[$dish->category_id]->slug --}}
                             @if (is_object($image) && $image->id)
                                 <div style="background-image: url('{{ $image->full() }}')" class="visual"></div>
                             @endif
