@@ -546,6 +546,17 @@ body.afisha {
 }
 
 body.about {
+    &.special {
+        .header {
+            .title {
+              .icon {
+                img {
+                  width: 108px;
+                }
+              }
+            }
+        }
+    }
   .header {
     .title {
       .icon {
