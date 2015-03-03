@@ -10,7 +10,7 @@ $seo = $special->seo;
 @extends(Helper::layout())
 
 
-@section('page_class')about common @stop
+@section('page_class')about common special @stop
 
 
 @section('style')
@@ -32,6 +32,18 @@ $seo = $special->seo;
 
     <div class="content w974">
         <div class="holder">
+            <a href="../" class="back-cross">
+                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" preserveAspectRatio="none" x="0px" y="0px" width="120px" height="100px" viewBox="0 0 120 100">
+                    <defs>
+                        <g id="Layer0_0_FILL">
+                            <path fill="" stroke="none" d=" M 107 6.95 L 104.4 4.35 60.9 47.95 17.35 4.35 14.75 6.95 58.1 50.3 14.75 93.65 17.35 96.25 60.9 52.75 104.4 96.25 107 93.65 63.65 50.3 107 6.95 Z"></path>
+                        </g>
+                    </defs>
+                    <g transform="matrix( 1, 0, 0, 1, 0,0) ">
+                        <use xlink:href="#Layer0_0_FILL"></use>
+                    </g>
+                </svg>
+            </a>
             <div class="where">
                 @if (count($special->cafe_id) > 1)
                     Вся сеть
