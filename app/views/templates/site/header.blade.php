@@ -5,7 +5,7 @@
 ?>
 
 <div class="header">
-    <div class="holder"><a href="/" class="logo"><img src="{{ Config::get('site.theme_path') }}/images/logo-index.svg"></a>
+    <div class="holder"><a href="/" class="logo"><img src="{{ Config::get('site.theme_path') }}/images/logo.png"></a>
         <div class="menu-wrapper">
             <div class="menu-btn">
                 <div class="label">Меню сайта</div>
