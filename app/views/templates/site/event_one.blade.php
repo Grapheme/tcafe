@@ -80,7 +80,7 @@ $status = Input::get('show') == 'archive' ? 'archive' : 'active';
             </div>
             <br/>
             @if (is_object($event->image_id))
-                <img src="{{ $event->image_id->full() }}"/>
+                <img src="{{ $event->image_id->full() }}" style="width: 100%;"/>
             @endif
             {{ $event->full_description }}
         </div>
