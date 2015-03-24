@@ -91,6 +91,7 @@ if (Input::get('cat')) {
     $child_cats = Dic::valuesBySlug('menu_category', function($query) use ($current_cat) {
         $query->where('lft', '>', $current_cat->lft);
         $query->where('rgt', '<', $current_cat->rgt);
+        $query->orderBy('lft', 'ASC');
         /**
          * Тут не хватает фильтра по записям related_dicvals
          */
