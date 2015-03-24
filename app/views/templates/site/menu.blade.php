@@ -96,6 +96,7 @@ if (Input::get('cat')) {
          * Тут не хватает фильтра по записям related_dicvals
          */
     });
+    Helper::smartQueries(1);
     $child_cats = DicVal::extracts($child_cats, null, true, true);
     foreach ($child_cats as $c => $child_cat) {
 
