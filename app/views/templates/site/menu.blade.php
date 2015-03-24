@@ -98,7 +98,7 @@ if (Input::get('cat')) {
     });
     #Helper::smartQueries(1);
     $child_cats = DicVal::extracts($child_cats, null, true, true);
-    Helper::ta($child_cats);
+    #Helper::ta($child_cats);
     foreach ($child_cats as $c => $child_cat) {
 
         /**
@@ -138,6 +138,9 @@ if (Input::get('cat')) {
      * Раскладываем товары по категориям
      */
     $cat_good = new Collection();
+    foreach ($ids as $id) {
+        $cat_good[$id] = new Collection();
+    }
     if ($goods && count($goods)) {
         foreach ($goods as $good) {
             if (!isset($cat_good[$good->category_id]))
