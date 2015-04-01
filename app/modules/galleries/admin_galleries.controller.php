@@ -262,8 +262,6 @@ class AdminGalleriesController extends BaseController {
 		
         $gallery = Gallery::where('id', $id)->first();
 
-
-
 		return View::make($this->tpl.'edit', compact('gallery', 'bread'));
 	}
 
@@ -302,7 +300,6 @@ class AdminGalleriesController extends BaseController {
         ## Check response
 		if($result['result'] == 'error') {
 	        return Response::json($result, 400);
-	        exit;
 		}
 
         ## Get gallery
@@ -397,7 +394,7 @@ class AdminGalleriesController extends BaseController {
 			File::makeDirectory($thumbsPath, 0777, TRUE);
 
         ## Generate filename
-		$fileName = time() . "_" . rand(1000, 1999) . '.' . $file->getClientOriginalExtension();
+		$fileName = time() . "_" . rand(10000000, 99999999) . '.' . $file->getClientOriginalExtension();
 
         ## Get images resize parameters from config
 		$thumb_size = Config::get('site.galleries_thumb_size');
