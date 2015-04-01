@@ -62,18 +62,16 @@ $specials_chunk = Helper::partition($specials->toArray(), 3);
                                 <div class="description">
                                     {{ $special->description }}
                                 </div>
-                                <div class="where">
-                                    @if (count($special->cafe_id) > 1)
-                                        Вся сеть
-                                    @elseif (count($special->cafe_id) == 1)
-                                        <?
-                                        $cafe = $special->cafe_id->toArray();
-                                        $cafe = array_shift($cafe);
-                                        #Helper::ta($cafe);
-                                        ?>
-                                        {{ $cafe['name'] }}
+                                    @if (count($special->cafe_id))
+                                        @foreach ($special->cafe_id as $cafe_id)
+                                            <?
+                                            $cafe = $cafe_id->toArray();
+                                            ?>
+                                            <div class="where">
+                                                {{ $cafe['name'] }}
+                                            </div>
+                                        @endforeach
                                     @endif
-                                </div>
                             </a>
 
                         @endforeach

@@ -107,6 +107,7 @@
     </div>
     <div class="content w850px">
         <div class="rest-nav">
+
             @if (isset($measure) && is_object($measure) && $measure->id && FALSE)
              <div class="unit-wrapper">
                 <?
@@ -197,6 +198,16 @@
                                     @endif
                                 </div>
                             </div>
+                                @if (count($measure->cafe_id))
+                                    @foreach ($measure->cafe_id as $cafe_id)
+                                        <?
+                                        $cafe = $cafe_id->toArray();
+                                        ?>
+                                        <div class="where">
+                                            {{ $cafe['name'] }}
+                                        </div>
+                                    @endforeach
+                                @endif
                         </a>
                     </div>
                 @endforeach
@@ -219,18 +230,16 @@
                                 <div style="background-image: url('{{ $image->full() }}')" class="visual"></div>
                             @endif
                             <div class="title">{{ $action->name }}</div>
-                            <div class="where">
-                                @if (count($action->cafe_id) > 1)
-                                    Вся сеть
-                                @elseif (count($action->cafe_id) == 1)
+                            @if (count($action->cafe_id))
+                                @foreach ($action->cafe_id as $cafe_id)
                                     <?
-                                    $cafe = $action->cafe_id->toArray();
-                                    $cafe = array_shift($cafe);
-                                    #Helper::ta($cafe);
+                                    $cafe = $cafe_id->toArray();
                                     ?>
-                                    {{ $cafe['name'] }}
-                                @endif
-                            </div>
+                                    <div class="where">
+                                        {{ $cafe['name'] }}
+                                    </div>
+                                @endforeach
+                            @endif
                         </a>
                     </div>
                 @endforeach

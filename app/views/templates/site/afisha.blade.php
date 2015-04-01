@@ -92,18 +92,16 @@ $measures = DicLib::loadImages($measures, 'image_id');
                             @endif
                         </div>
                         <div class="title">{{ $measure->name }}</div>
-                        <div class="where">
-                            @if (count($measure->cafe_id) > 1)
-                                Вся сеть
-                            @elseif (count($measure->cafe_id) == 1)
-                                <?
-                                $cafe = $measure->cafe_id->toArray();
-                                $cafe = array_shift($cafe);
-                                #Helper::ta($cafe);
-                                ?>
-                                {{ $cafe['name'] }}
+                            @if (count($measure->cafe_id))
+                                @foreach ($measure->cafe_id as $cafe_id)
+                                    <?
+                                    $cafe = $cafe_id->toArray();
+                                    ?>
+                                    <div class="where">
+                                        {{ $cafe['name'] }}
+                                    </div>
+                                @endforeach
                             @endif
-                        </div>
                     </a>
                 @endforeach
             @else
