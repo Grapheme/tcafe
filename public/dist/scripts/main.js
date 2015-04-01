@@ -2982,8 +2982,8 @@ function photosResize() {
   });
   
   $unit.height(unit_height)
-  $unit.slice(0 , unit_amount_x*unit_amount_y).removeClass('hidden');
-  $unit.slice((unit_amount_x*unit_amount_y)).addClass('hidden');
+  //$unit.slice(0 , unit_amount_x*unit_amount_y).removeClass('hidden');
+  //$unit.slice((unit_amount_x*unit_amount_y)).addClass('hidden');
 }
 
 function photoSlider(data) {
