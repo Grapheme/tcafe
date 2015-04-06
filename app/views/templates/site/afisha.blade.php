@@ -14,6 +14,7 @@ $measures = Dic::valuesBySlug('measure', function($query) use ($status) {
         $query->filter_by_field('measure_date', '<=', date('Y-m-d'));
         #$query->filter_by_field('measure_time', '<=', date('H:i'));
     }
+    $query->order_by_field('measure_date', 'DESC');
 });
 #Helper::smartQueries(1);
 #Helper::tad($measures);
