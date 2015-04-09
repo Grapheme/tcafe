@@ -42,7 +42,7 @@
                             @else
                                 <a href="{{ URL::route('app.cafe', $cafe->slug) }}" class="link">
                                     <nobr>{{ $cafe->name }}</nobr>
-                                    @if ($c == 0)
+                                    @if ($c == 0 && FALSE)
                                     <nobr>НА {{ $cafe->address2 }}</nobr>
                                     @endif
                                 </a>

@@ -125,16 +125,16 @@
                                         @endif
                                     </div>
                                 </div>
-                                    @if (count($measure->cafe_id))
-                                        @foreach ($measure->cafe_id as $cafe_id)
-                                            <?
-                                            $cafe = $cafe_id->toArray();
-                                            ?>
-                                            <div class="where">
-                                                {{ $cafe['name'] }}
-                                            </div>
-                                        @endforeach
-                                    @endif
+                                @if (count($measure->cafe_id))
+                                    @foreach ($measure->cafe_id as $cafe_id)
+                                        <?
+                                        $cafe = $cafe_id->toArray();
+                                        ?>
+                                        <div class="where">
+                                            {{ $cafe['name'] }}
+                                        </div>
+                                    @endforeach
+                                @endif
                             </a>
                         </div>
                     @endforeach
