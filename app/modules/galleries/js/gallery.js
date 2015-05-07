@@ -54,10 +54,10 @@ var dropzone_translate = {
         $(dz_selector).each(function(index, el) {
             //console.log( index + ": " + $( this ).text() );
 
-            var el_name = $(el).data("name");
-			var gallery_id = $(el).data('gallery_id');
+            var el_name       = $(el).data("name");
+			var gallery_id    = $('#' + el_name + '_gallery_id').val();
             var max_file_size = $(el).data("maxfilesize");
-            var max_files = $(el).data("maxfiles");
+            var max_files     = $(el).data("maxfiles");
             var acceptedFiles = $(el).data("acceptedfiles");
 
             var dropzone_settings = {
@@ -152,6 +152,7 @@ var dropzone_translate = {
                 $(el).find(".dz-preview").hide();
                 $(preview).css("background-image", "url("+response['thumb']+")");
                 $(preview).find(".photo-full-link").attr("href", response['full']);
+                $(preview).find(".modal-dialog img").attr("src", response['full']);
                 $(preview).find(".photo-delete-single").attr("data-photo-id", response['image_id']);
                 $(preview).show();
                 $(preview).parents().find('.photo-preview-container').show();
@@ -179,7 +180,11 @@ var dropzone_translate = {
         
         /*************************************************************************/
         
-        $('.photo-delete').click(function(event){
+        $(document).on('click', '.photo-delete', function(event){
+
+            var popover = $(this).parents('.image-data-popover').next('.popover');
+            $(popover).remove();
+
             event.preventDefault();
             var image_id = $(this).attr('data-photo-id');
             var $photoDiv = $(this).parent();
@@ -253,8 +258,56 @@ var dropzone_translate = {
             return false;
 		}
 
+
     	//$('.superbox').SuperBox();
 
-	});
 
-init_sortable(base_url + '/admin/gallery/ajax-order-save', '.photo-previews');
+        $(document).on('click', '.image-data-popover', function(event) {
+            //console.log($(this).next('.popover'));
+
+            var popover = $(this).next('.popover');
+            var current_title = $(this).attr('data-image-title');
+            $(popover).find('.image-data-field[data-name=title]').val(current_title);
+        });
+
+        $(document).on('click', '.image-data-preview-link', function(e){
+            var popover = $(this).parents('.popover');
+            $(popover).fadeOut();
+        });
+
+        $(document).on('click', '.save-image-data', function(event){
+            event.preventDefault();
+            var image_id = $(this).attr('data-photo-id');
+            var image_title = $(this).parents('.image-data').find('.image-data-field[data-name=title]').val();
+            $this = $(this);
+            var popover = $(this).parents('.popover');
+            var popover_link = $(popover).prev('a.image-data-popover');
+            var popover_error = $(popover).find('.image-save-data-error');
+            $(popover_link).attr('data-image-title', image_title);
+
+            $this.removeClass('btn-danger').addClass('btn-primary');
+            $(popover_error).text('');
+
+            $(this).addClass('loading').attr('disabled', 'disabled');
+            $.ajax({
+                url: base_url + "/admin/galleries/photoupdate",
+                data: { id: image_id, title: image_title },
+                type: 'post'
+            }).done(function(){
+                return true;
+            }).fail(function(data){
+                console.log(data);
+                $(popover_error).text('Ошибка при сохранении');
+                $this.removeClass('btn-primary').addClass('btn-danger');
+                return false;
+            }).always(function(){
+                $this.removeClass('loading').removeAttr('disabled');
+            });
+        });
+
+
+
+
+    });
+
+    init_sortable(base_url + '/admin/gallery/ajax-order-save', '.photo-previews');
