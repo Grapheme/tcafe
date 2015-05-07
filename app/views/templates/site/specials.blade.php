@@ -16,9 +16,16 @@ $specials_chunk = Helper::partition($specials->toArray(), 3);
 #Helper::tad($specials_chunk);
 ?>
 @extends(Helper::layout())
+<?
+$bg = Dic::valueBySlugs('options', 'background_specials');
+#Helper::tad($bg);
+?>
 
 
 @section('page_class')specials @stop
+
+
+@section('page_style') @if(is_object($bg) && $bg->name) background-image: url({{ $bg->name }}); @endif; @stop
 
 
 @section('style')

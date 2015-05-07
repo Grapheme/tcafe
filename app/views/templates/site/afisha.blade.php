@@ -30,9 +30,16 @@ $measures = DicLib::loadImages($measures, 'image_id');
 #setlocale(LC_TIME, 'ru_RU.CP1251', 'ru_RU','rus_RUS','Russian');
 ?>
 @extends(Helper::layout())
+<?
+$bg = Dic::valueBySlugs('options', 'background_afisha');
+#Helper::tad($bg);
+?>
 
 
 @section('page_class')afisha @stop
+
+
+@section('page_style') @if(is_object($bg) && $bg->name) background-image: url({{ $bg->name }}); @endif; @stop
 
 
 @section('style')

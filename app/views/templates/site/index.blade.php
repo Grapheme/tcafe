@@ -5,9 +5,16 @@
  */
 ?>
 @extends(Helper::layout())
+<?
+$bg = Dic::valueBySlugs('options', 'background_mainpage');
+#Helper::tad($bg);
+?>
 
 
 @section('page_class')index @stop
+
+
+@section('page_style') @if(is_object($bg) && $bg->name) background-image: url({{ $bg->name }}); @endif; @stop
 
 
 @section('style')
