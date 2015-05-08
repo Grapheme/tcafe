@@ -132,16 +132,24 @@ $bg = Dic::valueBySlugs('options', 'background_mainpage');
                                         @endif
                                     </div>
                                 </div>
+
                                 @if (count($measure->cafe_id))
-                                    @foreach ($measure->cafe_id as $cafe_id)
-                                        <?
-                                        $cafe = $cafe_id->toArray();
-                                        ?>
+                                    @if (count($measure->cafe_id) == count($cafes))
                                         <div class="where">
-                                            {{ $cafe['name'] }}
+                                            Вся сеть
                                         </div>
-                                    @endforeach
+                                    @else
+                                        @foreach ($measure->cafe_id as $cafe_id)
+                                            <?
+                                            $cafe = $cafe_id->toArray();
+                                            ?>
+                                            <div class="where">
+                                                {{ $cafe['name'] }}
+                                            </div>
+                                        @endforeach
+                                    @endif
                                 @endif
+
                             </a>
                         </div>
                     @endforeach
@@ -194,15 +202,22 @@ $bg = Dic::valueBySlugs('options', 'background_mainpage');
                                     <div style="background-image: url('{{ $image->full() }}')" class="visual"></div>
                                 @endif
                                 <div class="title">{{ $action->name }}</div>
+
                                 @if (count($action->cafe_id))
-                                    @foreach ($action->cafe_id as $cafe_id)
-                                        <?
-                                        $cafe = $cafe_id->toArray();
-                                        ?>
+                                    @if (count($action->cafe_id) == count($cafes))
                                         <div class="where">
-                                            {{ $cafe['name'] }}
+                                            Вся сеть
                                         </div>
-                                    @endforeach
+                                    @else
+                                        @foreach ($action->cafe_id as $cafe_id)
+                                            <?
+                                            $cafe = $cafe_id->toArray();
+                                            ?>
+                                            <div class="where">
+                                                {{ $cafe['name'] }}
+                                            </div>
+                                        @endforeach
+                                    @endif
                                 @endif
                             </a>
                         </div>

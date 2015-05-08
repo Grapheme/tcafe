@@ -4,6 +4,11 @@
  * AVAILABLE_ONLY_IN_ADVANCED_MODE
  */
 ?>
+<?
+## Все кафе
+$cafes = Dic::valuesBySlug('cafe');
+$cafes = DicVal::extracts($cafes, null, true, true);
+?>
 @extends(Helper::layout())
 
 
@@ -198,7 +203,13 @@
                                     @endif
                                 </div>
                             </div>
-                                @if (count($measure->cafe_id))
+
+                            @if (count($measure->cafe_id))
+                                @if (count($measure->cafe_id) == count($cafes))
+                                    <div class="where">
+                                        Вся сеть
+                                    </div>
+                                @else
                                     @foreach ($measure->cafe_id as $cafe_id)
                                         <?
                                         $cafe = $cafe_id->toArray();
@@ -208,6 +219,8 @@
                                         </div>
                                     @endforeach
                                 @endif
+                            @endif
+
                         </a>
                     </div>
                 @endforeach
@@ -230,15 +243,22 @@
                                 <div style="background-image: url('{{ $image->full() }}')" class="visual"></div>
                             @endif
                             <div class="title">{{ $action->name }}</div>
+
                             @if (count($action->cafe_id))
-                                @foreach ($action->cafe_id as $cafe_id)
-                                    <?
-                                    $cafe = $cafe_id->toArray();
-                                    ?>
+                                @if (count($action->cafe_id) == count($cafes))
                                     <div class="where">
-                                        {{ $cafe['name'] }}
+                                        Вся сеть
                                     </div>
-                                @endforeach
+                                @else
+                                    @foreach ($action->cafe_id as $cafe_id)
+                                        <?
+                                        $cafe = $cafe_id->toArray();
+                                        ?>
+                                        <div class="where">
+                                            {{ $cafe['name'] }}
+                                        </div>
+                                    @endforeach
+                                @endif
                             @endif
                         </a>
                     </div>

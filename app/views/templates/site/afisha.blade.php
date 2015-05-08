@@ -27,7 +27,9 @@ $measures = DicVal::extracts($measures, null, true, true);
 $measures = DicLib::loadImages($measures, 'image_id');
 #Helper::tad($measures);
 
-#setlocale(LC_TIME, 'ru_RU.CP1251', 'ru_RU','rus_RUS','Russian');
+## Все кафе
+$cafes = Dic::valuesBySlug('cafe');
+$cafes = DicVal::extracts($cafes, null, true, true);
 ?>
 @extends(Helper::layout())
 <?
@@ -100,7 +102,13 @@ $bg = Dic::valueBySlugs('options', 'background_afisha');
                             @endif
                         </div>
                         <div class="title">{{ $measure->name }}</div>
-                            @if (count($measure->cafe_id))
+
+                        @if (count($measure->cafe_id))
+                            @if (count($measure->cafe_id) == count($cafes))
+                                <div class="where">
+                                    Вся сеть
+                                </div>
+                            @else
                                 @foreach ($measure->cafe_id as $cafe_id)
                                     <?
                                     $cafe = $cafe_id->toArray();
@@ -110,6 +118,7 @@ $bg = Dic::valueBySlugs('options', 'background_afisha');
                                     </div>
                                 @endforeach
                             @endif
+                        @endif
                     </a>
                 @endforeach
             @else
