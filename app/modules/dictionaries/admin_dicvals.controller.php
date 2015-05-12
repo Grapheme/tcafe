@@ -220,6 +220,15 @@ class AdminDicvalsController extends BaseController {
             ;
         }
 
+        ## Dic settings
+        $dic_settings = Config::get('dic/' . $dic->slug);
+        #Helper::dd($dic_settings);
+
+        ## Sortable settings
+        $sortable = ($dic->sortable && $dic->pagination == 0 && $dic->sort_by == NULL) ? true : false;
+
+        if (isset($dic_settings['sortable']) && is_callable($dic_settings['sortable']))
+            $sortable = $dic_settings['sortable']($dic, $elements);
 
         ## Pagination
         if ($dic->pagination > 0)
@@ -228,15 +237,6 @@ class AdminDicvalsController extends BaseController {
             $elements = $elements->get();
 
         #Helper::tad($elements);
-
-        $dic_settings = Config::get('dic/' . $dic->slug);
-        #Helper::dd($dic_settings);
-
-        $sortable = ($dic->sortable && $dic->pagination == 0 && $dic->sort_by == NULL) ? true : false;
-
-        if (isset($dic_settings['sortable']) && is_callable($dic_settings['sortable']))
-            $sortable = $dic_settings['sortable']($dic, $elements);
-
         #Helper::smartQueries(1);
 
         $elements_pagination = clone $elements;
