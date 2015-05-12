@@ -66,6 +66,12 @@ return array(
         return $menus;
     },
 
+    'sortable' => function($dic = NULL, $dicvals = NULL) {
+        if (!Input::get('filter.fields.category_id'))
+            return false;
+        else
+            return ($dic->sortable && $dic->pagination == 0 && $dic->sort_by == NULL);
+    },
 
     'seo' => 0,
 
