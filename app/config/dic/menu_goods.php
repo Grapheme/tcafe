@@ -66,10 +66,14 @@ return array(
         return $menus;
     },
 
-    'sortable' => function($dic = NULL, $dicvals = NULL) {
-        if (!Input::get('filter.fields.category_id'))
+    'sortable' => function(&$dic = NULL, $dicvals = NULL) {
+        if (!Input::get('filter.fields.category_id')) {
+
+            $dic->pagination = 30;
+            #$dic->sort_by = 'name';
             return false;
-        else
+
+        } else
             return ($dic->sortable && $dic->pagination == 0 && $dic->sort_by == NULL);
     },
 
