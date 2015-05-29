@@ -8,10 +8,10 @@
 $status = Input::get('show') == 'archive' ? 'archive' : 'active';
 $measures = Dic::valuesBySlug('measure', function($query) use ($status) {
     if ($status == 'active') {
-        $query->filter_by_field('measure_date', '>', date('Y-m-d'));
+        $query->filter_by_field('measure_date', '>=', date('Y-m-d'));
         #$query->filter_by_field('measure_time', '>', date('H:i'));
     } else {
-        $query->filter_by_field('measure_date', '<=', date('Y-m-d'));
+        $query->filter_by_field('measure_date', '<', date('Y-m-d'));
         #$query->filter_by_field('measure_time', '<=', date('H:i'));
     }
     $query->order_by_field('measure_date', 'DESC');
