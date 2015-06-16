@@ -26,7 +26,7 @@ class Helper {
     }
 
     public static function d($array) {
-        echo "<pre style='text-align:left'>" . print_r($array, 1) . "</pre>";
+        echo "\n<pre style='text-align:left'>\n" . trim(print_r($array, 1)) . "\n</pre>\n";
     }
 
     public static function dd($array) {
@@ -128,10 +128,12 @@ class Helper {
         if (intval($time) == 0) {
             $time = time();
         }
+        $MonthNamesIm = array("Январь", "Февраль", "Март", "Апрель", "Май", "Июнь", "Июль", "Август", "Сентябрь", "Октябрь", "Ноябрь", "Декабрь");
         $MonthNames = array("Января", "Февраля", "Марта", "Апреля", "Мая", "Июня", "Июля", "Августа", "Сентября", "Октября", "Ноября", "Декабря");
         if (strpos($param, 'M') === false) {
             return date($param, $time);
         } else {
+            $MonthNames = $im ? $MonthNamesIm : $MonthNames;
             $month = $MonthNames[date('n', $time) - 1];
             if ($lower) {
                 $month = mb_strtolower($month);
@@ -346,6 +348,8 @@ class Helper {
 
     public static function drawmenu($menus = false) {
 
+        #Helper::tad($menus);
+
         if (!$menus || !is_array($menus) || !count($menus)) {
             return false;
         }
@@ -374,7 +378,10 @@ HTML;
 
             } elseif (isset($menu['link'])) {
 
-                $current = ($current_url == $menu['link']);
+                #Helper::ta($menu);
+
+                $current = ($current_url == @$menu['link']);
+                #Helper::ta($current_url . ' == ' . $menu['link'] . ' => ' . ($current_url == $menu['link']));
 
                 #$return .= "\n<!--\n" . $_SERVER['REQUEST_URI'] . "\n" . $menu['link'] . "\n-->\n";
 
@@ -385,7 +392,7 @@ HTML;
 
                 $additional = isset($menu['others']) ? self::arrayToAttributes($menu['others']) : '';
 
-                $return .= '<a class="' . @$menu['class'] . ($child_exists ? '' : ' margin-bottom-5') . '" href="' . $menu['link'] . '" ' . $additional . '>'
+                $return .= '<a class="' . @$menu['class'] . ($child_exists ? '' : ' margin-bottom-5') . '" href="' . @$menu['link'] . '" ' . $additional . '>'
                         . ($current ? '<i class="fa fa-check"></i> ' : '')
                         . @$menu['title'] . '</a> ';
 
@@ -393,10 +400,28 @@ HTML;
                     $return .= '<a class="btn btn-default dropdown-toggle ' . @$menu['class'] . '" dropdown-toggle" data-toggle="dropdown" href="javascript:void(0);">
     <span class="caret"></span>
 </a>
-<ul class="dropdown-menu text-left">';
+<ul class="dropdown-menu text-left dropdown-menu-cutted">';
 
                     foreach ($menu['child'] as $child) {
-                        $return .= '<li><a class="' . @$child['class'] . '" href="' . @$child['link'] . '">' . @$child['title'] . '</a></li> ';
+
+                        $current = ($current_url == @$child['link']);
+                        #Helper::ta($current_url . ' == ' . $child['link'] . ' => ' . ($current_url == $child['link']));
+
+                        $el_start = isset($child['link'])
+                            ? '<a class="' . @$child['class'] . '" href="' . @$child['link'] . '">'
+                            : '<span class="' . @$child['class'] . '">'
+                        ;
+                        $el_end = isset($child['link'])
+                            ? '</a>'
+                            : '</span>'
+                        ;
+
+                        $return .= '<li>'
+                                   . $el_start
+                                   . ($current ? '<i class="fa fa-check"></i> ' : '')
+                                   . ($current ? @trim(str_replace('&nbsp;', ' ', $child['title'])) : @$child['title'])
+                                   . $el_end
+                                   . '</li> ';
                     }
 
                     $return .= '</ul> ';
@@ -472,7 +497,7 @@ HTML;
     ## Uses in Dictionaries module (DicVal additional fields)
     ## $element - current DicVal model
     ##
-    public static function formField($name, $array, $value = false, $element = false) {
+    public static function formField($name, $array, $value = false, $element = false, $field_name = false) {
 
         if (!@$array || !is_array($array) || !@$name) {
             return false;
@@ -482,7 +507,7 @@ HTML;
             return $array['content'];
         }
 
-        #Helper::d($array);
+        #Helper::d($array); return;
 
         $return = '';
         #$name = $array['name'];
@@ -491,7 +516,7 @@ HTML;
 
         #var_dump($value);
 
-        $value = (isset($value) && $value !== NULL) ? $value : @$array['default'];
+        $value = (isset($value)) ? $value : @$array['default'];
 
         #echo (int)(isset($value) && $value !== NULL);
         #var_dump($value);
@@ -525,6 +550,7 @@ HTML;
         $others = ' ' . implode(' ', $others);
         #$others_string = self::arrayToAttributes($others_array);
         #Helper::dd($others_array);
+
         switch (@$array['type']) {
             case 'text':
                 $return = Form::text($name, $value, $others_array);
@@ -567,10 +593,21 @@ HTML;
                 $return = Form::select($name . '[]', $values, $value, $others_array);
                 break;
             case 'checkbox':
+
+                #Helper::d($name);
+                #Helper::d($others_array);
+                #Helper::d($array['title']);
+                #Helper::d($array);
+                #var_dump($value);
+                #return;
+
                 #Helper::d($array);
                 #Helper::ta($element);
+                
+                $v = $value;
+                #$v = @$element->{$field_name};
                 return '<label class="checkbox">'
-                . Form::checkbox($name, 1, @$element->$array['_name'], $others_array)
+                . Form::checkbox($name, 1, $v, $others_array)
                 . '<i></i>'
                 . '<span>' . $array['title'] . '</span>'
                 . '</label>';
@@ -599,10 +636,17 @@ HTML;
             case 'hidden':
                 $return = Form::hidden($name, $value, $others_array);
                 break;
+            case 'textline':
+                if (!$value)
+                    $return = Form::text($name, NULL, $others_array);
+                else
+                    $return = isset($array['view_text']) ? $array['view_text'] : $value;
+                break;
             case 'custom':
                 $return = @$array['content'];
                 break;
         }
+
         return $return;
     }
 
@@ -818,12 +862,152 @@ HTML;
         return $return;
     }
 
-
+    /**
+     * Функция для вывода выпадающего списка в верхнем меню для фильтрации результатов
+     *
+     * @param $filter_name
+     * @param $filter_default_text
+     * @param $filter_dic_elements - array like: array('_id_of_the_dicval_' => '_name_of_the_dicval_')
+     * @param $dic
+     * @param bool $dicval
+     * @return array
+     */
     public static function getDicValMenuDropdown($filter_name, $filter_default_text, $filter_dic_elements, $dic, $dicval = false) {
 
-        return DicLib::getDicValMenuDropdown($filter_name, $filter_default_text, $filter_dic_elements, $dic, $dicval);
-    }
+        #Helper::tad($filter_dic_elements);
 
+        $filter = Input::get('filter.fields');
+        #Helper::d($filter);
+        #Helper::ta($dic);
+
+        $dic_id = $dic->entity ? $dic->slug : $dic->id;
+        $route = $dic->entity ? 'entity.index' : 'dicval.index';
+
+        ## Get dimensional array for filtration from multidimensional array (Input::get()) #NOSQL
+        $current_link_attributes = Helper::multiArrayToAttributes(Input::get('filter'), 'filter');
+
+        ## Main element of the drop-down menu
+        if (@$filter[$filter_name]) {
+
+            #Helper::tad($filter[$filter_name]);
+
+            ## Get current dicval from array of the gettin' filter_dic_elements #NOSQL
+            /*
+            $first_element = NULL;
+            if (count($filter_dic_elements))
+                foreach ($filter_dic_elements as $first_element)
+                    break;
+            */
+            #if (is_string($first_element)) {
+            #    $current_dicval = @$filter_dic_elements[$filter[$filter_name]];
+            #} elseif (is_array($first_element)) {
+
+                foreach ($filter_dic_elements as $e => $element) {
+                    if (is_string($element) && $e == $filter[$filter_name]) {
+                        $current_dicval = $element;
+                        break;
+                    } elseif (is_array($element) && count($element)) {
+                        foreach ($element as $e2 => $el2) {
+                            if ($e2 == $filter[$filter_name]) {
+                                $current_dicval = $el2;
+                                break;
+                            }
+                        }
+                    }
+                }
+
+            #}
+
+            ## Get all current link attributes & modify for next url generation
+            $array = $current_link_attributes;
+            $array["filter[fields][{$filter_name}]"] = @$filter[$filter_name];
+            $array = (array)$dic_id + $array;
+
+            $parent = array(
+                'link' => URL::route($route, $array),
+                'title' => $current_dicval,
+                'class' => 'btn btn-default',
+            );
+
+        } else {
+
+            ## Get all current link attributes & modify for next url generation
+            $array = $current_link_attributes;
+            unset($array["filter[fields][{$filter_name}]"]);
+            $array = (array)$dic_id + $array;
+
+            $parent = array(
+                'link' => URL::route($route, $array),
+                'title' => $filter_default_text,
+                'class' => 'btn btn-default',
+            );
+        }
+        ## Child elements
+        $product_types = array();
+        if (@$filter[$filter_name]) {
+
+            ## Get all current link attributes & modify for next url generation
+            $array = $current_link_attributes;
+            unset($array["filter[fields][{$filter_name}]"]);
+            $array = (array)$dic_id + $array;
+
+            $product_types[] = array(
+                'link' => URL::route($route, $array),
+                'title' => $filter_default_text,
+                'class' => '',
+            );
+        }
+        #Helper::tad($filter_dic_elements);
+        foreach ($filter_dic_elements as $element_id => $element_name) {
+
+            if (is_string($element_name)) {
+
+                if ($element_id == @$filter[$filter_name]) {
+                    continue;
+                }
+
+                ## Get all current link attributes & modify for next url generation
+                $array = $current_link_attributes;
+                $array["filter[fields][{$filter_name}]"] = $element_id;
+                $array = (array)$dic_id + $array;
+
+                $product_types[] = array(
+                    'link' => URL::route($route, $array),
+                    'title' => $element_name,
+                    'class' => '',
+                );
+
+            } elseif (is_array($element_name)) {
+
+                $element_names = $element_name;
+                $product_types[] = array(
+                    #'link' => '#',
+                    'title' => $element_id,
+                    'class' => '',
+                );
+
+                foreach ($element_names as $el_id => $element_name) {
+
+                    ## Get all current link attributes & modify for next url generation
+                    $array = $current_link_attributes;
+                    $array["filter[fields][{$filter_name}]"] = $el_id;
+                    $array = (array)$dic_id + $array;
+
+                    $product_types[] = array(
+                        'link' => URL::route($route, $array),
+                        'title' => '&nbsp; &nbsp; &nbsp;' . $element_name,
+                        'class' => '',
+                    );
+                }
+
+            }
+
+        }
+        ## Assembly
+        $parent['child'] = $product_types;
+        return $parent;
+
+    }
 
     /**
      * Smart view of ALL Eloquent queries
@@ -1081,7 +1265,7 @@ HTML;
                                     if (count($temp) == 1)
                                         $value = $tmp;
                                     else
-                                        $value[$tmp] = true;
+                                    $value[$tmp] = true;
                                 }
                             }
                         #}
@@ -1098,7 +1282,7 @@ HTML;
         }
 
         #Helper::d("PROPERTIES:");
-        #Helper::dd($properties);
+        #Helper::d($properties);
 
         return $properties;
     }
@@ -1162,5 +1346,20 @@ HTML;
         }
         return $partition;
     }
+
+    public static function is_image($filename) {
+        $is = @getimagesize($filename);
+        if (!$is)
+            return false;
+        elseif ( !in_array($is[2], array(1,2,3)) )
+            return false;
+        else
+            return true;
+    }
 }
 
+if (!function_exists('is_collection')) {
+    function is_collection($obj) {
+        return isset($obj) && is_object($obj) && $obj->count();
+    }
+}
