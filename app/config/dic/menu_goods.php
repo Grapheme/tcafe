@@ -47,6 +47,7 @@ return array(
 
     /**
      * MENUS - дополнительные пункты верхнего меню, под названием словаря.
+     *
      */
     'menus' => function($dic, $dicval = NULL) {
 
