@@ -6,6 +6,10 @@
 ?>
 <?
 $seo = $special->seo;
+
+## Все кафе
+$cafes = Dic::valuesBySlug('cafe');
+$cafes = DicVal::extracts($cafes, null, true, true);
 ?>
 @extends(Helper::layout())
 
