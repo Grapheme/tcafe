@@ -47,6 +47,7 @@ return array(
 
     /**
      * MENUS - дополнительные пункты верхнего меню, под названием словаря.
+     *
      */
     'menus' => function($dic, $dicval = NULL) {
 
@@ -66,6 +67,16 @@ return array(
         return $menus;
     },
 
+    'sortable' => function(&$dic = NULL, $dicvals = NULL) {
+        if (!Input::get('filter.fields.category_id')) {
+
+            $dic->pagination = 30;
+            #$dic->sort_by = 'name';
+            return false;
+
+        } else
+            return ($dic->sortable && $dic->pagination == 0 && $dic->sort_by == NULL);
+    },
 
     'seo' => 0,
 

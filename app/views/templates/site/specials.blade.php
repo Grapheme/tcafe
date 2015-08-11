@@ -14,11 +14,22 @@ $specials = DicLib::loadImages($specials, 'image_id');
 #Helper::tad($specials);
 $specials_chunk = Helper::partition($specials->toArray(), 3);
 #Helper::tad($specials_chunk);
+
+## Все кафе
+$cafes = Dic::valuesBySlug('cafe');
+$cafes = DicVal::extracts($cafes, null, true, true);
 ?>
 @extends(Helper::layout())
+<?
+$bg = Dic::valueBySlugs('options', 'background_specials');
+#Helper::tad($bg);
+?>
 
 
 @section('page_class')specials @stop
+
+
+@section('page_style') @if(is_object($bg) && $bg->name) background-image: url({{ $bg->name }}); @endif; @stop
 
 
 @section('style')
@@ -62,18 +73,22 @@ $specials_chunk = Helper::partition($specials->toArray(), 3);
                                 <div class="description">
                                     {{ $special->description }}
                                 </div>
-                                <div class="where">
-                                    @if (count($special->cafe_id) > 1)
-                                        Вся сеть
-                                    @elseif (count($special->cafe_id) == 1)
-                                        <?
-                                        $cafe = $special->cafe_id->toArray();
-                                        $cafe = array_shift($cafe);
-                                        #Helper::ta($cafe);
-                                        ?>
-                                        {{ $cafe['name'] }}
+                                @if (count($special->cafe_id))
+                                    @if (count($special->cafe_id) == count($cafes))
+                                        <div class="where">
+                                            Вся сеть
+                                        </div>
+                                    @else
+                                        @foreach ($special->cafe_id as $cafe_id)
+                                            <?
+                                            $cafe = $cafe_id->toArray();
+                                            ?>
+                                            <div class="where">
+                                                {{ $cafe['name'] }}
+                                            </div>
+                                        @endforeach
                                     @endif
-                                </div>
+                                @endif
                             </a>
 
                         @endforeach

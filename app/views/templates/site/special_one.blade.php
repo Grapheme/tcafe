@@ -6,6 +6,10 @@
 ?>
 <?
 $seo = $special->seo;
+
+## Все кафе
+$cafes = Dic::valuesBySlug('cafe');
+$cafes = DicVal::extracts($cafes, null, true, true);
 ?>
 @extends(Helper::layout())
 
@@ -44,18 +48,24 @@ $seo = $special->seo;
                     </g>
                 </svg>
             </a>
-            <div class="where">
-                @if (count($special->cafe_id) > 1)
-                    Вся сеть
-                @elseif (count($special->cafe_id) == 1)
-                    <?
-                    $cafe = $special->cafe_id->toArray();
-                    $cafe = array_shift($cafe);
-                    #Helper::ta($cafe);
-                    ?>
-                    {{ $cafe['name'] }}
+
+            @if (count($special->cafe_id))
+                @if (count($special->cafe_id) == count($cafes))
+                    <div class="where">
+                        Вся сеть
+                    </div>
+                @else
+                    @foreach ($special->cafe_id as $cafe_id)
+                        <?
+                        $cafe = $cafe_id->toArray();
+                        ?>
+                        <div class="where">
+                            {{ $cafe['name'] }}
+                        </div>
+                    @endforeach
                 @endif
-            </div>
+            @endif
+
             <h1>{{ $special->name  }}</h1>
             @if (is_object($special->image_id))
                 <img src="{{ $special->image_id->full() }}"/>

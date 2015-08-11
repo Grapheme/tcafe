@@ -8,12 +8,13 @@
 $status = Input::get('show') == 'archive' ? 'archive' : 'active';
 $measures = Dic::valuesBySlug('measure', function($query) use ($status) {
     if ($status == 'active') {
-        $query->filter_by_field('measure_date', '>', date('Y-m-d'));
+        $query->filter_by_field('measure_date', '>=', date('Y-m-d'));
         #$query->filter_by_field('measure_time', '>', date('H:i'));
     } else {
-        $query->filter_by_field('measure_date', '<=', date('Y-m-d'));
+        $query->filter_by_field('measure_date', '<', date('Y-m-d'));
         #$query->filter_by_field('measure_time', '<=', date('H:i'));
     }
+    $query->order_by_field('measure_date', 'DESC');
 });
 #Helper::smartQueries(1);
 #Helper::tad($measures);
@@ -26,12 +27,21 @@ $measures = DicVal::extracts($measures, null, true, true);
 $measures = DicLib::loadImages($measures, 'image_id');
 #Helper::tad($measures);
 
-#setlocale(LC_TIME, 'ru_RU.CP1251', 'ru_RU','rus_RUS','Russian');
+## Все кафе
+$cafes = Dic::valuesBySlug('cafe');
+$cafes = DicVal::extracts($cafes, null, true, true);
 ?>
 @extends(Helper::layout())
+<?
+$bg = Dic::valueBySlugs('options', 'background_afisha');
+#Helper::tad($bg);
+?>
 
 
 @section('page_class')afisha @stop
+
+
+@section('page_style') @if(is_object($bg) && $bg->name) background-image: url({{ $bg->name }}); @endif; @stop
 
 
 @section('style')
@@ -92,18 +102,23 @@ $measures = DicLib::loadImages($measures, 'image_id');
                             @endif
                         </div>
                         <div class="title">{{ $measure->name }}</div>
-                        <div class="where">
-                            @if (count($measure->cafe_id) > 1)
-                                Вся сеть
-                            @elseif (count($measure->cafe_id) == 1)
-                                <?
-                                $cafe = $measure->cafe_id->toArray();
-                                $cafe = array_shift($cafe);
-                                #Helper::ta($cafe);
-                                ?>
-                                {{ $cafe['name'] }}
+
+                        @if (count($measure->cafe_id))
+                            @if (count($measure->cafe_id) == count($cafes))
+                                <div class="where">
+                                    Вся сеть
+                                </div>
+                            @else
+                                @foreach ($measure->cafe_id as $cafe_id)
+                                    <?
+                                    $cafe = $cafe_id->toArray();
+                                    ?>
+                                    <div class="where">
+                                        {{ $cafe['name'] }}
+                                    </div>
+                                @endforeach
                             @endif
-                        </div>
+                        @endif
                     </a>
                 @endforeach
             @else

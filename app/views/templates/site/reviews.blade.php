@@ -6,7 +6,7 @@
 ?>
 <?
 $reviews = Dic::valuesBySlug('reviews', function($query){
-    #$query->orderBy('created_at', 'DESC');
+    $query->orderBy('created_at', 'DESC');
     $query->filter_by_field('active', '=', 1);
 });
 $reviews = DicVal::extracts($reviews, null, true, true);

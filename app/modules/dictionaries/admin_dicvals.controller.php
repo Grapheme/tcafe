@@ -210,6 +210,26 @@ class AdminDicvalsController extends BaseController {
 
         #Helper::tad($dic->pagination);
 
+
+        ## Search
+        $search_query = NULL;
+        if (NULL !== ($search_query = Input::get('q'))) {
+            $elements = $elements
+                ->where('name', 'LIKE', '%' . $search_query . '%')
+                ->orWhere('slug', 'LIKE', '%' . $search_query . '%')
+            ;
+        }
+
+        ## Dic settings
+        $dic_settings = Config::get('dic/' . $dic->slug);
+        #Helper::dd($dic_settings);
+
+        ## Sortable settings
+        $sortable = ($dic->sortable && $dic->pagination == 0 && $dic->sort_by == NULL) ? true : false;
+
+        if (isset($dic_settings['sortable']) && is_callable($dic_settings['sortable']))
+            $sortable = $dic_settings['sortable']($dic, $elements);
+
         ## Pagination
         if ($dic->pagination > 0)
             $elements = $elements->paginate($dic->pagination);
@@ -217,9 +237,6 @@ class AdminDicvalsController extends BaseController {
             $elements = $elements->get();
 
         #Helper::tad($elements);
-
-        $sortable = ($dic->sortable && $dic->pagination == 0 && $dic->sort_by == NULL) ? true : false;
-
         #Helper::smartQueries(1);
 
         $elements_pagination = clone $elements;
@@ -229,9 +246,6 @@ class AdminDicvalsController extends BaseController {
 
         if (Config::get('debug') == 1)
             Helper::tad($elements);
-
-        $dic_settings = Config::get('dic/' . $dic->slug);
-        #Helper::dd($dic_settings);
 
 
         $actions_column = false;
@@ -264,7 +278,7 @@ class AdminDicvalsController extends BaseController {
 
         #return View::make(Helper::acclayout());
         #return View::make($this->module['tpl'].'index_old', compact('elements', 'dic', 'dic_id', 'sortable', 'dic_settings', 'actions_column', 'total_elements', 'total_elements_current_selection'));
-        return View::make($this->module['tpl'].'index', compact('elements', 'elements_pagination', 'hierarchy', 'dic', 'dic_id', 'sortable', 'dic_settings', 'actions_column', 'total_elements', 'total_elements_current_selection'));
+        return View::make($this->module['tpl'].'index', compact('elements', 'elements_pagination', 'hierarchy', 'dic', 'dic_id', 'sortable', 'dic_settings', 'actions_column', 'total_elements', 'total_elements_current_selection', 'search_query'));
 	}
 
     /************************************************************************************/
@@ -323,7 +337,11 @@ class AdminDicvalsController extends BaseController {
         if (!is_object($element))
             App::abort(404);
 
+        #Helper::tad($element);
+
         $element->extract(0);
+
+        #Helper::tad($element);
 
         if (Config::get('debug') == 1)
             Helper::tad($element);
@@ -499,7 +517,7 @@ class AdminDicvalsController extends BaseController {
              */
             $element_fields = Config::get('dic/' . $dic->slug . '.fields');
             if (isset($element_fields) && is_callable($element_fields))
-                $element_fields = $element_fields();
+                $element_fields = $element_fields($element);
 
             #Helper::dd($element_fields);
 
@@ -516,6 +534,7 @@ class AdminDicvalsController extends BaseController {
 
                     $value = @$fields[$key];
 
+                    #Helper::d($key);
                     #Helper::d($value);
                     #continue;
 
@@ -548,7 +567,7 @@ class AdminDicvalsController extends BaseController {
              */
             $element_fields_i18n = Config::get('dic/' . $dic->slug . '.fields_i18n');
             if (isset($element_fields_i18n) && is_callable($element_fields_i18n))
-                $element_fields_i18n = $element_fields_i18n();
+                $element_fields_i18n = $element_fields_i18n($element);
             #Helper::d($element_fields_i18n);
             #Helper::dd($fields_i18n);
 
@@ -621,7 +640,7 @@ class AdminDicvalsController extends BaseController {
                     $element_meta = DicValMeta::firstOrNew(array('dicval_id' => $id, 'language' => $locale_sign));
                     $element_meta->update($array);
                     $element_meta->save();
-                    Helper::tad($element_meta);
+                    #Helper::tad($element_meta);
                     unset($element_meta);
                 }
             }
@@ -652,10 +671,13 @@ class AdminDicvalsController extends BaseController {
             $element->load('metas', 'allfields', 'seos');
             $element = $element->extract(1);
 
+            $this->callHook('after_store_update', $dic, $element);
             if ($mode == 'update')
                 $this->callHook('after_update', $dic, $element);
             elseif ($mode == 'store')
                 $this->callHook('after_store', $dic, $element);
+            $this->callHook('after_store_update_destroy', $dic, $element);
+            $this->callHook('after_store_update_destroy_order', $dic, $element);
 
 			$json_request['responseText'] = 'Сохранено';
             if ($redirect && Input::get('redirect'))
@@ -734,6 +756,8 @@ class AdminDicvalsController extends BaseController {
         }
 
         $this->callHook('after_destroy', $dic, $element);
+        $this->callHook('after_store_update_destroy', $dic, $element);
+        $this->callHook('after_store_update_destroy_order', $dic, $element);
 
         $json_request['responseText'] = 'Удалено';
 		$json_request['status'] = TRUE;
@@ -1109,6 +1133,7 @@ class AdminDicvalsController extends BaseController {
     }
 
 
+    /*
     public function postAjaxOrderSave() {
 
         $poss = Input::get('poss');
@@ -1124,6 +1149,7 @@ class AdminDicvalsController extends BaseController {
 
         return Response::make('1');
     }
+    */
 
 
     public function postAjaxNestedSetModel() {
@@ -1133,6 +1159,9 @@ class AdminDicvalsController extends BaseController {
         $data = Input::get('data');
         $data = json_decode($data, 1);
         #Helper::dd($data);
+
+        $dic_id = NULL;
+        $dic = NULL;
 
         if (count($data)) {
 
@@ -1144,13 +1173,21 @@ class AdminDicvalsController extends BaseController {
 
                 if (count($dicvals)) {
                     foreach ($dicvals as $dicval) {
+                        if (!$dic_id)
+                            $dic_id = $dicval->dic_id;
                         $dicval->lft = $id_left_right[$dicval->id]['left'];
                         $dicval->rgt = $id_left_right[$dicval->id]['right'];
                         $dicval->save();
                     }
+                    if ($dic_id) {
+                        $dic = Dic::by_id($dic_id);
+                    }
                 }
             }
         }
+
+        $this->callHook('after_order', $dic);
+        $this->callHook('after_store_update_destroy_order', $dic);
 
         return Response::make('1');
     }

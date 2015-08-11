@@ -4,6 +4,11 @@
  * AVAILABLE_ONLY_IN_ADVANCED_MODE
  */
 ?>
+<?
+## Все кафе
+$cafes = Dic::valuesBySlug('cafe');
+$cafes = DicVal::extracts($cafes, null, true, true);
+?>
 @extends(Helper::layout())
 
 
@@ -42,7 +47,7 @@
                             @else
                                 <a href="{{ URL::route('app.cafe', $cafe->slug) }}" class="link">
                                     <nobr>{{ $cafe->name }}</nobr>
-                                    @if ($c == 0)
+                                    @if ($c == 0 && FALSE)
                                     <nobr>НА {{ $cafe->address2 }}</nobr>
                                     @endif
                                 </a>
@@ -107,6 +112,7 @@
     </div>
     <div class="content w850px">
         <div class="rest-nav">
+
             @if (isset($measure) && is_object($measure) && $measure->id && FALSE)
              <div class="unit-wrapper">
                 <?
@@ -197,6 +203,24 @@
                                     @endif
                                 </div>
                             </div>
+
+                            @if (count($measure->cafe_id))
+                                @if (count($measure->cafe_id) == count($cafes))
+                                    <div class="where">
+                                        Вся сеть
+                                    </div>
+                                @else
+                                    @foreach ($measure->cafe_id as $cafe_id)
+                                        <?
+                                        $cafe = $cafe_id->toArray();
+                                        ?>
+                                        <div class="where">
+                                            {{ $cafe['name'] }}
+                                        </div>
+                                    @endforeach
+                                @endif
+                            @endif
+
                         </a>
                     </div>
                 @endforeach
@@ -219,18 +243,23 @@
                                 <div style="background-image: url('{{ $image->full() }}')" class="visual"></div>
                             @endif
                             <div class="title">{{ $action->name }}</div>
-                            <div class="where">
-                                @if (count($action->cafe_id) > 1)
-                                    Вся сеть
-                                @elseif (count($action->cafe_id) == 1)
-                                    <?
-                                    $cafe = $action->cafe_id->toArray();
-                                    $cafe = array_shift($cafe);
-                                    #Helper::ta($cafe);
-                                    ?>
-                                    {{ $cafe['name'] }}
+
+                            @if (count($action->cafe_id))
+                                @if (count($action->cafe_id) == count($cafes))
+                                    <div class="where">
+                                        Вся сеть
+                                    </div>
+                                @else
+                                    @foreach ($action->cafe_id as $cafe_id)
+                                        <?
+                                        $cafe = $cafe_id->toArray();
+                                        ?>
+                                        <div class="where">
+                                            {{ $cafe['name'] }}
+                                        </div>
+                                    @endforeach
                                 @endif
-                            </div>
+                            @endif
                         </a>
                     </div>
                 @endforeach
