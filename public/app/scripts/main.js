@@ -73,9 +73,14 @@ $(function() {
     window.history.back();
   });
   
-  $('.fs-baner .close').click(function(e){
+  
+  lightbox.start($('.fs-baner'))
+  
+  /*$('.fs-baner .close').click(function(e){
     e.preventDefault();
     $('.fs-baner').fadeOut();
-  });
+  });*/
+  
+  
   
 });

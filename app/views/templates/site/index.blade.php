@@ -238,11 +238,7 @@ $bg = Dic::valueBySlugs('options', 'background_mainpage');
             </div>
         @endif
     </div>
-    <div class="fs-baner">
-      <a href="#" class="close">
-        &#10005;        
-      </a>
-    </div>
+    <a href="{{ Config::get('site.theme_path') }}/images/fs-baner.jpg" class="fs-baner" data-lightbox="image-1"></a>
 @stop
 
 

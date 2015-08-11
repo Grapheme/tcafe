@@ -41,6 +41,17 @@ $main-border-width: 10px;
 
 
 .fs-baner {
+  display: none;
+}
+
+.lb-close {
+  position: absolute;
+  top: 0;
+  right: 100px;
+}
+
+/*
+.fs-baner {
   position: fixed;
   top: 0;
   left: 0;
@@ -58,4 +69,4 @@ $main-border-width: 10px;
     color: black;
     text-decoration: none;
   }
-}
+}*/
