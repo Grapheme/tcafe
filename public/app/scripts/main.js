@@ -73,4 +73,9 @@ $(function() {
     window.history.back();
   });
   
+  $('.fs-baner .close').click(function(e){
+    e.preventDefault();
+    $('.fs-baner').fadeOut();
+  });
+  
 });

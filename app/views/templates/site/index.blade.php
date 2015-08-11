@@ -206,7 +206,11 @@
             </div>
         @endif
     </div>
-
+    <div class="fs-baner">
+      <a href="#" class="close">
+        &#10005;        
+      </a>
+    </div>
 @stop
 
 

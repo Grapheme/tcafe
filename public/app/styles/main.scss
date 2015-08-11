@@ -38,3 +38,24 @@ $main-border-width: 10px;
 @import 'footer';
 @import 'slider';
 @import 'background';
+
+
+.fs-baner {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: url(../images/fs-baner.jpg);
+  z-index: 2000;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  .close {
+    position: absolute;
+    top: 50px;
+    right: 50px;
+    color: black;
+    text-decoration: none;
+  }
+}
