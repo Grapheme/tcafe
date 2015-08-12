@@ -73,8 +73,9 @@ $(function() {
     window.history.back();
   });
   
-  
-  lightbox.start($('.fs-baner'))
+  if (window.location.pathname == '/') {
+    lightbox.start($('.fs-baner'))
+  }
   
   /*$('.fs-baner .close').click(function(e){
     e.preventDefault();
