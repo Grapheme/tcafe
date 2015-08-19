@@ -1424,7 +1424,7 @@ $(function() {
     window.history.back();
   });
   
-  if (window.location.pathname == '/') {
+  if (window.location.pathname == '/' && 0) {
     lightbox.start($('.fs-baner'))
   }
   
