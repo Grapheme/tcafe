@@ -50,7 +50,7 @@ $menu = DicVal::extracts($menu, null, true, true);
  */
 $menu_tree = DicLib::nestedModelToTree($menu, '|');
 #Helper::ta($menu_tree);
-echo '<!--'; Helper::ta($menu_tree); echo '-->';
+#echo '<!--'; Helper::ta($menu_tree); echo '-->';
 
 /**
  * Если не выбрана категория - определяем первую в текущем кафе и редиректим
@@ -69,7 +69,7 @@ if (!Input::get('cat')) {
         break;
     }
     #Helper::tad($first_cat);
-    echo '<!--'; Helper::ta($first_cat); echo '-->';
+    #echo '<!--'; Helper::ta($first_cat); echo '-->';
 
     if (is_object($first_cat) && $first_cat->slug)
         Redirect(URL::route('page', array('menu', 'cafe' => $current_cafe->slug, 'cat' => $first_cat->slug)));
