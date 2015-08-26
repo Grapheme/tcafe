@@ -30,6 +30,8 @@ $current_cafe = Dic::valueBySlugs('cafe', Input::get('cafe'));
 if (!is_object($current_cafe) || !$current_cafe->id)
     Redirect(URL::route('page', 'menu'));
 
+echo '<!--'; Helper::ta($current_cafe); echo '-->';
+
 /**
  * Категории меню ВО ВСЕХ КАФЕ
  */
