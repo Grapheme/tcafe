@@ -9,7 +9,7 @@
 $bg = Dic::valueBySlugs('options', 'background_mainpage');
 #Helper::tad($bg);
 $mainpage_banner_url = Dic::valueBySlugs('options', 'mainpage_banner_url');
-echo '<!--'; Helper::ta($mainpage_banner_url); echo '-->';
+echo '<!--'; Helper::ta($mainpage_banner_url->name); echo '-->';
 echo '<!--'; Helper::ta(preg_match('~\.(jpg|jpeg|png|gif|svg|bmp|pdf)$~is', $mainpage_banner_url->name)); echo '-->';
 ?>
 
