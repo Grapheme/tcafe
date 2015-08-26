@@ -9,8 +9,8 @@
 $bg = Dic::valueBySlugs('options', 'background_mainpage');
 #Helper::tad($bg);
 $mainpage_banner_url = Dic::valueBySlugs('options', 'mainpage_banner_url');
-echo '<!--'; Helper::ta($mainpage_banner_url->name); echo '-->';
-echo '<!--'; Helper::ta(preg_match('~\.(jpg|jpeg|png|gif|svg|bmp|pdf)$~is', trim($mainpage_banner_url->name))); echo '-->';
+#echo '<!--'; Helper::ta($mainpage_banner_url->name); echo '-->';
+#echo '<!--'; Helper::ta(preg_match('~\.(jpg|jpeg|png|gif|svg|bmp|pdf)$~is', trim($mainpage_banner_url->name))); echo '-->';
 ?>
 
 
@@ -242,8 +242,8 @@ echo '<!--'; Helper::ta(preg_match('~\.(jpg|jpeg|png|gif|svg|bmp|pdf)$~is', trim
         @endif
     </div>
 
-    @if (preg_match('~\.[a-zA-Z]{3,4}$~is', $mainpage_banner_url->name))
-        <a href="{{ $mainpage_banner_url->name }}" class="fs-baner" data-lightbox="image-1"></a>
+    @if (preg_match('~\.[a-zA-Z]{3,4}$~is', trim($mainpage_banner_url->name)))
+        <a href="{{ trim($mainpage_banner_url->name) }}" class="fs-baner" data-lightbox="image-1"></a>
     @endif
 
 @stop
