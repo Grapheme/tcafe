@@ -50,6 +50,7 @@ $menu = DicVal::extracts($menu, null, true, true);
  */
 $menu_tree = DicLib::nestedModelToTree($menu, '|');
 #Helper::ta($menu_tree);
+echo '<!--'; Helper::ta($menu_tree); echo '-->';
 
 /**
  * Если не выбрана категория - определяем первую в текущем кафе и редиректим
