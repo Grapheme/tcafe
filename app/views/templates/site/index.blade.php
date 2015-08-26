@@ -8,6 +8,8 @@
 <?
 $bg = Dic::valueBySlugs('options', 'background_mainpage');
 #Helper::tad($bg);
+$mainpage_banner_url = Dic::valueBySlugs('options', 'mainpage_banner_url');
+echo '<!--'; Helper::ta($bg); echo '-->';
 ?>
 
 
