@@ -9,7 +9,7 @@
 $bg = Dic::valueBySlugs('options', 'background_mainpage');
 #Helper::tad($bg);
 $mainpage_banner_url = Dic::valueBySlugs('options', 'mainpage_banner_url');
-echo '<!--'; Helper::ta($mainpage_banner_url); echo '-->';
+#echo '<!--'; Helper::ta($mainpage_banner_url); echo '-->';
 ?>
 
 
@@ -241,8 +241,8 @@ echo '<!--'; Helper::ta($mainpage_banner_url); echo '-->';
         @endif
     </div>
 
-    @if (1)
-        <a href="{{ Config::get('site.theme_path') }}/images/fs-baner.jpg" class="fs-baner" data-lightbox="image-1"></a>
+    @if (preg_match('~\.[a-zA-Z]{3,4}$~is', $mainpage_banner_url->name))
+        <a href="{{ $mainpage_banner_url->name }}" class="fs-baner" data-lightbox="image-1"></a>
     @endif
 
 @stop
