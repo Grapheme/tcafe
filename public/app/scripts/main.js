@@ -73,7 +73,7 @@ $(function() {
     window.history.back();
   });
   
-  if (window.location.pathname == '/') {
+  if (window.location.pathname == '/' && $('a.fs-baner').size() > 0) {
     lightbox.start($('.fs-baner'))
   }
   
