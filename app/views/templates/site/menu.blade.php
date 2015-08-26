@@ -30,7 +30,7 @@ $current_cafe = Dic::valueBySlugs('cafe', Input::get('cafe'));
 if (!is_object($current_cafe) || !$current_cafe->id)
     Redirect(URL::route('page', 'menu'));
 
-echo '<!--'; Helper::ta($current_cafe); echo '-->';
+#echo '<!--'; Helper::ta($current_cafe); echo '-->';
 
 /**
  * Категории меню ВО ВСЕХ КАФЕ
@@ -68,6 +68,7 @@ if (!Input::get('cat')) {
         break;
     }
     #Helper::tad($first_cat);
+    echo '<!--'; Helper::ta($first_cat); echo '-->';
 
     if (is_object($first_cat) && $first_cat->slug)
         Redirect(URL::route('page', array('menu', 'cafe' => $current_cafe->slug, 'cat' => $first_cat->slug)));
