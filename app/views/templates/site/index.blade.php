@@ -10,7 +10,7 @@ $bg = Dic::valueBySlugs('options', 'background_mainpage');
 #Helper::tad($bg);
 $mainpage_banner_url = Dic::valueBySlugs('options', 'mainpage_banner_url');
 echo '<!--'; Helper::ta($mainpage_banner_url); echo '-->';
-echo '<!--'; Helper::ta(preg_match('~\.[a-zA-Z]{3,4}$~is', $mainpage_banner_url->name)); echo '-->';
+echo '<!--'; Helper::ta(preg_match_all('~\.[a-zA-Z]{3,4}$~is', $mainpage_banner_url->name)); echo '-->';
 ?>
 
 
